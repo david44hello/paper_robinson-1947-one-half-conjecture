@@ -1,0 +1,302 @@
+RBREG|Robinson.Check_4_8|def|true|END
+RBREG|Robinson.Check_6_2|def|true|END
+RBREG|Robinson.Check_6_4|def|true|END
+RBREG|Robinson.Check_7_6_band01|def|true|END
+RBREG|Robinson.Check_7_6_band02|def|true|END
+RBREG|Robinson.Check_7_6_band03|def|true|END
+RBREG|Robinson.Check_7_6_band04|def|true|END
+RBREG|Robinson.Check_7_6_band05|def|true|END
+RBREG|Robinson.Check_7_6_band06|def|true|END
+RBREG|Robinson.Check_7_6_band07|def|true|END
+RBREG|Robinson.Check_7_6_band08|def|true|END
+RBREG|Robinson.Check_7_6_band09|def|true|END
+RBREG|Robinson.Check_7_6_band10|def|true|END
+RBREG|Robinson.Check_7_6_band11|def|true|END
+RBREG|Robinson.FactArea|def|true|END
+RBREG|Robinson.FactArgumentPrinciple|def|true|END
+RBREG|Robinson.FactBidiscPowerSeries|def|true|END
+RBREG|Robinson.FactDeBranges|def|true|END
+RBREG|Robinson.FactGrunsky|def|true|END
+RBREG|Robinson.FactJordanCurve|def|true|END
+'Robinson.Paper.intro_gamma_deriv' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|intro_gamma_deriv||||theorem|END
+'Robinson.Paper.intro_gamma_coeff' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|intro_gamma_coeff||||theorem|END
+'Robinson.Paper.intro_factor_two' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|intro_factor_two||||theorem|END
+'Robinson.Paper.intro_koebe_critical_on_circle' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|intro_koebe_critical_on_circle||||theorem|END
+'Robinson.Paper.intro_theta0_approx' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|intro_theta0_approx||||theorem|END
+'Robinson.Paper.sec2_f_ne' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|sec2_f_ne||||theorem|END
+'Robinson.Paper.sec2_Q_symm' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|sec2_Q_symm||||theorem|END
+'Robinson.Paper.lem_2_1' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|lem_2_1||||theorem|END
+'Robinson.Paper.lem_2_2' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|lem_2_2|Robinson.FactArgumentPrinciple,Robinson.FactJordanCurve|Robinson.FactArgumentPrinciple,Robinson.FactJordanCurve||theorem|END
+'Robinson.Paper.lem_2_3_rot' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|lem_2_3_rot||||theorem|END
+'Robinson.Paper.lem_2_3_dil' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|lem_2_3_dil||||theorem|END
+'Robinson.Paper.sec2_pair_normal_form' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|sec2_pair_normal_form||||theorem|END
+'Robinson.Paper.sec2_values_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|sec2_values_eq||||theorem|END
+'Robinson.Paper.prop_2_4' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|prop_2_4|Robinson.FactArgumentPrinciple,Robinson.FactJordanCurve|Robinson.FactArgumentPrinciple,Robinson.FactJordanCurve||theorem|END
+'Robinson.Paper.koebe_mem_S' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|koebe_mem_S||||theorem|END
+'Robinson.Paper.prop_2_5' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|prop_2_5||||theorem|END
+'Robinson.Paper.sec2_koebe_limit' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|sec2_koebe_limit||||theorem|END
+'Robinson.Paper.sec3_deriv_ne_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|sec3_deriv_ne_zero||||theorem|END
+'Robinson.Paper.sec3_koebe_transform_mem_S' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|sec3_koebe_transform_mem_S||||theorem|END
+'Robinson.Paper.sec3_kernel_nonvanishing' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|sec3_kernel_nonvanishing||||theorem|END
+'Robinson.Paper.sec3_grunsky_exists' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|sec3_grunsky_exists|Robinson.FactBidiscPowerSeries|Robinson.FactBidiscPowerSeries||theorem|END
+'Robinson.Paper.sec3_grunsky_unique' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|sec3_grunsky_unique||||theorem|END
+'Robinson.Paper.sec3_cauchy' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|sec3_cauchy|Robinson.FactGrunsky|Robinson.FactGrunsky||theorem|END
+'Robinson.Paper.sec3_blocks_compressions' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|sec3_blocks_compressions|Robinson.FactGrunsky|Robinson.FactGrunsky||theorem|END
+'Robinson.Paper.sec3_oddroot_exists' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|sec3_oddroot_exists||||theorem|END
+'Robinson.Paper.sec3_oddroot_mem_S' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|sec3_oddroot_mem_S||||theorem|END
+'Robinson.Paper.sec3_oddroot_parity' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|sec3_oddroot_parity||||theorem|END
+'Robinson.Paper.sec3_OE_contractions' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|sec3_OE_contractions|Robinson.FactGrunsky|Robinson.FactGrunsky|Robinson.Paper.sec3_grunsky_unique|theorem|END
+'Robinson.Paper.sec3_block_sums' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|sec3_block_sums||||theorem|END
+'Robinson.Paper.sec3_p_ne_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|sec3_p_ne_zero||||theorem|END
+'Robinson.Paper.lem_3_1_i' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|lem_3_1_i||||theorem|END
+'Robinson.Paper.lem_3_1_ii' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|lem_3_1_ii||||theorem|END
+'Robinson.Paper.lem_3_1_iii' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|lem_3_1_iii||||theorem|END
+'Robinson.Paper.eq_Kf' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|eq_Kf||||theorem|END
+'Robinson.Paper.eq_gram' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|eq_gram||||theorem|END
+'Robinson.Paper.sec4_midpoint' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|sec4_midpoint||||theorem|END
+'Robinson.Paper.sec4_goal_equiv' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|sec4_goal_equiv||||theorem|END
+'Robinson.Paper.sec4_tau_bounds' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|sec4_tau_bounds||||theorem|END
+'Robinson.Paper.sec4_c_bounds' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|sec4_c_bounds|Robinson.FactDeBranges|Robinson.FactDeBranges||theorem|END
+'Robinson.Paper.sec4_eta_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|sec4_eta_le||||theorem|END
+'Robinson.Paper.sec4_rho_facts' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|sec4_rho_facts||||theorem|END
+'Robinson.Paper.sec4_model_mem_S' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|sec4_model_mem_S||||theorem|END
+'Robinson.Paper.sec4_hat_bounds' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|sec4_hat_bounds||||theorem|END
+'Robinson.Paper.eq_Qk' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|eq_Qk||||theorem|END
+'Robinson.Paper.lem_4_3' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|lem_4_3||||theorem|END
+'Robinson.Paper.sec4_circle' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|sec4_circle||||theorem|END
+'Robinson.Paper.lem_4_4_iv' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|lem_4_4_iv||||theorem|END
+'Robinson.Paper.lem_4_5_i' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|lem_4_5_i||||theorem|END
+'Robinson.Paper.lem_4_7' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|lem_4_7||||theorem|END
+'Robinson.Paper.sec4_caps_valid' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|sec4_caps_valid||||theorem|END
+'Robinson.Paper.sec4_no_constant' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|sec4_no_constant||||theorem|END
+'Robinson.Paper.sec4_Gtau' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|sec4_Gtau||||theorem|END
+'Robinson.Paper.sec4_area' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|sec4_area|Robinson.FactArea|Robinson.FactArea||theorem|END
+'Robinson.Paper.sec4_e_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|sec4_e_zero|Robinson.FactArea|Robinson.FactArea||theorem|END
+'Robinson.Paper.sec4_Pi_formula' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|sec4_Pi_formula||||theorem|END
+'Robinson.Paper.lem_4_2' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|lem_4_2||||theorem|END
+'Robinson.Paper.sec4_D_diagonal' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|sec4_D_diagonal||||theorem|END
+'Robinson.Paper.sec4_hat_closed' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|sec4_hat_closed||||theorem|END
+'Robinson.Paper.sec4_diff' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|sec4_diff|Robinson.FactDeBranges|Robinson.FactDeBranges||theorem|END
+'Robinson.Paper.sec4_majorant_split' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|sec4_majorant_split|Robinson.FactDeBranges|Robinson.FactDeBranges||theorem|END
+'Robinson.Paper.sec4_majorant_rules' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|sec4_majorant_rules||||theorem|END
+'Robinson.Paper.sec4_hw_coeff' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|sec4_hw_coeff||||theorem|END
+'Robinson.Paper.lem_4_4_i' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|lem_4_4_i||||theorem|END
+'Robinson.Paper.lem_4_4_ii' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|lem_4_4_ii|Robinson.FactDeBranges|Robinson.FactDeBranges||theorem|END
+'Robinson.Paper.lem_4_4_iii' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|lem_4_4_iii|Robinson.FactArea|Robinson.FactArea||theorem|END
+'Robinson.Paper.sec4_first_variation' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|sec4_first_variation|Robinson.FactDeBranges|Robinson.FactDeBranges||theorem|END
+'Robinson.Paper.sec4_Tj_closed' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|sec4_Tj_closed||||theorem|END
+'Robinson.Paper.sec4_low_coeffs' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|sec4_low_coeffs||||theorem|END
+'Robinson.Paper.sec4_majorant_conv' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|sec4_majorant_conv||||theorem|END
+'Robinson.Paper.lem_4_5_ii' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|lem_4_5_ii||||theorem|END
+'Robinson.Paper.lem_4_5_iii' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|lem_4_5_iii|Robinson.FactArea|Robinson.FactArea|Robinson.Paper.lem_4_5_i,Robinson.Paper.lem_4_5_ii|theorem|END
+'Robinson.Paper.lem_4_6' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|lem_4_6|Robinson.FactArea,Robinson.FactDeBranges|Robinson.FactDeBranges,Robinson.FactArea|Robinson.Paper.lem_4_4_ii,Robinson.Paper.lem_4_4_iii,Robinson.Paper.lem_4_5_iii|theorem|END
+'Robinson.Paper.sec4_Lam_nonneg' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|sec4_Lam_nonneg||||theorem|END
+'Robinson.Paper.prop_4_1_from_layer' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|prop_4_1_from_layer|Robinson.Check_4_8,Robinson.FactDeBranges|Robinson.FactDeBranges,Robinson.Check_4_8|Robinson.Paper.sec4_Lam_nonneg|theorem|END
+'Robinson.Paper.sec5_s_sq' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|sec5_s_sq||||theorem|END
+'Robinson.Paper.sec5_coords' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|sec5_coords||||theorem|END
+'Robinson.Paper.sec5_chi_qrel_entire' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|sec5_chi_qrel_entire||||theorem|END
+'Robinson.Paper.sec5_tan_identity' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|sec5_tan_identity||||theorem|END
+'Robinson.Paper.sec5_qrel_algebra' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|sec5_qrel_algebra||||theorem|END
+'Robinson.Paper.sec5_takagi_2x2' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|sec5_takagi_2x2||||theorem|END
+'Robinson.Paper.prop_5_2' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|prop_5_2||||theorem|END
+'Robinson.Paper.lem_5_3' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|lem_5_3||||theorem|END
+'Robinson.Paper.lem_5_4' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|lem_5_4||||theorem|END
+'Robinson.Paper.lem_5_4_qrel' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|lem_5_4_qrel||||theorem|END
+'Robinson.Paper.cor_5_5' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|cor_5_5||||theorem|END
+'Robinson.Paper.rem_5_6' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|rem_5_6||||theorem|END
+'Robinson.Paper.sec6_c_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|sec6_c_bound||||theorem|END
+'Robinson.Paper.sec6_margin_arith' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|sec6_margin_arith||||theorem|END
+'Robinson.Paper.sec6_L_log3' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|sec6_L_log3||||theorem|END
+'Robinson.Paper.sec6_ZO_re_im' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|sec6_ZO_re_im||||theorem|END
+'Robinson.Paper.sec6_xi_ball' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|sec6_xi_ball||||theorem|END
+'Robinson.Paper.sec6_psum_cos' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|sec6_psum_cos||||theorem|END
+'Robinson.Paper.sec6_b_change' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|sec6_b_change||||theorem|END
+'Robinson.Paper.sec6_b_values' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|sec6_b_values||||theorem|END
+'Robinson.Paper.sec6_logcos' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|sec6_logcos||||theorem|END
+'Robinson.Paper.sec6_Wbound_finite' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|sec6_Wbound_finite||||theorem|END
+'Robinson.Paper.sec6_expW_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|sec6_expW_bound||||theorem|END
+'Robinson.Paper.sec6_A0B0_closed' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|sec6_A0B0_closed||||theorem|END
+'Robinson.Paper.sec6_value_180' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|sec6_value_180||||theorem|END
+'Robinson.Paper.sec6_cover_bound_arith' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|sec6_cover_bound_arith||||theorem|END
+'Robinson.Paper.lem_7_2' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|lem_7_2||||theorem|END
+'Robinson.Paper.sec7_UR_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|sec7_UR_zero||||theorem|END
+'Robinson.Paper.sec7_trace_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|sec7_trace_bound||||theorem|END
+'Robinson.Paper.sec7_P_minors' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|sec7_P_minors||||theorem|END
+'Robinson.Paper.sec7_CP_linear' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|sec7_CP_linear||||theorem|END
+'Robinson.Paper.prop_7_5_i' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|prop_7_5_i||||theorem|END
+'Robinson.Paper.lem_7_6_i' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|lem_7_6_i|Robinson.Check_7_6_band01,Robinson.Check_7_6_band02,Robinson.Check_7_6_band03,Robinson.Check_7_6_band04,Robinson.Check_7_6_band05|Robinson.Check_7_6_band01,Robinson.Check_7_6_band02,Robinson.Check_7_6_band03,Robinson.Check_7_6_band04,Robinson.Check_7_6_band05||theorem|END
+'Robinson.Paper.lem_7_6_ii' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|lem_7_6_ii|Robinson.Check_7_6_band06,Robinson.Check_7_6_band07,Robinson.Check_7_6_band08,Robinson.Check_7_6_band09,Robinson.Check_7_6_band10,Robinson.Check_7_6_band11|Robinson.Check_7_6_band06,Robinson.Check_7_6_band07,Robinson.Check_7_6_band08,Robinson.Check_7_6_band09,Robinson.Check_7_6_band10,Robinson.Check_7_6_band11||theorem|END
+'Robinson.Paper.tab3_totals' depends on axioms: [propext]
+RBROW|tab3_totals||||theorem|END
+'Robinson.Paper.sec5_a_conj' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|sec5_a_conj||||theorem|END
+'Robinson.Paper.sec5_uv_gram' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|sec5_uv_gram||||theorem|END
+'Robinson.Paper.sec5_O2_contraction' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|sec5_O2_contraction|Robinson.FactGrunsky|Robinson.FactGrunsky|Robinson.Paper.sec3_blocks_compressions,Robinson.Paper.sec3_grunsky_unique,Robinson.Paper.sec5_coords,Robinson.Paper.sec5_uv_gram|theorem|END
+'Robinson.Paper.sec5_O2_entries' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|sec5_O2_entries|||Robinson.Paper.sec5_coords|theorem|END
+'Robinson.Paper.prop_5_1' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|prop_5_1|||Robinson.Paper.lem_3_1_i,Robinson.Paper.sec3_grunsky_unique,Robinson.Paper.sec5_coords|theorem|END
+'Robinson.Paper.sec5_relaxation' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|sec5_relaxation|Robinson.FactBidiscPowerSeries,Robinson.FactGrunsky|Robinson.FactBidiscPowerSeries,Robinson.FactGrunsky|Robinson.Paper.lem_3_1_i,Robinson.Paper.sec3_blocks_compressions,Robinson.Paper.sec3_grunsky_exists,Robinson.Paper.sec3_oddroot_exists,Robinson.Paper.sec5_coords,Robinson.Paper.sec5_uv_gram|theorem|END
+'Robinson.Paper.lem_6_3' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|lem_6_3||||theorem|END
+'Robinson.Paper.sec6_barnard_series' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|sec6_barnard_series|||Robinson.Paper.sec3_grunsky_unique|theorem|END
+'Robinson.Paper.sec6_UV_values' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|sec6_UV_values||||theorem|END
+'Robinson.Paper.sec6_Rf_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|sec6_Rf_bound|Robinson.FactBidiscPowerSeries,Robinson.FactGrunsky|Robinson.FactBidiscPowerSeries,Robinson.FactGrunsky|Robinson.Paper.sec3_cauchy,Robinson.Paper.sec3_grunsky_exists,Robinson.Paper.sec6_A0B0_closed,Robinson.Paper.sec6_UV_values|theorem|END
+'Robinson.Paper.sec6_sigma_pos' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|sec6_sigma_pos||||theorem|END
+'Robinson.Paper.sec6_logp_logq' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|sec6_logp_logq|Robinson.FactBidiscPowerSeries,Robinson.FactGrunsky|Robinson.FactBidiscPowerSeries,Robinson.FactGrunsky|Robinson.Paper.eq_gram,Robinson.Paper.lem_3_1_iii,Robinson.Paper.sec3_blocks_compressions,Robinson.Paper.sec3_cauchy,Robinson.Paper.sec3_grunsky_exists,Robinson.Paper.sec3_oddroot_exists,Robinson.Paper.sec3_oddroot_mem_S|theorem|END
+'Robinson.Paper.eq_psum' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|eq_psum|Robinson.Check_6_2,Robinson.FactBidiscPowerSeries,Robinson.FactGrunsky|Robinson.FactBidiscPowerSeries,Robinson.FactGrunsky,Robinson.Check_6_2|Robinson.Paper.eq_gram,Robinson.Paper.lem_3_1_iii,Robinson.Paper.sec3_blocks_compressions,Robinson.Paper.sec3_cauchy,Robinson.Paper.sec3_grunsky_exists,Robinson.Paper.sec3_oddroot_exists,Robinson.Paper.sec3_oddroot_mem_S,Robinson.Paper.sec6_Wbound_finite,Robinson.Paper.sec6_b_change,Robinson.Paper.sec6_b_values,Robinson.Paper.sec6_expW_bound,Robinson.Paper.sec6_psum_cos,Robinson.Paper.sec6_xi_ball|theorem|END
+'Robinson.Paper.prop_6_1_from_layer' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|prop_6_1_from_layer||||theorem|END
+'Robinson.Paper.sec7_be_deriv' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|sec7_be_deriv||||theorem|END
+'Robinson.Paper.lem_7_3' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|lem_7_3|Robinson.FactBidiscPowerSeries,Robinson.FactGrunsky|Robinson.FactBidiscPowerSeries,Robinson.FactGrunsky|Robinson.Paper.eq_Kf,Robinson.Paper.lem_3_1_i,Robinson.Paper.lem_3_1_ii,Robinson.Paper.lem_3_1_iii,Robinson.Paper.lem_6_3,Robinson.Paper.prop_5_1,Robinson.Paper.sec3_OE_contractions,Robinson.Paper.sec3_grunsky_exists,Robinson.Paper.sec5_O2_entries|theorem|END
+'Robinson.Paper.eq_UR' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|eq_UR|Robinson.FactBidiscPowerSeries,Robinson.FactGrunsky|Robinson.FactBidiscPowerSeries,Robinson.FactGrunsky|Robinson.Paper.eq_Kf,Robinson.Paper.lem_3_1_i,Robinson.Paper.lem_3_1_ii,Robinson.Paper.lem_3_1_iii,Robinson.Paper.lem_6_3,Robinson.Paper.prop_5_1,Robinson.Paper.sec3_OE_contractions,Robinson.Paper.sec3_grunsky_exists,Robinson.Paper.sec5_O2_entries|theorem|END
+'Robinson.Paper.sec7_gram' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|sec7_gram||||theorem|END
+'Robinson.Paper.lem_7_4' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|lem_7_4|Robinson.FactBidiscPowerSeries,Robinson.FactGrunsky|Robinson.FactBidiscPowerSeries,Robinson.FactGrunsky|Robinson.Paper.eq_Kf,Robinson.Paper.lem_3_1_i,Robinson.Paper.lem_3_1_ii,Robinson.Paper.lem_3_1_iii,Robinson.Paper.lem_6_3,Robinson.Paper.prop_5_1,Robinson.Paper.sec3_OE_contractions,Robinson.Paper.sec3_grunsky_exists,Robinson.Paper.sec5_O2_entries,Robinson.Paper.sec7_gram|theorem|END
+'Robinson.Paper.prop_7_5_ii' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|prop_7_5_ii|Robinson.FactBidiscPowerSeries,Robinson.FactGrunsky|Robinson.FactBidiscPowerSeries,Robinson.FactGrunsky|Robinson.Paper.eq_Kf,Robinson.Paper.lem_3_1_i,Robinson.Paper.lem_3_1_ii,Robinson.Paper.lem_3_1_iii,Robinson.Paper.lem_6_3,Robinson.Paper.prop_5_1,Robinson.Paper.sec3_OE_contractions,Robinson.Paper.sec3_grunsky_exists,Robinson.Paper.sec5_O2_entries,Robinson.Paper.sec7_gram|theorem|END
+'Robinson.Paper.sec5_not_all_from_S' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|sec5_not_all_from_S|Robinson.Check_7_6_band02,Robinson.FactBidiscPowerSeries,Robinson.FactGrunsky|Robinson.FactBidiscPowerSeries,Robinson.FactGrunsky,Robinson.Check_7_6_band02|Robinson.Paper.lem_3_1_i,Robinson.Paper.prop_7_5_ii,Robinson.Paper.rem_5_6,Robinson.Paper.sec3_grunsky_unique,Robinson.Paper.sec5_coords|theorem|END
+'Robinson.Paper.sec7_identity_O2' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|sec7_identity_O2||||theorem|END
+'Robinson.Paper.prop_7_1_from_layer' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|prop_7_1_from_layer||||theorem|END
+'Robinson.Paper.prop_4_1' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|prop_4_1|Robinson.Check_4_8,Robinson.FactArea,Robinson.FactDeBranges|Robinson.FactDeBranges,Robinson.FactArea,Robinson.Check_4_8|Robinson.Paper.lem_4_3,Robinson.Paper.lem_4_5_iii,Robinson.Paper.lem_4_6,Robinson.Paper.prop_4_1_from_layer,Robinson.Paper.sec4_Gtau,Robinson.Paper.sec4_e_zero,Robinson.Paper.sec4_majorant_split|theorem|END
+'Robinson.Paper.prop_6_1' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|prop_6_1|Robinson.Check_6_2,Robinson.Check_6_4,Robinson.FactBidiscPowerSeries,Robinson.FactGrunsky|Robinson.FactBidiscPowerSeries,Robinson.FactGrunsky,Robinson.Check_6_2,Robinson.Check_6_4|Robinson.Paper.eq_psum,Robinson.Paper.prop_6_1_from_layer,Robinson.Paper.sec6_Rf_bound,Robinson.Paper.sec6_c_bound|theorem|END
+'Robinson.Paper.prop_7_1' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|prop_7_1|Robinson.Check_7_6_band01,Robinson.Check_7_6_band02,Robinson.Check_7_6_band03,Robinson.Check_7_6_band04,Robinson.Check_7_6_band05,Robinson.Check_7_6_band06,Robinson.Check_7_6_band07,Robinson.Check_7_6_band08,Robinson.Check_7_6_band09,Robinson.Check_7_6_band10,Robinson.Check_7_6_band11,Robinson.FactBidiscPowerSeries,Robinson.FactGrunsky|Robinson.FactBidiscPowerSeries,Robinson.FactGrunsky,Robinson.Check_7_6_band01,Robinson.Check_7_6_band02,Robinson.Check_7_6_band03,Robinson.Check_7_6_band04,Robinson.Check_7_6_band05,Robinson.Check_7_6_band06,Robinson.Check_7_6_band07,Robinson.Check_7_6_band08,Robinson.Check_7_6_band09,Robinson.Check_7_6_band10,Robinson.Check_7_6_band11|Robinson.Paper.lem_7_6_i,Robinson.Paper.lem_7_6_ii,Robinson.Paper.prop_5_1,Robinson.Paper.prop_7_1_from_layer,Robinson.Paper.prop_7_5_ii,Robinson.Paper.sec3_grunsky_exists,Robinson.Paper.sec3_oddroot_exists,Robinson.Paper.sec3_oddroot_mem_S,Robinson.Paper.sec5_O2_contraction|theorem|END
+'Robinson.Paper.lem_8_1' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|lem_8_1||||theorem|END
+'Robinson.Paper.sec8_cover' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|sec8_cover||||theorem|END
+'Robinson.Paper.sec8_assembly' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|sec8_assembly|Robinson.FactArgumentPrinciple,Robinson.FactJordanCurve|Robinson.FactArgumentPrinciple,Robinson.FactJordanCurve||theorem|END
+'Robinson.Paper.thm_1_1' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|thm_1_1|Robinson.Check_4_8,Robinson.Check_6_2,Robinson.Check_6_4,Robinson.Check_7_6_band01,Robinson.Check_7_6_band02,Robinson.Check_7_6_band03,Robinson.Check_7_6_band04,Robinson.Check_7_6_band05,Robinson.Check_7_6_band06,Robinson.Check_7_6_band07,Robinson.Check_7_6_band08,Robinson.Check_7_6_band09,Robinson.Check_7_6_band10,Robinson.Check_7_6_band11,Robinson.FactArea,Robinson.FactArgumentPrinciple,Robinson.FactBidiscPowerSeries,Robinson.FactDeBranges,Robinson.FactGrunsky,Robinson.FactJordanCurve|Robinson.FactArgumentPrinciple,Robinson.FactJordanCurve,Robinson.FactDeBranges,Robinson.FactArea,Robinson.Check_4_8,Robinson.FactBidiscPowerSeries,Robinson.FactGrunsky,Robinson.Check_6_2,Robinson.Check_6_4,Robinson.Check_7_6_band01,Robinson.Check_7_6_band02,Robinson.Check_7_6_band03,Robinson.Check_7_6_band04,Robinson.Check_7_6_band05,Robinson.Check_7_6_band06,Robinson.Check_7_6_band07,Robinson.Check_7_6_band08,Robinson.Check_7_6_band09,Robinson.Check_7_6_band10,Robinson.Check_7_6_band11|Robinson.Paper.prop_4_1,Robinson.Paper.prop_6_1,Robinson.Paper.prop_7_1,Robinson.Paper.sec8_assembly|theorem|END
+'Robinson.Paper.thm_1_2' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|thm_1_2|Robinson.Check_4_8,Robinson.Check_6_2,Robinson.Check_6_4,Robinson.Check_7_6_band01,Robinson.Check_7_6_band02,Robinson.Check_7_6_band03,Robinson.Check_7_6_band04,Robinson.Check_7_6_band05,Robinson.Check_7_6_band06,Robinson.Check_7_6_band07,Robinson.Check_7_6_band08,Robinson.Check_7_6_band09,Robinson.Check_7_6_band10,Robinson.Check_7_6_band11,Robinson.FactArea,Robinson.FactBidiscPowerSeries,Robinson.FactDeBranges,Robinson.FactGrunsky|Robinson.FactDeBranges,Robinson.FactArea,Robinson.Check_4_8,Robinson.FactBidiscPowerSeries,Robinson.FactGrunsky,Robinson.Check_6_2,Robinson.Check_6_4,Robinson.Check_7_6_band01,Robinson.Check_7_6_band02,Robinson.Check_7_6_band03,Robinson.Check_7_6_band04,Robinson.Check_7_6_band05,Robinson.Check_7_6_band06,Robinson.Check_7_6_band07,Robinson.Check_7_6_band08,Robinson.Check_7_6_band09,Robinson.Check_7_6_band10,Robinson.Check_7_6_band11|Robinson.Paper.prop_4_1,Robinson.Paper.prop_6_1,Robinson.Paper.prop_7_1|theorem|END
+'Robinson.Paper.rem_8_2' depends on axioms: [propext, Classical.choice, Quot.sound]
+RBROW|rem_8_2|Robinson.Check_4_8,Robinson.Check_6_2,Robinson.Check_6_4,Robinson.FactArea,Robinson.FactBidiscPowerSeries,Robinson.FactDeBranges,Robinson.FactGrunsky|Robinson.FactDeBranges,Robinson.FactArea,Robinson.Check_4_8,Robinson.FactBidiscPowerSeries,Robinson.FactGrunsky,Robinson.Check_6_2,Robinson.Check_6_4|Robinson.Paper.prop_4_1,Robinson.Paper.prop_6_1|theorem|END

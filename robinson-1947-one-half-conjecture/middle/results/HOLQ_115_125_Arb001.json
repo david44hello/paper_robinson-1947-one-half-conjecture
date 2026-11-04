@@ -1,0 +1,23 @@
+{
+  "status": "INDEPENDENT_BAND_CONFIRMED",
+  "source_status": "PASS",
+  "nodes": 24917,
+  "leaves": 12459,
+  "confirmed_leaves": 12459,
+  "unconfirmed_leaves": 0,
+  "source_pending_boxes": 0,
+  "independent_box_checks": 12519,
+  "unconfirmed": [],
+  "confirmed_root_fraction_exact": "1",
+  "confirmed_root_fraction": 1.0,
+  "unconfirmed_leaf_fraction_exact": "0",
+  "source_pending_fraction_exact": "0",
+  "cpu_seconds": 315.4047104,
+  "source_sha256": "206f0a81236089581449890cf497ebdf70a5899e33ea760243453c16b586ec52",
+  "own_source_hashes": {
+    "holq_peer_tree_arb.py": "c1bc2696b3f1ca514610990adce78d027ae0808c2910e3a0274036e8f00130bf",
+    "holq_local_arb.py": "2762619a6c145d89e5cc1b3a07007f1cfa18f6060d6e8bc01e003545cb2d4103",
+    "arb_differential.py": "bf496f1be8fcfa3fa1d43c62c20d7649feb567a1a1fdcd528c4855d2f998ad97",
+    "fourlog_arb_box.py": "b586496b08f656748dd1d9e678396d48a92a5ce64d312e7e04dc48e45525e7e5"
+  }
+}

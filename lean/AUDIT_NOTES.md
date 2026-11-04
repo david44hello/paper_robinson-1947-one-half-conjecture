@@ -1,0 +1,217 @@
+# Robinson's (1947) one-half conjecture is true — notes on the Lean proof
+
+The paper: https://doi.org/10.5281/zenodo.23953160
+
+Pointers of the form `sec_0N_*.tex:<line>` (and `abstract.tex:<line>`, `back_matter.tex:<line>`) are lines of the
+TeX sources of version 2.00 of the paper. No line has moved since version 1.70: later versions reword
+sec_07_middle.tex:165, back_matter.tex:4, sec_02_reduction.tex:30 and sec_03_tools.tex:28, and add one sentence at the
+end of abstract.tex:3.
+
+## The rows
+
+Each claim of the paper is one Lean theorem, a *row*, in
+[Robinson/Paper/Statements.lean](Robinson/Paper/Statements.lean). The rows are named by the paper's numbering; their
+proofs are in [Robinson/Proofs/](Robinson/Proofs/), and the definitions they use in [Robinson/Defs/](Robinson/Defs/).
+[CLAIM_MAP.tsv](CLAIM_MAP.tsv) maps every printed claim of the paper to its rows.
+
+Lean checks a proof of every row. The audit does not judge whether a row says what the paper says: to trust the
+result, compare the definitions, the facts and checks (below) and the rows with the paper.
+
+## The status of a row
+
+The claim audit ([AUDIT.md](AUDIT.md), data in [CLAIMS.json](CLAIMS.json)) gives every row one status:
+141 rows; 105 PROVED; 36 PROVED GIVEN; 0 not proved yet; 0 FAIL.
+
+The status words:
+
+- **PROVED**: Lean checks the proof, and the row depends only on Lean's three standard axioms (`propext`,
+  `Classical.choice`, `Quot.sound`).
+- **PROVED GIVEN** *names*: as PROVED, and the row takes the named facts or computer checks as explicit hypotheses.
+- **not proved yet**: the proof of the row, or of a row it uses, is unfinished.
+- **FAIL**: the row depends on another axiom, or uses a fact or check other than as an explicit hypothesis.
+
+A status is decided from Lean's own output, never from the source text. For each row, the audit runs Lean's
+`#print axioms` and reads the row's elaborated type:
+
+- an axiom other than `propext`, `Classical.choice`, `Quot.sound` and Lean's placeholder axiom for an unfinished
+  proof gives **FAIL**; so does a fact or check that occurs in the type other than as the exact type of a hypothesis,
+  and a hypothesis whose type is a named proposition that is neither a fact nor a check;
+- else, the placeholder axiom among the axioms gives **not proved yet** (the row's own proof, or a row it uses, is
+  unfinished);
+- else, the facts and checks that the row takes as hypotheses give **PROVED GIVEN** with their names;
+- else the row is **PROVED**.
+
+## Facts and checks
+
+The facts and checks are ordinary propositions (`def … : Prop`), never axioms; nothing is assumed globally. A row
+that uses one takes it as an explicit hypothesis.
+
+- [Robinson/NotFormalized.lean](Robinson/NotFormalized.lean): 6 published facts from areas that Lean's
+  library (Mathlib) does not cover. They are NOT formalized.
+- [Robinson/ComputerChecked.lean](Robinson/ComputerChecked.lean): 14 statements that the paper's programs
+  check by computer (Lemmas 4.8, 6.2, 6.4 and 7.6). They are NOT proved in Lean.
+
+The section "Trust surface" below states each of them, with its source and the rows that use it.
+
+## The files
+
+- `check.sh`: the one command. It downloads Mathlib's prebuilt files (`lake exe cache get`), builds the proof
+  (`lake build`), runs the audit and the final gate (next section), and stops at the first failure.
+- `scripts/ci_check.sh`: the check that GitHub runs at every change, after its own Mathlib download and build: it
+  runs `./check.sh`. GitHub then also checks that the rerun audit leaves `AUDIT.md` exactly as published.
+- `Robinson/Paper/Statements.lean`: the rows. `Robinson/Proofs/`: their proofs. `Robinson/Defs/`: the definitions.
+- `Robinson/NotFormalized.lean` and `Robinson/ComputerChecked.lean`: the facts and the checks.
+- `CLAIM_MAP.tsv`: every printed claim of the paper, its place in the paper, its rows and its status.
+- `AUDIT.md` and `CLAIMS.json`: the audit's table and data. `scripts/audit.py` writes them, with
+  `scripts/audit_axioms.lean` (the Lean file it runs) and `scripts/audit_output.log` (Lean's output).
+- `scripts/final_gate.py` and `scripts/OPEN_ROWS.txt`: the final gate and its list of rows that may stay unproved
+  (empty in this release).
+- `MD5SUMS.txt`: the MD5 sum of every other file.
+
+## How to rerun only the audit
+
+After `lake build` (for example, after one run of `./check.sh`), with Python 3:
+
+```bash
+LEAN_RUN_LOCK=none LEAN_RUN_GATE=none python3 scripts/audit.py
+python3 scripts/final_gate.py Robinson/Paper/Statements.lean CLAIMS.json scripts/OPEN_ROWS.txt
+```
+
+The audit prints the `AUDIT:` line of README.md and rewrites `AUDIT.md`, `CLAIMS.json`, `scripts/audit_axioms.lean`
+and `scripts/audit_output.log`. They come out byte-identical to the files shipped here,
+so `git status` stays clean and `md5sum -c MD5SUMS.txt` passes. (`LEAN_RUN_LOCK` and `LEAN_RUN_GATE` name a lock file
+and a priority gate for shared machines; `none` runs Lean directly.) The final gate checks that an unfinished proof
+stands only as the whole proof of a row named in `scripts/OPEN_ROWS.txt`, and that the statuses of the audit match
+that list: with the empty list, no row is unfinished and none is FAIL.
+
+## What the proof takes as given, what is not counted, and how rows differ from the paper
+
+The census rows are the rows of the main results: Lemma 2.2 (`lem_2_2`), Proposition 2.4 (`prop_2_4`), Proposition
+4.1 (`prop_4_1`), Proposition 6.1 (`prop_6_1`), Proposition 7.1 (`prop_7_1`), the proof of Theorems 1.1 and 1.2
+(`sec8_assembly`), Theorem 1.1 (`thm_1_1`), Theorem 1.2 (`thm_1_2`), Remark 8.2 (`rem_8_2`). "Used by" lists the
+census rows whose Lean statement takes the item as a hypothesis (from the audit, `CLAIMS.json`).
+
+## Trust surface
+
+The Lean proofs of the census rows rest on 6 published facts and 14 computer checks. Each one is an ordinary Lean
+proposition (`def … : Prop`), never a Lean postulate. A row that uses one takes it as an explicit hypothesis, so its
+status is PROVED GIVEN that fact or check.
+
+### The 6 facts: "not formalized" (file Robinson/NotFormalized.lean)
+
+1. `FactArgumentPrinciple`: if `G` is holomorphic near `|z| ≤ ρ` and `G − c` has no zero on `|z| = ρ`, then the number of zeros of `G − c` in `|z| < ρ` (with multiplicity) equals the winding number of the image curve `G(|z| = ρ)` about `c`. Source: [Ahl79, Chapter 4, Section 5.2], as sec_02_reduction.tex:30 uses it. Not formalized: no argument principle in Lean's library. Used by: `lem_2_2`, `prop_2_4`, `sec8_assembly`, `thm_1_1`.
+2. `FactJordanCurve`: if `G` is holomorphic near `|z| ≤ ρ` and injective on `|z| = ρ`, the image `J` is a Jordan curve; `ℂ \ J` is a bounded component `Ω` and an unbounded component `Ω'` with boundary `J`; the winding number is `0` on `Ω'` and a constant `±1` on `Ω`. Source: the Jordan curve theorem, [HS18, Corollaries 1.4 and 1.6; Theorem 3.2] (Hemasundar and Simha) and [Ahl79, Chapter 4, Section 2.1], as sec_02_reduction.tex:30 cites them. Not formalized: no Jordan curve theorem in Lean's library. Used by: `lem_2_2`, `prop_2_4`, `sec8_assembly`, `thm_1_1`.
+3. `FactDeBranges`: every `f(z) = z + Σ_{n≥2} a_n zⁿ` in `𝒮` has `|a_n| ≤ n` for `n ≥ 2`. Source: de Branges' theorem [deB85], sec_03_tools.tex:13-16 (citation on l.17). Not formalized: no univalent-function theory in Lean's library. Used by: `prop_4_1`, `thm_1_1`, `thm_1_2`, `rem_8_2`.
+4. `FactArea`: if `g(ζ) = ζ + b₀ + Σ_{n≥1} b_n ζ⁻ⁿ` is holomorphic and injective in `|ζ| > 1`, then `Σ_{n≥1} n|b_n|² ≤ 1`. Source: the area theorem of Gronwall [Gro14], [Dur83, Chapter 2], sec_03_tools.tex:17-20. Not formalized: no univalent-function theory in Lean's library. Used by: `prop_4_1`, `thm_1_1`, `thm_1_2`, `rem_8_2`.
+5. `FactGrunsky`: for `g ∈ 𝒮`, the Grunsky matrix `C(g) = (√(nm) γ_nm)` satisfies `|xᵀ C(g) y| ≤ ‖x‖ ‖y‖` on every finite section (equivalent to operator norm at most 1 on `ℓ²`). Source: the strong Grunsky inequality [Gru39], [Pom75, Theorem 3.1], sec_03_tools.tex:28-35. Not formalized: no univalent-function theory in Lean's library. Used by: `prop_6_1`, `prop_7_1`, `thm_1_1`, `thm_1_2`, `rem_8_2`.
+6. `FactBidiscPowerSeries`: a function continuous on `𝔻 × 𝔻` and holomorphic in each variable separately is the sum of a double power series that converges absolutely on all of `𝔻 × 𝔻`. Source: Osgood's lemma and the Cauchy formula on a polydisc, [Hor90, Section 2.2] (Hörmander), as sec_03_tools.tex:28 cites it; the paper uses it for the Grunsky kernel (sec_03_tools.tex:24-28). Not formalized: no holomorphic functions of several variables in Lean's library. Used by: `prop_6_1`, `prop_7_1`, `thm_1_1`, `thm_1_2`, `rem_8_2`.
+
+### The 14 checks: "checked by computer, NOT proved in Lean" (file Robinson/ComputerChecked.lean)
+
+Each check is typed exactly as printed (variables, range, function, strict inequality). Angles of Lemma 7.6 are in degrees.
+
+1. `Check_4_8`: Lemma 4.8 (sec_04_near.tex:296-328; programs at sec_04_near.tex:333): on each of the 256 cells `[i/256, (i+1)/256]`, `𝔞` and `𝔡` are positive at `x = ±y₀`, `Π₋ > 0`, and for every `e ∈ [0, e⁺]`: `293/540 + δe > 0` and `(293/540 + δe)² − ρ₊e(M + 130e) > 0`. Programs and outputs in the repository folder `robinson-1947-one-half-conjecture/`: first program `near/check_B9_b.py` (output `near/results/check_B9_b.txt`); second program `near/check_B9_a.py`, on its own 320 cells (output `near/results/check_B9_a.txt`). Checked by computer, NOT proved in Lean. Used by: `prop_4_1`, `thm_1_1`, `thm_1_2`, `rem_8_2`.
+2. `Check_6_2`: Lemma 6.2 (sec_06_far.tex:39-45; programs at sec_06_far.tex:48): for all `c ∈ [0, 383/1000]` and `r₁ ∈ [0, 1]`, `b₂r₁ + b₃√(1 − r₁²) − log cos(b₁r₁) < T = 211/200`. Programs and outputs in the repository folder `robinson-1947-one-half-conjecture/`: first program `far/check_sector135.py` (its output is the certificate `far/S135_certificate.json`); second program `far/S135_check_b.py` (output `far/results/S135_check_b.txt`). Checked by computer, NOT proved in Lean. Used by: `prop_6_1`, `thm_1_1`, `thm_1_2`, `rem_8_2`.
+3. `Check_6_4`: Lemma 6.4 (sec_06_far.tex:84-90; programs at sec_06_far.tex:93): for all `c ∈ [0, 383/1000]`, `√((U_R + A_R)(V_R + B_R)) + √((U_R − A_R)(V_R − B_R)) < 173/250`. Programs and outputs in the repository folder `robinson-1947-one-half-conjecture/`: first program `far/check_sector135.py` (its output is the certificate `far/S135_certificate.json`); second program `far/S135_check_b.py` (output `far/results/S135_check_b.txt`). Checked by computer, NOT proved in Lean. Used by: `prop_6_1`, `thm_1_1`, `thm_1_2`, `rem_8_2`.
+4. `Check_7_6_band01`: Lemma 7.6(i) (sec_07_middle.tex:128), Table 3 row `[50.3°, 55°]` (sec_07_middle.tex:147; programs at sec_07_middle.tex:133-139): `Φ_F(θ, α, ψ, ω) > 0` for `θ ∈ [50.3, 55]` and `(α, ψ, ω) ∈ 𝓧`. Programs and outputs in the repository folder `robinson-1947-one-half-conjecture/`: program A `middle/programA/joint_v040/`, program B `middle/programB/holq_support_tree_arb.py` with `--cap-packet middle/programB/HOLQ_joint_support_P55.json`; tree `middle/trees/50.3-55/cover.tree`; output `middle/results/HOLQ_JOINT_50p30_55_Arb001.json`. Checked by computer, NOT proved in Lean. Used by: `prop_7_1`, `thm_1_1`, `thm_1_2`.
+5. `Check_7_6_band02`: Lemma 7.6(i) (sec_07_middle.tex:128), Table 3 row `[55°, 60°]` (sec_07_middle.tex:148): `Φ_F > 0` for `θ ∈ [55, 60]` on `𝓧`. Programs and outputs in the repository folder `robinson-1947-one-half-conjecture/`: program A `middle/programA/joint_v040/`, program B `middle/programB/holq_support_tree_arb.py` with `--cap-packet middle/programB/HOLQ_joint_support_P55.json`; tree `middle/trees/55-60/cover.tree`; output `middle/results/HOLQ_JOINT_55_60_Arb001.json`. Checked by computer, NOT proved in Lean. Used by: `prop_7_1`, `thm_1_1`, `thm_1_2`.
+6. `Check_7_6_band03`: Lemma 7.6(i) (sec_07_middle.tex:128), Table 3 row `[60°, 70°]` (sec_07_middle.tex:149): `Φ_F > 0` for `θ ∈ [60, 70]` on `𝓧`. Programs and outputs in the repository folder `robinson-1947-one-half-conjecture/`: program A `middle/programA/joint_v040/`, program B `middle/programB/holq_support_tree_arb.py` with `--cap-packet middle/programB/HOLQ_joint_support_P55.json`; tree `middle/trees/60-70/cover.tree`; output `middle/results/HOLQ_JOINT_60_70_Arb001.json`. Checked by computer, NOT proved in Lean. Used by: `prop_7_1`, `thm_1_1`, `thm_1_2`.
+7. `Check_7_6_band04`: Lemma 7.6(i) (sec_07_middle.tex:128), Table 3 row `[70°, 80°]` (sec_07_middle.tex:150): `Φ_F > 0` for `θ ∈ [70, 80]` on `𝓧`. Programs and outputs in the repository folder `robinson-1947-one-half-conjecture/`: program A `middle/programA/joint_v040/`, program B `middle/programB/holq_support_tree_arb.py` with `--cap-packet middle/programB/HOLQ_joint_support_P55.json`; tree `middle/trees/70-80/cover.tree`; output `middle/results/HOLQ_JOINT_70_80_Arb001.json`. Checked by computer, NOT proved in Lean. Used by: `prop_7_1`, `thm_1_1`, `thm_1_2`.
+8. `Check_7_6_band05`: Lemma 7.6(i) (sec_07_middle.tex:128), Table 3 row `[80°, 90°]` (sec_07_middle.tex:151): `Φ_F > 0` for `θ ∈ [80, 90]` on `𝓧`. Programs and outputs in the repository folder `robinson-1947-one-half-conjecture/`: program A `middle/programA/joint_v040/`, program B `middle/programB/holq_support_tree_arb.py` with `--cap-packet middle/programB/HOLQ_joint_support_P55.json`; tree `middle/trees/80-90/cover.tree`; output `middle/results/HOLQ_JOINT_80_90_Arb001.json`. Checked by computer, NOT proved in Lean. Used by: `prop_7_1`, `thm_1_1`, `thm_1_2`.
+9. `Check_7_6_band06`: Lemma 7.6(ii) (sec_07_middle.tex:129), Table 3 row `[90°, 95°]` (sec_07_middle.tex:152): `Φ_rel > 0` for `θ ∈ [90, 95]` on `𝓧`. Programs and outputs in the repository folder `robinson-1947-one-half-conjecture/`: program A `middle/programA/plain_v060/`, program B `middle/programB/holq_peer_tree_arb.py`; tree `middle/trees/90-95/cover.tree`; output `middle/results/HOLQ_90_95_Arb001.json`. Checked by computer, NOT proved in Lean. Used by: `prop_7_1`, `thm_1_1`, `thm_1_2`.
+10. `Check_7_6_band07`: Lemma 7.6(ii) (sec_07_middle.tex:129), Table 3 row `[95°, 100°]` (sec_07_middle.tex:153): `Φ_rel > 0` for `θ ∈ [95, 100]` on `𝓧`. Programs and outputs in the repository folder `robinson-1947-one-half-conjecture/`: program A `middle/programA/plain_v060/`, program B `middle/programB/holq_peer_tree_arb.py`; tree `middle/trees/95-100/cover.tree`; output `middle/results/HOLQ_95_100_Arb001.json`. Checked by computer, NOT proved in Lean. Used by: `prop_7_1`, `thm_1_1`, `thm_1_2`.
+11. `Check_7_6_band08`: Lemma 7.6(ii) (sec_07_middle.tex:129), Table 3 row `[100°, 105°]` (sec_07_middle.tex:154): `Φ_rel > 0` for `θ ∈ [100, 105]` on `𝓧`. Programs and outputs in the repository folder `robinson-1947-one-half-conjecture/`: program A `middle/programA/plain_v060/`, program B `middle/programB/holq_peer_tree_arb.py`; tree `middle/trees/100-105/cover.tree`; output `middle/results/HOLQ_100_105_Arb002.json`. Checked by computer, NOT proved in Lean. Used by: `prop_7_1`, `thm_1_1`, `thm_1_2`.
+12. `Check_7_6_band09`: Lemma 7.6(ii) (sec_07_middle.tex:129), Table 3 row `[105°, 115°]` (sec_07_middle.tex:155): `Φ_rel > 0` for `θ ∈ [105, 115]` on `𝓧`. Programs and outputs in the repository folder `robinson-1947-one-half-conjecture/`: program A `middle/programA/plain_v060/`, program B `middle/programB/holq_peer_tree_arb.py`; tree `middle/trees/105-115/cover.tree`; output `middle/results/HOLQ_105_115_Arb001.json`. Checked by computer, NOT proved in Lean. Used by: `prop_7_1`, `thm_1_1`, `thm_1_2`.
+13. `Check_7_6_band10`: Lemma 7.6(ii) (sec_07_middle.tex:129), Table 3 row `[115°, 125°]` (sec_07_middle.tex:156): `Φ_rel > 0` for `θ ∈ [115, 125]` on `𝓧`. Programs and outputs in the repository folder `robinson-1947-one-half-conjecture/`: program A `middle/programA/plain_v060/`, program B `middle/programB/holq_peer_tree_arb.py`; tree `middle/trees/115-125/cover.tree`; output `middle/results/HOLQ_115_125_Arb001.json`. Checked by computer, NOT proved in Lean. Used by: `prop_7_1`, `thm_1_1`, `thm_1_2`.
+14. `Check_7_6_band11`: Lemma 7.6(ii) (sec_07_middle.tex:129), Table 3 row `[125°, 135°]` (sec_07_middle.tex:157): `Φ_rel > 0` for `θ ∈ [125, 135]` on `𝓧`. Programs and outputs in the repository folder `robinson-1947-one-half-conjecture/`: program A `middle/programA/plain_v060/`, program B `middle/programB/holq_peer_tree_arb.py`; tree `middle/trees/125-135/cover.tree`; output `middle/results/HOLQ_125_135_Arb001.json`. Checked by computer, NOT proved in Lean. Used by: `prop_7_1`, `thm_1_1`, `thm_1_2`.
+
+Note: outside the census, the row for sec_05_grunsky_q.tex:54 ("not every `M ∈ 𝓑` comes from a univalent function",
+`sec5_not_all_from_S`) also uses `Check_7_6_band02` (the band that contains `θ = 60°`).
+
+## Not counted
+
+These printed sentences are not claims that the Lean work counts. Each line gives the place and the reason.
+
+### History and attributions (accounts of earlier work, not claims of this paper)
+1. abstract.tex:3: "Robinson proved r ≥ 0.38, observed that the Koebe function gives r ≤ 1/2, and conjectured that r = 1/2" and "Barnard proved r ≥ 0.49 in 1978": history.
+2. sec_01_intro.tex:5: "In a study of univalent majorants, R. M. Robinson …": attribution.
+3. sec_01_intro.tex:9: Robinson's results, Robinson's quoted words, and "Robinson writes H = (zG)'": history (the factor remark itself is a counted row).
+4. sec_01_intro.tex:11: Livingston, Barnard, Pearce, Barnard's quote, "We know of no later improvement", Ye, Sinel'nikova: history.
+5. sec_01_intro.tex:21: "this is the quotient of Barnard's proof": attribution.
+6. sec_01_intro.tex:36-37: Table 1, column of earlier results: history.
+7. sec_01_intro.tex:44: "Before this paper, the radius 1/2 was known for …": history.
+8. sec_01_intro.tex:45: "the radius of starlikeness of Γ(𝒮) lies between 0.435 and 0.445": a quoted result that no proof here uses (the remark "need not be star-shaped" rests on it alone).
+9. sec_01_intro.tex:52: Figure 1, panel (a), and "The vertical axis starts at r = 0.40": history and figure layout.
+10. sec_01_intro.tex:75: "combined in a similar way by Wikström": attribution.
+11. sec_02_reduction.tex:61: "this is Robinson's observation": attribution (the sharpness claim itself is counted).
+12. back_matter.tex:3 and :6-7: the data-availability heading and the acknowledgments (the data sentence, l.4, is item 36).
+
+### Route words and layout (they describe the proof; each step is its own row)
+13. sec_01_intro.tex:80-81: the "Organization" paragraph.
+14. sec_02_reduction.tex:23: "we include the proof because …": route words.
+15. sec_02_reduction.tex:37: "Nothing in this proof requires …" and "Barnard reduces … [Bar78, p. 136]": route words and attribution.
+16. sec_03_tools.tex:6: "None of them is new": description.
+17. sec_04_near.tex:33: overview of the section's route.
+18. sec_04_near.tex:294: "We divide … and collect in one statement …": layout.
+19. sec_05_grunsky_q.tex:57: "real dimension 6" and "real dimension 3": dimension words (the content is in the rows for Proposition 5.2 and Lemma 5.3).
+20. sec_05_grunsky_q.tex:103, second sentence ("This is why Section 7 uses …"): route words.
+21. sec_07_middle.tex:97: "P was chosen numerically …": how a constant was found.
+22. sec_07_middle.tex:117: "The added terms are not arbitrary": route words (the vanishing for `f(z) = z` is a counted row).
+23. sec_07_middle.tex:124: "Both are explicit elementary functions …": description.
+
+### Descriptions of the computer runs (the 14 checks above carry the claims; the programs and logs are in the repository folder `robinson-1947-one-half-conjecture/`)
+24. abstract.tex:3: "Both parts of the proof end in finite computations, … each computation by two independently written programs": run description.
+25. sec_01_intro.tex:62-64: Table 2: "two programs", "72 and 410 coefficients", "256 cells (320 in the second program)", "304,664 leaf boxes in the first program, 311,506 boxes in the second": run description.
+26. sec_04_near.tex:147: "whose 72 coefficients are all positive": a program certificate (Lemma 4.3 itself is PROVED in Lean by its own certificate).
+27. sec_04_near.tex:243: "all its 410 coefficients are positive": a program certificate (Lemma 4.5(i) itself is PROVED in Lean).
+28. sec_04_near.tex:333: how the programs work, "All 256 cells pass", and the second program's 320 cells: run description.
+29. sec_04_near.tex:333: "the smallest value that the first program finds … with its upper bounds for 𝔥[Z] and 𝔴[Z], is about 0.1557, in the cell [227/256, 228/256]": a program output, and no proof uses it (with the exact numbers of Lemma 4.8 the minimum is about 0.1574).
+30. sec_06_far.tex:48: eleven cells, degree 28, Bernstein coefficients on at most eight subintervals (the second program: eight equal ones): run description.
+31. sec_06_far.tex:93: 234 cells, the largest bound 3459999249/(5·10⁹), and the second program's check of the same 234 cells: run description.
+32. sec_06_far.tex:100: "The cover is refined only until every cell passes …": run description.
+33. sec_07_middle.tex:133-139: the programs' method, including the three lower-bound forms and which bounds each program uses: run description (the band checks carry the claim).
+34. sec_07_middle.tex:141-162: Table 3 leaf and box counts and "Both programs accepted every band": run description (the arithmetic of Table 3's totals IS a counted row).
+35. sec_07_middle.tex:165: "about 14,500 CPU seconds … about four hours", and where the programs and outputs are: run description (version 1.80 rewords the first sentence of this line; still a run description).
+36. back_matter.tex:4: "one script there reruns the checks and prints one line per check": run description (version 1.80 rewords it; still a run description).
+
+### Other
+37. sec_08_proof.tex:5: "All their endpoints, measured in degrees, are rational, except θ₀ = 2 arcsin(17/40)": it motivates Lemma 8.1; θ₀ is only excluded, and its irrationality is not claimed.
+38. abstract.tex:3 (short paper only): "Both main results are also proved in the Lean 4 proof assistant, with the computer-checked Lemmas 4.8, 6.2, 6.4 and 7.6 and six published theorems taken as hypotheses.": a remark about this Lean proof; its content is the status of Theorems 1.1 and 1.2 (AUDIT.md: PROVED GIVEN; Theorem 1.1 takes the six facts and the 14 checks, Theorem 1.2 four of the facts and the 14 checks).
+39. P24_short.tex:11 (short paper only), the footnote "Lean 4 proof: https://github.com/david44hello/paper_robinson-1947-one-half-conjecture/tree/v2.00": a link to this Lean proof.
+
+## Rows stronger than printed, and route differences
+
+No row is weaker than its printed claim.
+
+### Rows stronger than printed
+1. `sec4_first_variation` (sec_04_near.tex:212-216): typed for complex `λ`; the paper uses real `0 ≤ λ ≤ 1`.
+2. `sec6_xi_ball` (sec_06_far.tex:26): holds for all `σ₊, σ₋ ≥ 0` with `σ₊ + σ₋ > 0` and every `N ∈ 𝓑`, not only the numbers of the pair.
+3. `sec6_psum_cos` (sec_06_far.tex:24-28): an identity for every real `φ` and all complex `X, Y`, not only `φ = arg Z_o`.
+4. `sec6_b_change` (sec_06_far.tex:30-32): for all `L, d > 0`, real `φ` and all `ξ₁, ξ₂ ∈ ℂ`, with `|ζ₁|² + |ζ₂|² = |ξ₁|² + |ξ₂|²` (not only `≤ 1`).
+5. `sec6_Wbound_finite` (sec_06_far.tex:34-36): for all `b₁, b₂, b₃ ≥ 0` with `b₁ < π/2`, not only the numbers of this range of `θ`.
+6. `sec7_trace_bound` (sec_07_middle.tex:81-86): for every size `N`, every `E` with the bilinear bound, every real `𝒲` and all real `λ, μ`, not only the fixed `λ = 4/5`, `μ = 1/2`.
+7. `sec6_sigma_pos` (sec_06_far.tex:18): states `σ₊ > 0` and `σ₋ > 0`; the paper says "nonzero".
+8. `lem_4_4_i` (sec_04_near.tex:174): for any majorant `Z` with the needed convergence at `y`; the paper's majorants are the rational functions described at sec_04_near.tex:159.
+9. `sec4_hw_coeff` (sec_04_near.tex:164-169): for any `Z` with nonnegative coefficients that converges on `|x| < r`; the paper uses it for the rational majorants of sec_04_near.tex:159.
+10. `lem_4_2` (sec_04_near.tex:85-93): typed for the explicit range `0 < |ξ| < 1/4`; the paper says "For small ξ" (sec_04_near.tex:75). The use at `ξ = iy`, `y ≤ 17/80`, lies inside this range.
+
+### Typing notes (same claim)
+11. `sec4_no_constant` (sec_04_near.tex:31): the type does not ask `C₂ > 0` for the upper constant; it follows from `C₁ > 0` and the two bounds.
+12. `lem_7_2` (sec_07_middle.tex:23-25): the type keeps `Mᵀ = M` (the paper's matrices are symmetric) for the conjugation part; the proof does not need it.
+13. `sec6_L_log3` (sec_06_far.tex:16 and :34): the middle part `L = log 3` holds by definition; the other two parts are real proofs.
+14. `sec4_majorant_rules` (sec_04_near.tex:159): typed with `F(0) = Z(0) = 0`, as the paper prints it since version 1.70.
+
+### Route differences (same conclusion, different proof)
+15. `prop_2_5` (sec_02_reduction.tex:72): `Γk` is shown not injective on `|z| < r`, `r > 1/2`, by an explicit pair `z, z̄` (`zz̄ = P ∈ (1/4, r²)`, `Re z = (3 − 1/P)/2`), not by the local-mapping argument at `z₀ = −1/2`.
+16. `lem_4_4_ii`, `lem_4_4_iii` (sec_04_near.tex:172-179): Lemma 4.4 is printed for `9/20 ≤ τ ≤ 1/2`, while the shared rows for sec_04_near.tex:53-68 are typed on the printed range `9/20 < τ < 1/2` (sec_04_near.tex:48); so the Lean proof proves the area bound again on the closed range, including the endpoint `τ = 1/2`.
+17. `lem_4_6` (proof at sec_04_near.tex:266-276): no series in powers of `B` (sec_04_near.tex:267-271) and no `q`-sums (sec_04_near.tex:272-275); instead the closed identities `Π − Π̂ = −NB(1/(aL²) + 1/(a²L))` and `Π − Π̂ − Π̇ = NB²(2/(a³L) + 1/(a²L²))` (`a = 1 − νξ`, `L = a + B`), and `1/L ≪ 1/𝔡` by the inverse rule (sec_04_near.tex:159); same `Z₁`, `Z₂`, same conclusion (sec_04_near.tex:276).
+18. `sec4_first_variation`, `sec4_Tj_closed` (sec_04_near.tex:216): the printed "`T_j = −y⁻² ∂Q/∂b_{2j−1}`" is read as the `λ`-derivative plus the closed form of each `T_j`.
+19. `sec4_Lam_nonneg` (sec_04_near.tex:342): `Λ ≥ 0` is proved from an explicit derivative of `Z₂` at `±y₀`, uniform over the cell caps; the paper argues from nonnegative coefficients. It is a support row, not a census hypothesis.
+20. `prop_4_1` (proof at sec_04_near.tex:336-347): the case `e = 0` gives `f = k` directly, without Lemma 4.2 (sec_04_near.tex:337); `|c| ≤ 1` comes from de Branges for `n = 2` inside the proof (sec_04_near.tex:57), because the shared row for sec_04_near.tex:53-60 needs `9/20 < τ` strictly; `Π₋ > 0` comes from `Π₋ ≥ 1 − ε(y₀) ≈ 0.42` (sec_04_near.tex:259), not from the computer check.
+21. `lem_4_3`, `sec4_circle`, `lem_4_5_i` (sec_04_near.tex:126-147 and :218-243): PROVED in Lean with no computer check, by certificates checked inside Lean; the paper uses programs (72 and 410 positive coefficients).
+22. `eq_Kf` and Lemma 3.1 (sec_03_tools.tex:56-70): `eq_Kf` is proved by comparing two-variable coefficients, built on one-variable uniqueness; the parity of the odd root's Grunsky coefficients is proved inside the proof, with no extra hypothesis.
+23. `lem_6_3` (sec_06_far.tex:59-61): proved with no hypothesis at all (it does not need the symmetry `γ_nm = γ_mn`).
+24. `sec6_logp_logq`, `sec6_Rf_bound`, `eq_psum` (sec_06_far.tex:22-24): the Lean proof uses the symmetrized compression `(N + Nᵀ)/2`, with `‖N‖ ≤ 1` from the bilinear compression bound; `σ₋ > 0` is proved inside (`σ₋ = 0` would make `z = s²` real).
+25. `lem_7_3` (proof at sec_07_middle.tex:39-47): the branch bound `|Δ_f| ≤ 2 log 2 < π` comes from the Grunsky contraction (`|K_h(s, −s)| ≤ log 2`), not from the radial integration at sec_07_middle.tex:44.
+26. `lem_7_4` (sec_07_middle.tex:69-86): the trace bound is proved on `N × N` sections (`sec7_trace_bound`), then `N → ∞`.
+27. `sec5_not_all_from_S` (sec_05_grunsky_q.tex:54): proved from Proposition 7.5(ii) and the band check at `θ = 60°` (`Check_7_6_band02`), with Remark 5.6's matrix (`α = 0.535`, sec_05_grunsky_q.tex:103); in the Lean file it stands after Proposition 7.5(ii), which its proof uses.

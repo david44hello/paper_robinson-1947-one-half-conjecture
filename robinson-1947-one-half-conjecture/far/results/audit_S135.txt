@@ -1,0 +1,5 @@
+(C) scalars: PASS
+(D) formula (8) matches complex form; Koebe rotations 135-180 deg min Re Q = 0.252066: PASS
+(A) mixed term: 207 cells, max upper 0.691984257761 < 173/250 = .692 : PASS
+(B) ball step: 11 cells; author's a+,b+,beta+ dominate my enclosures; N>0 by Sturm: PASS
+S135 AUDIT PASS

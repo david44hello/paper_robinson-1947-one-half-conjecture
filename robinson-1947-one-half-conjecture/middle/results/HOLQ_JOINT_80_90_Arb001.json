@@ -1,0 +1,38 @@
+{
+  "status": "INDEPENDENT_BAND_CONFIRMED",
+  "support_exact": [
+    "4/5",
+    "1/2",
+    "JOINT_P55"
+  ],
+  "target_exact": "0",
+  "band_degrees_exact": [
+    "80",
+    "90"
+  ],
+  "cap_packet_sha256": "279c9f0751137f5bcea433046b3a846fd073dfc7e9ba77567bd94ad9d3a07e79",
+  "producer_minimum_UNTRUSTED": "4614644319774367/4611686018427387904",
+  "source_status": "PASS",
+  "nodes": 124779,
+  "leaves": 62390,
+  "confirmed_leaves": 62390,
+  "unconfirmed_leaves": 0,
+  "source_pending_boxes": 0,
+  "independent_box_checks": 63302,
+  "unconfirmed": [],
+  "confirmed_root_fraction_exact": "1",
+  "unconfirmed_leaf_fraction_exact": "0",
+  "source_pending_fraction_exact": "0",
+  "cpu_seconds": 3181.605881264,
+  "source_sha256": "cb2f5ef90cc64ef9cd369739d4d3bdee4d042d1ca2ca24d5581457b0c48d2697",
+  "own_source_hashes": {
+    "holq_support_tree_arb.py": "a6fe7e92009624dbe0fdc25defb10b5e87a0bb9f668469de3bdfb2d952548c22",
+    "holq_support_arb.py": "1715f99534a0b2f7cdb3911993cd9598df8d9f59da15bb5ac456e246162d95b0",
+    "holq_joint_cap_arb.py": "2d7f6c7c98eab01b2aeb5940944d045e40b8090dc3853a12f67734a939df18ca",
+    "holq_peer_tree_arb.py": "c1bc2696b3f1ca514610990adce78d027ae0808c2910e3a0274036e8f00130bf",
+    "holq_local_arb.py": "2762619a6c145d89e5cc1b3a07007f1cfa18f6060d6e8bc01e003545cb2d4103",
+    "arb_differential.py": "bf496f1be8fcfa3fa1d43c62c20d7649feb567a1a1fdcd528c4855d2f998ad97",
+    "fourlog_arb_box.py": "b586496b08f656748dd1d9e678396d48a92a5ce64d312e7e04dc48e45525e7e5",
+    "fourlog_centered.py": "67ea4b49f17996c2d6c88063f8e0b155a6d8f580e01140676f30dce95028ae28"
+  }
+}

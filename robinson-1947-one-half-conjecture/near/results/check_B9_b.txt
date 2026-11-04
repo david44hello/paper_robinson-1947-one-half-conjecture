@@ -1,0 +1,28 @@
+{
+  "status": "PASS",
+  "radius": "17/80",
+  "cells": 256,
+  "minimum": 0.15572479103124945,
+  "minimum_cell": 227,
+  "worst_cell": {
+    "radius": "17/80",
+    "q_low": "227/256",
+    "q_high": "57/64",
+    "kappa": 0.6896551724137931,
+    "Ktail": 0.5404108949297025,
+    "Mcell": 20.292043935358723,
+    "H_universal": 0.42084123407270096,
+    "H_model": 0.898011453308881,
+    "gamma_HZ": 0.11999304158533215,
+    "Hcell": 0.7780184117235488,
+    "J_WR": 10.278854146344743,
+    "J_Tcap_HR": 0.1328288830959129,
+    "J_norm_HZ": 2.1653202703385808,
+    "J_total": 12.577003299779237,
+    "d": 12.410198131635847,
+    "minimum": 0.15572479103124945,
+    "pass_certificate": true,
+    "diagnostic_counterfactuals": {}
+  },
+  "pass_certificate": true
+}

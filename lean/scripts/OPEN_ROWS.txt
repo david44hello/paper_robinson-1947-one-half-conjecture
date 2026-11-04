@@ -1,0 +1,2 @@
+# OPEN_ROWS.txt — rows of Robinson/Paper/Statements.lean that may stay unproved at the freeze (one name per line).
+# none - every row is PROVED or PROVED GIVEN (AUDIT.md).

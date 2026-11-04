@@ -1,0 +1,33 @@
+Derived physical model area coefficient 2
+Derived physical model area coefficient 3
+Derived physical model area coefficient 4
+Derived physical model area coefficient 5
+MODEL {"degrees": [11, 5], "count": 72, "minimum": "13603014527949/5000000000000", "positive": true}
+FINITE NORM {"degrees": [40, 9], "count": 410, "minimum": "4679574989953689/5368709120", "positive": true}
+{
+  "status": "PASS",
+  "radius": "21/100",
+  "midpoint_lower": "9/20",
+  "minimum": 0.24407440875220557,
+  "minimum_cell": 233,
+  "cells": 256,
+  "model": {
+    "degrees": [
+      11,
+      5
+    ],
+    "count": 72,
+    "minimum": "13603014527949/5000000000000",
+    "positive": true
+  },
+  "finite_norm": {
+    "degrees": [
+      40,
+      9
+    ],
+    "count": 410,
+    "minimum": "4679574989953689/5368709120",
+    "positive": true
+  },
+  "pass_certificate": true
+}
