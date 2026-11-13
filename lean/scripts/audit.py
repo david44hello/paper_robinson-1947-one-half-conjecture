@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 """audit.py — the claim audit: one status per paper row of Robinson/Paper/Statements.lean, from Lean's own output.
+Version 0.50, 2026-11-11: Lake itself decides whether the build is up to date (`lake build --no-build`, which compares
+  content hashes), not file times: a restored build cache or a fresh checkout no longer counts as stale.
 Version 0.40, 2026-11-04: AUDIT.md and CLAIMS.json are written at the project root (the published layout).
 Version 0.30, 2026-11-04: no time stamp in AUDIT.md and CLAIMS.json: a rerun on the same build rewrites every output
   byte for byte, so a Git checkout stays clean. A reader runs `LEAN_RUN_LOCK=none LEAN_RUN_GATE=none scripts/audit.py`.
@@ -13,7 +15,7 @@ Usage:  scripts/audit.py           the audit: `scripts/lean_run.sh lake env pyth
         scripts/audit.py --test    self-test (no Lean)
         (--locked is that inner step; it refuses to run unless started that way)
 Needs built .olean files for Robinson.Paper.Statements and its imports (scripts/check.sh builds them first);
-refuses to run on stale ones. The generated file only reads the environment: no row is changed, nothing assumed.
+refuses to run unless Lake says they are up to date (`lake build --no-build`). The generated file only reads the environment: no row is changed, nothing assumed.
 
 Status of a row (from `#print axioms` and the elaborated type; the source text never decides a status):
   FAIL: <reason>       an axiom other than propext, Classical.choice, Quot.sound and sorryAx; or a fact/check that
@@ -33,7 +35,6 @@ import re
 import subprocess
 import sys
 import tempfile
-import time
 
 SCRIPTS = Path(__file__).resolve().parent
 PROJECT = SCRIPTS.parent
@@ -54,8 +55,8 @@ GENERATED = SCRIPTS / "audit_axioms.lean"
 LOG = SCRIPTS / "audit_output.log"
 REPORT = PROJECT / "AUDIT.md"
 CLAIMS = PROJECT / "CLAIMS.json"
-OLEAN_ROOT = Path(".lake/build/lib/lean")   # relative to the project; read only (modification times)
-VERSION = "0.40"
+OLEAN_ROOT = Path(".lake/build/lib/lean")   # relative to the project; read only (a rebuild during the audit)
+VERSION = "0.50"
 LOCK_MARK = "CLAIM_AUDIT_UNDER_LOCK"   # set by main_audit for the inner step
 
 
@@ -167,18 +168,23 @@ def direct_imports(project, module):
     return re.findall(r"^import\s+(" + LIB + r"(?:\.[\w']+)*)\s*$", clean, re.M)
 
 
-def stale_modules(project, root_module):
-    """Modules of the closure whose .olean is missing, older than its source, or older than the .olean of a
-    project module it imports (then Lake would rebuild it; an approximation of Lake's own rule by file times)."""
-    stale = []
-    for module in sorted(import_closure(project, root_module)):
-        source = project / module_path(module, ".lean")
-        olean = project / OLEAN_ROOT / module_path(module, ".olean")
-        imported = [project / OLEAN_ROOT / module_path(dep, ".olean") for dep in direct_imports(project, module)]
-        if not olean.is_file() or olean.stat().st_mtime < source.stat().st_mtime or \
-           any(dep.is_file() and olean.stat().st_mtime < dep.stat().st_mtime for dep in imported):
-            stale.append(module)
-    return stale
+def lake_command():
+    """The toolchain's lake: `lake env`, the inner step's launcher, sets LAKE."""
+    lake = os.environ.get("LAKE")
+    if not lake:
+        fail("LAKE is not set: the inner step runs under `lake env` (run scripts/audit.py)")
+    return lake
+
+
+def lake_build_state(lake, root_module):
+    """Lake's own answer whether root_module and everything it imports are built from the current sources.
+    `lake build --no-build` exits 0 when every target is up to date, and non-zero (3 on Lean v4.35) when one needs a
+    rebuild. Lake compares content hashes, so new file times alone (a fresh checkout, a restored cache) do not count.
+    Returns None when up to date, else Lake's exit status and the last lines of its output."""
+    proc = subprocess.run([lake, "build", "--no-build", root_module], cwd=PROJECT, capture_output=True, text=True)
+    if proc.returncode == 0:
+        return None
+    return f"exit {proc.returncode}:\n" + "\n".join((proc.stdout + proc.stderr).splitlines()[-12:])
 
 
 def olean_times(project, root_module):
@@ -327,9 +333,9 @@ def main_audit_locked():
     """The audit proper; started by main_audit under the lock, the gate and `lake env`."""
     if os.environ.get(LOCK_MARK) != "1":
         fail("--locked is the inner step of scripts/audit.py; run scripts/audit.py")
-    stale = stale_modules(PROJECT, ROOT_MODULE)
-    if stale:
-        fail("stale or missing .olean for: " + ", ".join(stale) +
+    not_built = lake_build_state(lake_command(), ROOT_MODULE)
+    if not_built:
+        fail(f"Lake says the build of {ROOT_MODULE} is not up to date (`lake build --no-build`, {not_built})"
              "\n  build first: scripts/lean_run.sh lake build " + ROOT_MODULE)
     built = olean_times(PROJECT, ROOT_MODULE)
     items = parse_statements(STATEMENTS.read_text(encoding="utf-8"))
@@ -444,30 +450,41 @@ def test_render_and_waiting():
     assert "| `FactA` | fact | 2 |" in report
 
 
-def test_freshness():
+def test_olean_times():
     with tempfile.TemporaryDirectory(dir=SCRIPTS, prefix=".audit-test.") as name:
         root = Path(name)
         (root / LIB / "Paper").mkdir(parents=True)
         (root / LIB / "Defs.lean").write_text("theorem x : True := trivial\n")
         (root / LIB / "Paper/Statements.lean").write_text(f"import {LIB}.Defs\nimport Mathlib\n-- import {LIB}.Gone\n")
         assert import_closure(root, ROOT_MODULE) == {ROOT_MODULE, LIB + ".Defs"}
-        assert stale_modules(root, ROOT_MODULE) == [LIB + ".Defs", ROOT_MODULE]          # no oleans yet
+        assert set(olean_times(root, ROOT_MODULE).values()) == {None}                    # no oleans yet
         for module in (LIB + ".Defs", ROOT_MODULE):
             olean = root / OLEAN_ROOT / module_path(module, ".olean")
             olean.parent.mkdir(parents=True, exist_ok=True)
             olean.write_text("olean")
-        assert stale_modules(root, ROOT_MODULE) == []
         before = olean_times(root, ROOT_MODULE)
         rebuilt = root / OLEAN_ROOT / module_path(ROOT_MODULE, ".olean")
         os.utime(rebuilt, ns=(before[ROOT_MODULE] + 10**9, before[ROOT_MODULE] + 10**9))
-        assert olean_times(root, ROOT_MODULE) != before
-        dependency = root / OLEAN_ROOT / module_path(LIB + ".Defs", ".olean")
-        os.utime(dependency, ns=(before[ROOT_MODULE] + 2 * 10**9, before[ROOT_MODULE] + 2 * 10**9))
-        assert stale_modules(root, ROOT_MODULE) == [ROOT_MODULE]  # an import's .olean is newer than its own
-        source = root / LIB / "Defs.lean"
-        later = time.time() + 60
-        os.utime(source, (later, later))
-        assert stale_modules(root, ROOT_MODULE) == [LIB + ".Defs", ROOT_MODULE]          # a source newer than its .olean
+        assert olean_times(root, ROOT_MODULE) != before                                  # a rebuild during the audit
+
+
+def test_lake_build_state():
+    """Stand-in lakes: exit 0 = up to date; exit 3 + Lake's message = not built (the audit then fails loudly)."""
+    with tempfile.TemporaryDirectory(dir=SCRIPTS, prefix=".audit-test.") as name:
+        built, stale = Path(name) / "lake_built", Path(name) / "lake_stale"
+        built.write_text("#!/bin/sh\necho 'All targets up-to-date (1 jobs).'\nexit 0\n")
+        stale.write_text("#!/bin/sh\necho 'error: target is out-of-date and needs to be rebuilt'\nexit 3\n")
+        for stand_in in (built, stale):
+            stand_in.chmod(0o755)
+        assert lake_build_state(str(built), ROOT_MODULE) is None
+        answer = lake_build_state(str(stale), ROOT_MODULE)
+        assert answer.startswith("exit 3:") and "out-of-date" in answer
+    saved = os.environ.pop("LAKE", None)
+    try:
+        expect_failure(lake_command)
+    finally:
+        if saved is not None:
+            os.environ["LAKE"] = saved
 
 
 def test_inner_step_refuses_without_lock():
@@ -485,9 +502,10 @@ def main_test():
     test_lean_output_parsers()
     test_classify()
     test_render_and_waiting()
-    test_freshness()
+    test_olean_times()
+    test_lake_build_state()
     print("PASS: audit parsers, registry contracts, statuses (FAIL / not proved yet / PROVED GIVEN / PROVED), "
-          "olean freshness, report cells and totals")
+          "Lake's up-to-date answer, rebuild-during-audit detection, report cells and totals")
 
 
 def main_audit():

@@ -1,6 +1,6 @@
-# CLAIM_MAP — Robinson's one-half conjecture (1947), SHORT paper = frozen text v2.00 (P24_short.pdf md5 0a1921c957012603c914bca822108dd5; \longfalse).
-# Pointers "sec_0N_*.tex:<line>" = lines of the v2.00 sources. Theorem numbers as printed (checked on P24_short.pdf).
-# Columns (TAB): claim id | claim (v2.00 pointer) | REQUIRED rows | SUPPORT rows | status (from the audit; kept equal by
+# CLAIM_MAP — Robinson's one-half conjecture (1947), SHORT paper = frozen text v2.80 (P24_short.pdf md5 a4740430a8dfd71d07df1499ad8f7a76; \longfalse).
+# Pointers "sec_0N_*.tex:<line>" = lines of the v2.80 sources. Theorem numbers as printed (checked on P24_short.pdf).
+# Columns (TAB): claim id | claim (v2.80 pointer) | REQUIRED rows | SUPPORT rows | status (from the audit; kept equal by
 #   scripts/claims_table.py --write / --check; NOT COUNTED lines carry their reason instead).
 # REQUIRED: ALL comma-listed rows must be proved; claim status = its worst REQUIRED row. SUPPORT rows do not change the status.
 # Quantifier rule: each printed quantifier and exception is compared with the row's type (an independent read of the statements, before proofs).
@@ -9,37 +9,39 @@
 # A4 FACTS (explicit hypotheses, never Lean postulates; file Robinson/NotFormalized.lean): FactArgumentPrinciple, FactJordanCurve (Lemma 2.2),
 #   FactDeBranges, FactArea, FactGrunsky (strong Grunsky inequality), FactBidiscPowerSeries (Osgood + Cauchy on the bidisc).
 # A3 CHECKS (explicit hypotheses "checked by computer, NOT proved in Lean"; file Robinson/ComputerChecked.lean): Check_4_8,
-#   Check_6_2, Check_6_4, Check_7_6_band01 .. Check_7_6_band11; maybe Check_4_3, Check_4_5 (if the kernel cannot do them).
-# LAYERS: [E] elementary / finite-dimensional (target PROVED today); [G] Grunsky layer (needs Grunsky coefficients, the odd
-#   root, l2 compressions: rows stated, expected "not proved yet"); [P] power-series layer of sec. 4 (majorants, first and
-#   second variation: rows stated, expected "not proved yet"); [A] assembly (hypothesis-parametrized, target PROVED).
+#   Check_6_2, Check_6_4, Check_7_6_band01 .. Check_7_6_band11. Lemmas 4.3 and 4.5(i) are proved in Lean without a computer-check hypothesis.
+# LAYERS: [E] elementary / finite-dimensional; [G] Grunsky coefficients, odd root and l2 compressions;
+#   [P] power series, majorants, first and second variation; [A] assembly.
+# The current audit gives the status of every row and names every fact or check taken as a hypothesis.
 # NOT COUNTED (no mathematical claim of this paper): history and attributions - abstract.tex:3 "Robinson proved r >= 0.38,
 #   observed ..., conjectured", "Barnard proved r >= 0.49 in 1978"; sec_01_intro.tex:5 "In a study of univalent majorants";
-#   :9 Robinson's results, the quote, "Robinson writes H = (zG)'" (the factor remark is row intro_factor_two); :11 Livingston,
-#   Barnard, Pearce, "We know of no later improvement", Ye, Sinel'nikova; :21 "this is the quotient of Barnard's proof";
-#   :36-37 Table 1 "Best result before" column; :44 "Before this paper, the radius 1/2 was known for ..."; :45 "since the radius of
+#   :9 Robinson's results, the quote, "Robinson writes H = (zG)'" (the factor remark is row intro_factor_two); :11 Livingston
+#   (close-to-convex, hence starlike and convex), Barnard, Pearce, "We know of no later improvement"; :14 "as Robinson observed" [Rob47, p. 18] (attribution; the sharpness itself is
+#   T11); :21 "Barnard ... uses the same quotient";
+#   :32-40 Table 1: its column "Best result before this paper" (now the left one; with "the radius 1/2 cannot be
+#   enlarged (Robinson 1947)") and its caption "What was known before, and what this paper proves."; :44 Table 1 and Figure 1 "compare Theorem ... with what was known before"; :45 "since the radius of
 #   starlikeness of Gamma(S) lies between 0.435 and 0.445 [Bar75, Pea83]" (a quoted result, used by no proof here; the
 #   consequence "need not be star-shaped" rests on it alone); :52 Figure 1 panel (a) and "The vertical axis starts at
-#   r = 0.40"; :75 "combined in a similar way by Wikstrom"; :80-81 Organization; sec_02_reduction.tex:23 and :37 (route words:
+#   r = 0.40"; :61 Table 2 "(Robinson's observation)" (attribution; the rest of Table 2 is a run description, below); :75 "combined in a similar way by Wikstrom"; :77 Barnard's split of Q_f, our use of it, and "The other ingredients of our proof" (attribution and route words; each ingredient is its own row); :80-81 Organization; sec_02_reduction.tex:23 and :37 (route words:
 #   "we include the proof because ...", "Nothing in this proof requires ...", "Barnard reduces ... [Bar78, p. 136]"); :61 "this
 #   is Robinson's observation"; sec_03_tools.tex:6 "None of them is new"; sec_04_near.tex:33 (overview of the section's
 #   route; each step is its own row below); :294 "We divide ... and collect in one statement" (layout); sec_05_grunsky_q.tex
 #   :57 "real dimension 6 / 3" (dimension words; content = prop_5_2 + lem_5_3); :103 second sentence (route); sec_07_middle
-#   :97 "P was chosen numerically ..."; :117 "The added terms are not arbitrary" (route words; the vanishing at M = 0 is
+#   :97 "the matrix P fixed above makes C_P small near ..." (55 degrees); :117 "Lemma ... uses the Grunsky inequality for the even block" (route words; the vanishing at M = 0 is
 #   row sec7_UR_zero); :124 "Both are explicit elementary functions" (description); back_matter.tex (data availability,
 #   acknowledgments).
-# NOT COUNTED (descriptions of the computer runs; logs in the repository folder `robinson-1947-one-half-conjecture/`): sec_01_intro.tex:62-64 Table 2 "two programs", "72 and 410
+# NOT COUNTED (descriptions of the computer runs; logs in the repository folder `robinson-1947-one-half-conjecture/`): sec_01_intro.tex:61-67 Table 2 and its caption: "proofs on paper", "no computation", "two programs", "72 and 410
 #   coefficients", "256 cells (320 in the second program)", "304,664 leaf boxes in the first program, 311,506 boxes in the second"; sec_04_near.tex:147 "72 coefficients are all
 #   positive" (the certificate of lem_4_3 if not proved in Lean), :243 "410 coefficients" (lem_4_5_i), :333 "All 256 cells
 #   pass", the second program's 320 cells (the value 0.1557 is claim C48m below); sec_06_far.tex:48 eleven cells,
 #   degree 28, Bernstein on <= 8 subintervals (the second program: eight equal ones), :93 234 cells and the second program's
-#   check of the same 234 cells, the largest bound 3459999249/(5e9), :100 "The cover is refined only until every cell passes";
+#   check of the same 234 cells, the largest bound 3459999249/(5e9);
 #   sec_07_middle :133-139 the programs' method (incl. which bounds each program uses), :141-162 Table 3 leaf and box counts and
-#   "Both programs accepted every band", :165 about 14,500 CPU s; back_matter.tex:4 "One script there reruns the checks of Sections 4 and 6, checks the stored
+#   "Both programs accepted every band", :165 "takes about four hours on one processor core"; back_matter.tex:4 "One script there reruns the checks of Sections 4 and 6, checks the stored
 #   results of Section 7 and, on request, replays its eleven bands with the second program".
 #   (The arithmetic of Table 3's totals IS a row: tab3_totals.)
 #
-# claim	claim (v2.00 pointer)	REQUIRED rows	SUPPORT rows	status
+# claim	claim (v2.80 pointer)	REQUIRED rows	SUPPORT rows	status
 T11	Thm 1.1 (sec_01_intro.tex:13-15; abstract.tex:3; Table 1 sec_01_intro.tex:36): for every f in S, Gamma f is injective on the closed disc |z| <= 1/2; the radius 1/2 is sharp (for every r > 1/2 some f in S has Gamma f not injective on |z| < r)	thm_1_1	sec8_assembly, prop_2_5	PROVED GIVEN Check_4_8, Check_6_2, Check_6_4, Check_7_6_band01, Check_7_6_band02, Check_7_6_band03, Check_7_6_band04, Check_7_6_band05, Check_7_6_band06, Check_7_6_band07, Check_7_6_band08, Check_7_6_band09, Check_7_6_band10, Check_7_6_band11, FactArea, FactArgumentPrinciple, FactBidiscPowerSeries, FactDeBranges, FactGrunsky, FactJordanCurve
 T12	Thm 1.2 (sec_01_intro.tex:23-28; abstract.tex:3; Table 1 sec_01_intro.tex:37; Fig. 1 (b) sec_01_intro.tex:52): for every f in S, r in (0, 1/2], distinct z, w with |z| = |w| = r: Re Q_f(z, w) > 0	thm_1_2	sec8_assembly	PROVED GIVEN Check_4_8, Check_6_2, Check_6_4, Check_7_6_band01, Check_7_6_band02, Check_7_6_band03, Check_7_6_band04, Check_7_6_band05, Check_7_6_band06, Check_7_6_band07, Check_7_6_band08, Check_7_6_band09, Check_7_6_band10, Check_7_6_band11, FactArea, FactBidiscPowerSeries, FactDeBranges, FactGrunsky
 I1	sec_01_intro.tex:7-9: Gamma f = (f + z f')/2 = (1/2)(z f)'; it multiplies the coefficient a_n by (n+1)/2	intro_gamma_deriv, intro_gamma_coeff		PROVED
@@ -52,9 +54,10 @@ I7	sec_01_intro.tex:71 (and abstract.tex:3 "By the argument principle it suffice
 I8	sec_01_intro.tex:73, sec_02_reduction.tex:75: Q_k(z, w) -> 0 as z, w -> -1/2 along the circle; in normal position for k_pi(z) = -k(-z) as theta -> 0, at the rate sin^2(theta/2)	sec2_koebe_limit, sec4_no_constant	eq_Qk	PROVED
 I9	sec_01_intro.tex:73: the comparison function k(cu)/c has second coefficient 2c and is the Koebe function when c = 1; Prop 4.1's bound (summary)	sec4_model_mem_S	prop_4_1	PROVED
 I10	sec_01_intro.tex:75 (and abstract.tex:3): Q_f = Qrel(O_2); strong Grunsky => |O_2| <= 1; Takagi + minimum principle => minimum at a symmetric unitary matrix, three real parameters; far range > 1/2000; middle range positive; Lemma 8.1 => the three ranges cover all angles	prop_5_1, sec5_O2_contraction, prop_5_2, lem_5_3, prop_6_1, prop_7_1, sec8_cover		PROVED GIVEN Check_6_2, Check_6_4, Check_7_6_band01, Check_7_6_band02, Check_7_6_band03, Check_7_6_band04, Check_7_6_band05, Check_7_6_band06, Check_7_6_band07, Check_7_6_band08, Check_7_6_band09, Check_7_6_band10, Check_7_6_band11, FactBidiscPowerSeries, FactGrunsky
-I11	abstract.tex:3: "inequalities in at most four real variables. Both parts of the proof end in finite computations, checked in exact rational arithmetic or in rigorous interval arithmetic, each computation by two independently written programs"	Check_4_8, Check_6_2, Check_6_4, lem_7_6_i, lem_7_6_ii		checked by computer, NOT proved in Lean
-I12	abstract.tex:3 (short paper only): "Both main results are also proved in the Lean 4 proof assistant, with the computer-checked Lemmas 4.8, 6.2, 6.4 and 7.6 and six published theorems taken as hypotheses."			NOT COUNTED (a remark about this Lean proof: its content is the status of T11 and T12, both PROVED GIVEN; Thm 1.1 takes the six facts and the 14 checks, Thm 1.2 four of the facts and the 14 checks)
-I13	P24_short.tex:11 (short paper only), footnote: "Lean 4 proof: https://github.com/david44hello/paper_robinson-1947-one-half-conjecture/tree/v2.00"			NOT COUNTED (a link to this Lean proof)
+I11	abstract.tex:3: "inequalities in at most four real variables. Both parts end in finite computations, in exact rational or rigorous interval arithmetic, each checked by two independently written programs"	Check_4_8, Check_6_2, Check_6_4, lem_7_6_i, lem_7_6_ii		checked by computer, NOT proved in Lean
+I12	abstract.tex:3 (short paper only): "Assuming the computer-checked Lemmas 4.8, 6.2, 6.4 and 7.6, both main results are also proved in Lean~4, and checked with the Lean comparator."			NOT COUNTED (a remark about this Lean proof: its content is the status of T11 and T12, both PROVED GIVEN; Thm 1.1 takes the six facts and the 14 checks, Thm 1.2 four of the facts and the 14 checks; and a run of the Lean comparator on these files)
+I13	P24_short.tex:11 (short paper only), footnote: "Lean~4 formalization: https://github.com/david44hello/paper_robinson-1947-one-half-conjecture/tree/v2.80/lean"			NOT COUNTED (a link to this Lean proof)
+I14	P24_short.tex:9 and :15 (short paper only): the title's footnote, a pointer to the expanded version of the paper (:9), and the manuscript's version line (:15)			NOT COUNTED (pointers, no mathematical claim)
 S2a	sec_02_reduction.tex:5: for f in S and distinct z, w in D, f(z) != f(w)	sec2_f_ne		PROVED
 S2b	sec_02_reduction.tex:9: Q_f is symmetric in z and w	sec2_Q_symm		PROVED
 L21	Lemma 2.1 (sec_02_reduction.tex:11-17): for f in S, distinct z, w in D: Gamma f(z) - Gamma f(w) = (1/2)(f(z) - f(w)) Q_f(z, w); Gamma f(z) = Gamma f(w) iff Q_f(z, w) = 0	lem_2_1		PROVED
@@ -104,14 +107,14 @@ C55	Cor 5.5 (sec_05_grunsky_q.tex:94-96): Phi holomorphic near B, Phi(conj M) = 
 R56	Remark 5.6 (sec_05_grunsky_q.tex:102-104): at theta = 60 degrees, M = -[[cos a, sin a], [sin a, -cos a]], a = 0.535, is real symmetric unitary and Re Qrel(M) approx -0.078	rem_5_6		PROVED
 P61	Prop 6.1 (sec_06_far.tex:7-9): for f in S, theta in [135, 180] degrees: Re Q_f(z_theta, conj z_theta) > 1/2000	prop_6_1	prop_6_1_from_layer (the printed proof, sec_06_far.tex:96-98), eq_psum, sec6_Rf_bound	PROVED GIVEN Check_6_2, Check_6_4, FactBidiscPowerSeries, FactGrunsky
 S6a	sec_06_far.tex:11: Re(p+q) > 277/400, |R_f| < 173/250, 277/400 - 173/250 = 1/2000; 0 <= c <= sin(pi/8) < 383/1000 (pi < 22/7, sine Taylor)	sec6_c_bound, sec6_margin_arith		PROVED
-S6b	sec_06_far.tex:14-36: sigma_+-, L = 2 A_o = log 3, d; the rotated basis and a(s) = e^{i phi/2}(sqrt sigma_+, i sqrt sigma_-); N symmetric with |N| <= 1; log p = e^{i phi}(X + iY), log q = e^{-i phi}(X - iY); |xi_1|^2 + |xi_2|^2 <= 1; (p+q)/2 = e^{U*} cos V*; the orthogonal change to zeta, b_1, b_2, b_3 >= 0, b_1 <= L < pi/2; |log cos v| <= -log cos |v| for |v| < pi/2; (eq:Wbound)	sec6_L_log3, sec6_logp_logq, sec6_xi_ball, sec6_psum_cos, sec6_b_change, sec6_b_values, sec6_logcos, sec6_Wbound_finite		PROVED GIVEN FactBidiscPowerSeries, FactGrunsky
+S6b	sec_06_far.tex:14-36: sigma_+-, L = 2 A_o = log 3, d; the rotated basis and a(s) = e^{i phi/2}(sqrt sigma_+, i sqrt sigma_-); N symmetric with |N| <= 1; log p = e^{i phi}(X + iY), log q = e^{-i phi}(X - iY); |xi_1|^2 + |xi_2|^2 <= 1; (p+q)/2 = e^{U*} cos V*; the orthogonal change to zeta, b_1, b_2, b_3 >= 0, b_1 <= L = log 3 < pi/2, because 0 <= phi <= pi/2 ("the point z lies in the closed first quadrant") and d <= 2(sigma_+ + sigma_-) = L ("by the inequality between the arithmetic and geometric means") (:34); |log cos v| <= -log cos |v| for |v| < pi/2; (eq:Wbound)	sec6_L_log3, sec6_logp_logq, sec6_xi_ball, sec6_psum_cos, sec6_b_change, sec6_b_values, sec6_phi_d_range, sec6_logcos, sec6_Wbound_finite		PROVED GIVEN FactBidiscPowerSeries, FactGrunsky
 S6n1	sec_06_far.tex:18: sigma_+ and sigma_- "are both nonzero, since Re a(s) and Im a(s) are linearly independent"	sec6_sigma_pos		PROVED
 L62	Lemma 6.2 (sec_06_far.tex:39-45): for c in [0, 383/1000], r_1 in [0, 1]: b_2 r_1 + b_3 sqrt(1 - r_1^2) - log cos(b_1 r_1) < 211/200	Check_6_2	sec6_ZO_re_im	checked by computer, NOT proved in Lean
-S6c	sec_06_far.tex:51-53 (eq:psum): min of Re e^W on |W| <= T ("Since g is even, it suffices to take 0 <= gamma <= pi", :51): T sin(57/100) < 57/100, cos(57/100) > 21/25, e^{21T/25} < 672/277, e^T < 800/277; |W| <= 211/200 => Re e^W > 277/800; Re(p+q) = 2 Re e^W > 277/400	sec6_expW_bound, eq_psum		PROVED GIVEN Check_6_2, FactBidiscPowerSeries, FactGrunsky
+S6c	sec_06_far.tex:51-53 (eq:psum): min of Re e^W on |W| <= T ("Since g is even, it suffices to take 0 <= gamma <= pi", :51); with T = 211/200, the function gamma - T sin gamma is strictly convex on [0, pi] and vanishes at 0, and gamma = T sin gamma has exactly one root gamma_* in (0, pi) ("there is only one, since gamma - T sin gamma is strictly convex on [0, pi] and vanishes at 0", :51): T sin(57/100) < 57/100, cos(57/100) > 21/25, e^{21T/25} < 672/277, e^T < 800/277; |W| <= 211/200 => Re e^W > 277/800; Re(p+q) = 2 Re e^W > 277/400	sec6_expW_bound, sec6_gamma_unique, eq_psum		PROVED GIVEN Check_6_2, FactBidiscPowerSeries, FactGrunsky
 L63	Lemma 6.3 (sec_06_far.tex:59-61): Q_f(z, w) - p(z) - p(w) = beta(z)^T C(f) alpha(w) + beta(w)^T C(f) alpha(z)	lem_6_3		PROVED
 S6d	sec_06_far.tex:74-82: alpha(w) = conj alpha(z), beta(w) = conj beta(z); R_f = 2(beta_r^T C alpha_r + beta_i^T C alpha_i) for every real phase; |R_f| <= sqrt((U_R+A_R)(V_R+B_R)) + sqrt((U_R-A_R)(V_R-B_R)); U_R = 4/9, V_R = log 4/3; beta^T beta = z^2/(1-z^2)^2, alpha^T alpha = -log(1 - z^2); the A_R, B_R formulas; cos eps = 1 - 2c^2, sin eps = 2c sqrt(1 - c^2)	sec6_Rf_bound, sec6_UV_values, sec6_A0B0_closed		PROVED GIVEN FactBidiscPowerSeries, FactGrunsky
 L64	Lemma 6.4 (sec_06_far.tex:84-90): for c in [0, 383/1000]: sqrt((U_R+A_R)(V_R+B_R)) + sqrt((U_R-A_R)(V_R-B_R)) < 173/250	Check_6_4		checked by computer, NOT proved in Lean
-S6f	sec_06_far.tex:93, :100: the function of Lemma 6.4 is about 0.6912 at c = 0 (theta = 180 degrees) (:100); 3459999249/(5e9) < 173/250 (:93, :100)	sec6_value_180, sec6_cover_bound_arith		PROVED
+S6f	sec_06_far.tex:93, :100: the function of Lemma 6.4 is about 0.6912 at c = 0 (theta = 180 degrees) (:100); 3459999249/(5e9) < 173/250 (:93)	sec6_value_180, sec6_cover_bound_arith		PROVED
 S7a	sec_07_middle.tex:13: for 90..135 the relaxation suffices; for smaller angles it can fail (Remark 5.6)	lem_7_6_i, lem_7_6_ii, cor_5_5, rem_5_6		PROVED GIVEN Check_7_6_band01, Check_7_6_band02, Check_7_6_band03, Check_7_6_band04, Check_7_6_band05, Check_7_6_band06, Check_7_6_band07, Check_7_6_band08, Check_7_6_band09, Check_7_6_band10, Check_7_6_band11
 S7b	sec_07_middle.tex:16: b_e(s) = s d/ds a_e(s)	sec7_be_deriv		PROVED
 L72	Lemma 7.2 (sec_07_middle.tex:23-25): Delta, U, R holomorphic on {|M| < pi/log 9}; iU(conj M) = conj(iU(M)), R(conj M) = conj R(M)	lem_7_2		PROVED
@@ -130,6 +133,7 @@ L81	Lemma 8.1 (sec_08_proof.tex:7-16): theta_0 > 50.3 degrees, i.e. sin(503 pi/3
 S8a	sec_08_proof.tex:5, :19: the three ranges (0, theta_0], [50.3, 135], [135, 180] degrees overlap and cover (0, 180] degrees	sec8_cover		PROVED
 S8e	sec_08_proof.tex:5: "All their endpoints, measured in degrees, are rational, except theta_0 = 2 arcsin(17/40)"			NOT COUNTED (motivates Lemma 8.1; theta_0 is only excluded - its irrationality is not claimed)
 R82	Remark 8.2 (sec_08_proof.tex:22-24): distinct z, w, |z| = |w| = r <= 1/2, angular distance theta: Re Q_f >= sin^2(theta/2)/80 if theta <= theta_0; > 1/2000 if theta >= 135 degrees	rem_8_2		PROVED GIVEN Check_4_8, Check_6_2, Check_6_4, FactArea, FactBidiscPowerSeries, FactDeBranges, FactGrunsky
+R82m	Remark 8.2, middle range (sec_08_proof.tex:23): "On the middle range the bound is ..." Re Q_f > 0 (Proposition 7.1): distinct z, w, |z| = |w| = r <= 1/2, angular distance theta in [50.3, 135] degrees: Re Q_f(z, w) > 0 (Thm 1.2 states it for every angle)	thm_1_2	prop_7_1	PROVED GIVEN Check_4_8, Check_6_2, Check_6_4, Check_7_6_band01, Check_7_6_band02, Check_7_6_band03, Check_7_6_band04, Check_7_6_band05, Check_7_6_band06, Check_7_6_band07, Check_7_6_band08, Check_7_6_band09, Check_7_6_band10, Check_7_6_band11, FactArea, FactBidiscPowerSeries, FactDeBranges, FactGrunsky
 C48m	sec_04_near.tex:333: "the smallest value that the first program finds for the quadratic left side ..., with its upper bounds for h[Z] and w[Z], is about 0.1557, in the cell [227/256, 228/256]" (a printed program output; no proof uses it)			NOT COUNTED (run description: the first program's minimum with its upper bounds for h[Z] and w[Z]; the paper says so)
 R1n	sec_04_near.tex:153-156 (used at :337-341): Re Q_f(-tau+iy, -tau-iy) >= Re Qhat - y^2|Tdot| - y^2|T - That - Tdot|	sec4_majorant_split		PROVED GIVEN FactDeBranges
 R2b	sec_06_far.tex:72: the right side of Lemma 6.3 is sum_{n,m>=1} (n+m) gamma_nm z^n w^m (Barnard's identity)	sec6_barnard_series		PROVED

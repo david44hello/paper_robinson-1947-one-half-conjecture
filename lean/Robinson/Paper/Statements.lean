@@ -6,8 +6,12 @@ Paper author: Dave Goel. Copyright (C) Dave Goel 2026--now. All rights reserved.
 
 
 
-Paper = the frozen text v2.00 (P24_short.pdf md5 0a1921c957012603c914bca822108dd5), short paper (\longfalse).
-Pointers "sec_0N_*.tex:<line>" = lines of the v2.00 sources. A row is proved iff its body is a proof term.
+
+
+
+
+Paper = the short paper (\longfalse); AUDIT_NOTES.md and CLAIM_MAP.tsv name its text version.
+Pointers "sec_0N_*.tex:<line>" = lines of the paper's TeX sources. A row is proved iff its body is a proof term.
 A row with a binder `(h : Fact…)` is PROVED GIVEN that published fact (Robinson/NotFormalized.lean); a row with a
 binder `(h : Check…)` is PROVED GIVEN that computer check (Robinson/ComputerChecked.lean). No other hypotheses,
 except in the rows `*_from_layer` and `sec8_assembly`: these are printed proofs written as implications, and
@@ -57,6 +61,8 @@ import Robinson.Proofs.Lem44iii
 import Robinson.Proofs.NearP_C
 import Robinson.Proofs.SigmaPos
 import Robinson.Proofs.NearP_D
+import Robinson.Proofs.GammaUnique
+import Robinson.Proofs.Sec6PhiD
 
 namespace Robinson.Paper
 
@@ -659,7 +665,7 @@ theorem sec5_qrel_algebra (p q χ fz fw : ℂ) (hχ0 : χ ≠ 0) (hχ1 : χ ≠ 
         1 + (p * (1 + χ) ^ 2 - q * (1 - χ) ^ 2) / (4 * χ) ∧
       1 + (p * (1 + χ) ^ 2 - q * (1 - χ) ^ 2) / (4 * χ) = 1 + (p + q) / 2 + (p - q) * (χ + χ⁻¹) / 4 := Proofs.sec5_qrel_algebra_proved p q χ fz fw hχ0 hχ1 hfw hne hratio
 
-/-- The Takagi factorization of a complex symmetric 2x2 matrix [Tak25], [HJ13, Corollary 4.4.4(c)], as the proof of
+/-- The Takagi factorization of a complex symmetric 2x2 matrix [Tak25], [HJ13, Corollary 4.4.4], as the proof of
 Proposition 5.2 uses it (sec_05_grunsky_q.tex:64): `M = 𝒰 diag(σ₁, σ₂) 𝒰ᵀ` with `𝒰` unitary and
 `0 ≤ σⱼ ≤ ‖M‖`. -/
 theorem sec5_takagi_2x2 (M : Matrix (Fin 2) (Fin 2) ℂ) (hM : Mᵀ = M) :
@@ -720,7 +726,7 @@ theorem sec6_c_bound (θ : ℝ) (h1 : deg 135 ≤ θ) (h2 : θ ≤ deg 180) :
 /-- sec_06_far.tex:11 and :97: "`277/400 - 173/250 = 1/2000`". -/
 theorem sec6_margin_arith : (277 / 400 : ℝ) - 173 / 250 = 1 / 2000 := Proofs.sec6_margin_arith_proved
 
-/-- sec_06_far.tex:16 and :34: "`L = 2A_o = log 3`" and "`L < π/2`". -/
+/-- sec_06_far.tex:16 and :34: "`L = 2A_o = log 3`" and "`L = log 3 < π/2`". -/
 theorem sec6_L_log3 : 2 * Ao = Real.log 3 ∧ Llog3 = Real.log 3 ∧ Llog3 < Real.pi / 2 := Proofs.sec6_L_log3_proved
 
 /-- sec_06_far.tex:48: "`u_o = Re Z_o` and `v_o = Im Z_o`" with `c = cos(θ/2)` (for `θ ∈ [0, π]`). -/
@@ -759,7 +765,7 @@ theorem sec6_b_change (L d φ : ℝ) (hL : 0 < L) (hd : 0 < d) (ξ₁ ξ₂ : �
 /-- sec_06_far.tex:16, :32-34 and :48: for `θ ∈ [135°, 180°]`, with `φ = arg Z_o`, `σ± = (A_o ± |Z_o|)/2`,
 `d = 4√(σ₊σ₋)` and `L = log 3`, the numbers `b₁, b₂, b₃` of the orthogonal change are those of Lemma 6.2 at
 `c = cos(θ/2)` ("since `d² = L² - 4|Z_o|²` and `|Z_o| cos φ = u_o`, `|Z_o| sin φ = v_o`"); they are nonnegative,
-`b₁ > 0`, and `b₁ ≤ L < π/2`. -/
+`b₁ > 0`, and `b₁ ≤ L = log 3 < π/2`. -/
 theorem sec6_b_values (θ : ℝ) (h1 : deg 135 ≤ θ) (h2 : θ ≤ deg 180) :
     let φ := Complex.arg (Zo θ)
     let d := 4 * Real.sqrt ((Ao + ‖Zo θ‖) / 2 * ((Ao - ‖Zo θ‖) / 2))
@@ -767,6 +773,18 @@ theorem sec6_b_values (θ : ℝ) (h1 : deg 135 ≤ θ) (h2 : θ ≤ deg 180) :
     0 < b1 c ∧ Real.sqrt (Llog3 ^ 2 * Real.sin φ ^ 2 + d ^ 2 * Real.cos φ ^ 2) = b1 c ∧
       (Llog3 ^ 2 - d ^ 2) * Real.sin φ * Real.cos φ / b1 c = b2 c ∧ Llog3 * d / b1 c = b3 c ∧
       0 ≤ b2 c ∧ 0 ≤ b3 c ∧ b1 c ≤ Llog3 ∧ Llog3 < Real.pi / 2 := Proofs.sec6_b_values_proved θ h1 h2
+
+/-- sec_06_far.tex:34, after "`b₁ ≤ L = log 3 < π/2`": "because `0 ≤ φ ≤ π/2` there (the point `z` lies in the closed
+first quadrant) and `d ≤ 2(σ₊ + σ₋) = L` (by the inequality between the arithmetic and geometric means)", for
+`θ ∈ [135°, 180°]`, with `z = z_θ`, `φ = arg Z_o`, `σ± = (A_o ± |Z_o|)/2`, `d = 4√(σ₊σ₋)` and `L = log 3` as in
+`sec6_b_values`. -/
+theorem sec6_phi_d_range (θ : ℝ) (h1 : deg 135 ≤ θ) (h2 : θ ≤ deg 180) :
+    let φ := Complex.arg (Zo θ)
+    let σp := (Ao + ‖Zo θ‖) / 2
+    let σm := (Ao - ‖Zo θ‖) / 2
+    let d := 4 * Real.sqrt (σp * σm)
+    0 ≤ (zθ θ).re ∧ 0 ≤ (zθ θ).im ∧ 0 ≤ φ ∧ φ ≤ Real.pi / 2 ∧
+      d ≤ 2 * (σp + σm) ∧ 2 * (σp + σm) = Llog3 := Proofs.sec6_phi_d_range_proved θ h1 h2
 
 /-- sec_06_far.tex:34: "The function `-log cos v` has a Taylor series with nonnegative coefficients ..., so
 `|log cos v| ≤ -log cos |v|` for `|v| < π/2`" (principal logarithm; `cos v` is never real `≤ 0` there). -/
@@ -788,6 +806,13 @@ theorem sec6_Wbound_finite (b₁ b₂ b₃ : ℝ) (h1 : 0 ≤ b₁) (h2 : 0 ≤ 
 "Since `g` is even, it suffices to take `0 ≤ γ ≤ π`", sec_06_far.tex:51, with `g(γ) = e^{-T cos γ} cos(T sin γ)`). -/
 theorem sec6_expW_bound (W : ℂ) (hW : ‖W‖ ≤ Tfar) : 277 / 800 < (exp W).re := Proofs.sec6_expW_bound_proved W hW
 
+/-- sec_06_far.tex:51, with `T = 211/200` (sec_06_far.tex:44): "the root `γ_* ∈ (0, π)` of `γ = T sin γ` (there is
+only one, since `γ - T sin γ` is strictly convex on `[0, π]` and vanishes at `0`)". -/
+theorem sec6_gamma_unique :
+    StrictConvexOn ℝ (Set.Icc (0 : ℝ) Real.pi) (fun γ : ℝ => γ - Tfar * Real.sin γ) ∧
+    (0 : ℝ) - Tfar * Real.sin 0 = 0 ∧
+    ∃! γ : ℝ, γ ∈ Set.Ioo (0 : ℝ) Real.pi ∧ γ = Tfar * Real.sin γ := Proofs.sec6_gamma_unique_proved
+
 /-- sec_06_far.tex:74-82 with Lemma 6.4's parametrization (sec_06_far.tex:85-87): for `θ ∈ [135°, 180°]`,
 `c = cos(θ/2)`, `ε = π - θ` and `z = z_θ`: `e^{-iε} = 1 - 2c² - 2ic√(1 - c²)` ("`cos ε = 1 - 2c²`,
 `sin ε = 2c√(1 - c²)`"), `z² = -x e^{-iε}` with `x = ¼`, and `A_R = Re(e^{iε} z²/(1 - z²)²)`,
@@ -802,8 +827,8 @@ theorem sec6_A0B0_closed (θ : ℝ) (h1 : deg 135 ≤ θ) (h2 : θ ≤ deg 180) 
 is in `(0.69115, 0.69125)`. -/
 theorem sec6_value_180 : 0.69115 < Rbound 0 ∧ Rbound 0 < 0.69125 := Proofs.sec6_value_180_proved
 
-/-- sec_06_far.tex:93 and :100: the largest of the cover's upper bounds, `3459999249/(5·10⁹)` (sec_06_far.tex:93),
-"lies just below `173/250`" (sec_06_far.tex:100). -/
+/-- sec_06_far.tex:93: each cell's upper bound is "below `173/250`", and "The largest of these upper bounds is
+`3459999249/(5·10⁹)`"; so the largest one is below `173/250`. -/
 theorem sec6_cover_bound_arith : (3459999249 : ℝ) / (5 * 10 ^ 9) < 173 / 250 := Proofs.sec6_cover_bound_arith_proved
 
 /-! ## Section 7 (middle angles): the finite-dimensional rows -/
@@ -877,7 +902,7 @@ theorem tab3_totals :
 
 /-! ## Sections 5-7: the Grunsky-layer rows -/
 
-/-- sec_05_grunsky_q.tex:13: "The coefficients of `a(s)` have phases `e^{inθ/4}`, so `a(t) = \overline{a(s)}`"
+/-- sec_05_grunsky_q.tex:13: "The coefficients of `a(s)` have phases `nθ/4`, so `a(t) = \overline{a(s)}`"
 (entrywise, every `s`; likewise `a_e`, `b_e`). -/
 theorem sec5_a_conj (s : ℂ) (n : ℕ) :
     aOdd (conj s) n = conj (aOdd s n) ∧ aEven (conj s) n = conj (aEven s n) ∧ bEven (conj s) n = conj (bEven s n) := Proofs.sec5_a_conj_proved s n
@@ -1098,7 +1123,8 @@ theorem sec8_assembly (hAP : FactArgumentPrinciple) (hJ : FactJordanCurve)
         0 < (Q f z w).re) := Proofs.sec8_assembly_proved hAP hJ hnear hmiddle hfar
 
 /-- Theorem 1.1 (sec_01_intro.tex:13-15): for every `f ∈ 𝒮`, the function `Γ f` is injective on the closed disc
-`|z| ≤ ½`. The radius `½` is sharp: for every `r > ½` some `f ∈ 𝒮` has `Γ f` not injective on `|z| < r`.
+`|z| ≤ ½`. The radius `½` is sharp, as Robinson observed [Rob47, p. 18]: for every `r > ½` some `f ∈ 𝒮` has `Γ f`
+not injective on `|z| < r`.
 Its proof uses Propositions 4.1, 6.1, 7.1 (with their checks and facts) and the facts of Lemma 2.2. -/
 theorem thm_1_1 (hAP : FactArgumentPrinciple) (hJ : FactJordanCurve) (hDB : FactDeBranges) (hArea : FactArea) (h48 : Check_4_8)
     (hB : FactBidiscPowerSeries) (hG : FactGrunsky) (h62 : Check_6_2) (h64 : Check_6_4)
@@ -1124,7 +1150,8 @@ theorem thm_1_2 (hDB : FactDeBranges) (hArea : FactArea) (h48 : Check_4_8)
 
 /-- Remark 8.2 (sec_08_proof.tex:22-24; sec_01_intro.tex:46): for distinct `z, w` with `|z| = |w| = r ≤ ½` and
 angular distance `θ` (`w = z e^{±iθ}`, `0 < θ ≤ π`): `Re Q_f(z, w) ≥ sin²(θ/2)/80` when `θ ≤ θ₀`, and
-`Re Q_f(z, w) > 1/2000` when `θ ≥ 135°`. -/
+`Re Q_f(z, w) > 1/2000` when `θ ≥ 135°`. The remark's middle range, "the bound is `Re Q_f > 0` (Proposition 7.1)"
+(sec_08_proof.tex:23), is `thm_1_2` (for every angle), through `prop_7_1`. -/
 theorem rem_8_2 (hDB : FactDeBranges) (hArea : FactArea) (h48 : Check_4_8)
     (hB : FactBidiscPowerSeries) (hG : FactGrunsky) (h62 : Check_6_2) (h64 : Check_6_4) :
     ∀ f : ℂ → ℂ, InS f → ∀ r : ℝ, 0 < r → r ≤ 1 / 2 → ∀ z w : ℂ, ‖z‖ = r → ‖w‖ = r →

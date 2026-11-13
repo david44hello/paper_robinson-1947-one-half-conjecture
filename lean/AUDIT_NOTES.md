@@ -1,11 +1,11 @@
 # Robinson's (1947) one-half conjecture is true — notes on the Lean proof
 
-The paper: https://doi.org/10.5281/zenodo.23953160
+The paper's link is on the [front page of this repository](https://github.com/david44hello/paper_robinson-1947-one-half-conjecture).
 
 Pointers of the form `sec_0N_*.tex:<line>` (and `abstract.tex:<line>`, `back_matter.tex:<line>`) are lines of the
-TeX sources of version 2.00 of the paper. No line has moved since version 1.70: later versions reword
-sec_07_middle.tex:165, back_matter.tex:4, sec_02_reduction.tex:30 and sec_03_tools.tex:28, and add one sentence at the
-end of abstract.tex:3.
+TeX sources of version 2.80 of the paper. No line has moved since version 1.70: later versions change the words of
+some lines in place, among them the abstract (abstract.tex:3), and add sentences that point to the figures at the
+ends of lines.
 
 ## The rows
 
@@ -20,7 +20,7 @@ result, compare the definitions, the facts and checks (below) and the rows with 
 ## The status of a row
 
 The claim audit ([AUDIT.md](AUDIT.md), data in [CLAIMS.json](CLAIMS.json)) gives every row one status:
-141 rows; 105 PROVED; 36 PROVED GIVEN; 0 not proved yet; 0 FAIL.
+143 rows; 107 PROVED; 36 PROVED GIVEN; 0 not proved yet; 0 FAIL.
 
 The status words:
 
@@ -63,7 +63,8 @@ The section "Trust surface" below states each of them, with its source and the r
 - `Robinson/NotFormalized.lean` and `Robinson/ComputerChecked.lean`: the facts and the checks.
 - `CLAIM_MAP.tsv`: every printed claim of the paper, its place in the paper, its rows and its status.
 - `AUDIT.md` and `CLAIMS.json`: the audit's table and data. `scripts/audit.py` writes them, with
-  `scripts/audit_axioms.lean` (the Lean file it runs) and `scripts/audit_output.log` (Lean's output).
+  `scripts/audit_axioms.lean` (the Lean file it runs) and `scripts/audit_output.log` (Lean's output; made locally
+  and ignored by Git).
 - `scripts/final_gate.py` and `scripts/OPEN_ROWS.txt`: the final gate and its list of rows that may stay unproved
   (empty in this release).
 - `MD5SUMS.txt`: the MD5 sum of every other file.
@@ -78,8 +79,9 @@ python3 scripts/final_gate.py Robinson/Paper/Statements.lean CLAIMS.json scripts
 ```
 
 The audit prints the `AUDIT:` line of README.md and rewrites `AUDIT.md`, `CLAIMS.json`, `scripts/audit_axioms.lean`
-and `scripts/audit_output.log`. They come out byte-identical to the files shipped here,
-so `git status` stays clean and `md5sum -c MD5SUMS.txt` passes. (`LEAN_RUN_LOCK` and `LEAN_RUN_GATE` name a lock file
+and `scripts/audit_output.log`. The first three are byte-identical to the files shipped here; `scripts/audit_output.log`
+is generated locally and ignored by Git. Thus `git status` stays clean and `md5sum -c MD5SUMS.txt` passes.
+(`LEAN_RUN_LOCK` and `LEAN_RUN_GATE` name a lock file
 and a priority gate for shared machines; `none` runs Lean directly.) The final gate checks that an unfinished proof
 stands only as the whole proof of a row named in `scripts/OPEN_ROWS.txt`, and that the statuses of the audit match
 that list: with the empty list, no row is unfinished and none is FAIL.
@@ -133,18 +135,18 @@ Note: outside the census, the row for sec_05_grunsky_q.tex:54 ("not every `M ∈
 These printed sentences are not claims that the Lean work counts. Each line gives the place and the reason.
 
 ### History and attributions (accounts of earlier work, not claims of this paper)
-1. abstract.tex:3: "Robinson proved r ≥ 0.38, observed that the Koebe function gives r ≤ 1/2, and conjectured that r = 1/2" and "Barnard proved r ≥ 0.49 in 1978": history.
+1. abstract.tex:3: "Robinson proved r ≥ 0.38, observed that the Koebe function gives r ≤ 1/2, and conjectured r = 1/2" and "Barnard proved r ≥ 0.49 in 1978": history.
 2. sec_01_intro.tex:5: "In a study of univalent majorants, R. M. Robinson …": attribution.
 3. sec_01_intro.tex:9: Robinson's results, Robinson's quoted words, and "Robinson writes H = (zG)'": history (the factor remark itself is a counted row).
-4. sec_01_intro.tex:11: Livingston, Barnard, Pearce, Barnard's quote, "We know of no later improvement", Ye, Sinel'nikova: history.
-5. sec_01_intro.tex:21: "this is the quotient of Barnard's proof": attribution.
-6. sec_01_intro.tex:36-37: Table 1, column of earlier results: history.
-7. sec_01_intro.tex:44: "Before this paper, the radius 1/2 was known for …": history.
+4. sec_01_intro.tex:11: Livingston (close-to-convex, hence starlike and convex functions), Barnard, Pearce, Barnard's quote, "We know of no later improvement": history.
+5. sec_01_intro.tex:21: "Barnard [Bar78, (1)] uses the same quotient": attribution.
+6. sec_01_intro.tex:32-40: Table 1, its column "Best result before this paper" (with "the radius 1/2 cannot be enlarged (Robinson 1947)") and its caption "What was known before, and what this paper proves.": history and table layout (the column "New result" states Theorems 1.1 and 1.2).
+7. sec_01_intro.tex:44: Table 1 and Figure 1 "compare Theorem … with what was known before": history.
 8. sec_01_intro.tex:45: "the radius of starlikeness of Γ(𝒮) lies between 0.435 and 0.445": a quoted result that no proof here uses (the remark "need not be star-shaped" rests on it alone).
 9. sec_01_intro.tex:52: Figure 1, panel (a), and "The vertical axis starts at r = 0.40": history and figure layout.
-10. sec_01_intro.tex:75: "combined in a similar way by Wikström": attribution.
-11. sec_02_reduction.tex:61: "this is Robinson's observation": attribution (the sharpness claim itself is counted).
-12. back_matter.tex:3 and :6-7: the data-availability heading and the acknowledgments (the data sentence, l.4, is item 36).
+10. sec_01_intro.tex:75: "combined in a similar way by Wikström", and sec_01_intro.tex:77: Barnard's split of `Q_f`, how this proof uses it, and "The other ingredients of our proof …": attribution and route words (each ingredient is a counted row).
+11. Robinson's observation that the radius 1/2 is sharp, credited at sec_01_intro.tex:14 ("as Robinson observed" [Rob47, p. 18]), sec_01_intro.tex:61 (Table 2, "(Robinson's observation)") and sec_02_reduction.tex:61 ("this is Robinson's observation"): attribution (the sharpness claim itself is counted).
+12. back_matter.tex:3 and :6-7: the data-availability heading and the acknowledgments (the data sentence, l.4, is item 35).
 
 ### Route words and layout (they describe the proof; each step is its own row)
 13. sec_01_intro.tex:80-81: the "Organization" paragraph.
@@ -155,29 +157,31 @@ These printed sentences are not claims that the Lean work counts. Each line give
 18. sec_04_near.tex:294: "We divide … and collect in one statement …": layout.
 19. sec_05_grunsky_q.tex:57: "real dimension 6" and "real dimension 3": dimension words (the content is in the rows for Proposition 5.2 and Lemma 5.3).
 20. sec_05_grunsky_q.tex:103, second sentence ("This is why Section 7 uses …"): route words.
-21. sec_07_middle.tex:97: "P was chosen numerically …": how a constant was found.
-22. sec_07_middle.tex:117: "The added terms are not arbitrary": route words (the vanishing for `f(z) = z` is a counted row).
+21. sec_07_middle.tex:97: "the matrix P fixed above makes C_P small near …" (55°): why this constant (the bound holds for every positive definite `P`, a counted row).
+22. sec_07_middle.tex:117: "Lemma … uses the Grunsky inequality for the even block, which the relaxation of Section … ignores": route words (the vanishing of `iU` and `R` for `f(z) = z` is a counted row).
 23. sec_07_middle.tex:124: "Both are explicit elementary functions …": description.
 
 ### Descriptions of the computer runs (the 14 checks above carry the claims; the programs and logs are in the repository folder `robinson-1947-one-half-conjecture/`)
-24. abstract.tex:3: "Both parts of the proof end in finite computations, … each computation by two independently written programs": run description.
-25. sec_01_intro.tex:62-64: Table 2: "two programs", "72 and 410 coefficients", "256 cells (320 in the second program)", "304,664 leaf boxes in the first program, 311,506 boxes in the second": run description.
+24. abstract.tex:3: "Both parts end in finite computations, … each checked by two independently written programs": run description.
+25. sec_01_intro.tex:61-67: Table 2 and its caption: "proofs on paper", "no computation", "two programs", "72 and 410 coefficients", "256 cells (320 in the second program)", "304,664 leaf boxes in the first program, 311,506 boxes in the second": run description.
 26. sec_04_near.tex:147: "whose 72 coefficients are all positive": a program certificate (Lemma 4.3 itself is PROVED in Lean by its own certificate).
 27. sec_04_near.tex:243: "all its 410 coefficients are positive": a program certificate (Lemma 4.5(i) itself is PROVED in Lean).
 28. sec_04_near.tex:333: how the programs work, "All 256 cells pass", and the second program's 320 cells: run description.
 29. sec_04_near.tex:333: "the smallest value that the first program finds … with its upper bounds for 𝔥[Z] and 𝔴[Z], is about 0.1557, in the cell [227/256, 228/256]": a program output, and no proof uses it (with the exact numbers of Lemma 4.8 the minimum is about 0.1574).
 30. sec_06_far.tex:48: eleven cells, degree 28, Bernstein coefficients on at most eight subintervals (the second program: eight equal ones): run description.
 31. sec_06_far.tex:93: 234 cells, the largest bound 3459999249/(5·10⁹), and the second program's check of the same 234 cells: run description.
-32. sec_06_far.tex:100: "The cover is refined only until every cell passes …": run description.
-33. sec_07_middle.tex:133-139: the programs' method, including the three lower-bound forms and which bounds each program uses: run description (the band checks carry the claim).
-34. sec_07_middle.tex:141-162: Table 3 leaf and box counts and "Both programs accepted every band": run description (the arithmetic of Table 3's totals IS a counted row).
-35. sec_07_middle.tex:165: "about 14,500 CPU seconds … about four hours", and where the programs and outputs are: run description (version 1.80 rewords the first sentence of this line; still a run description).
-36. back_matter.tex:4: "one script there reruns the checks and prints one line per check": run description (version 1.80 rewords it; still a run description).
+32. sec_07_middle.tex:133-139: the programs' method, including the three lower-bound forms and which bounds each program uses: run description (the band checks carry the claim).
+33. sec_07_middle.tex:141-162: Table 3 leaf and box counts and "Both programs accepted every band": run description (the arithmetic of Table 3's totals IS a counted row).
+34. sec_07_middle.tex:165: where the programs, the subdivisions and the outputs are, and "Replaying the second program on all eleven bands takes about four hours on one processor core": run description.
+35. back_matter.tex:4: where the programs, their input data and their outputs are, and "One script there reruns the checks of Sections … and …, checks the stored results of Section … and, on request, replays its eleven bands with the second program": run description.
 
 ### Other
-37. sec_08_proof.tex:5: "All their endpoints, measured in degrees, are rational, except θ₀ = 2 arcsin(17/40)": it motivates Lemma 8.1; θ₀ is only excluded, and its irrationality is not claimed.
-38. abstract.tex:3 (short paper only): "Both main results are also proved in the Lean 4 proof assistant, with the computer-checked Lemmas 4.8, 6.2, 6.4 and 7.6 and six published theorems taken as hypotheses.": a remark about this Lean proof; its content is the status of Theorems 1.1 and 1.2 (AUDIT.md: PROVED GIVEN; Theorem 1.1 takes the six facts and the 14 checks, Theorem 1.2 four of the facts and the 14 checks).
-39. P24_short.tex:11 (short paper only), the footnote "Lean 4 proof: https://github.com/david44hello/paper_robinson-1947-one-half-conjecture/tree/v2.00": a link to this Lean proof.
+36. sec_08_proof.tex:5: "All their endpoints, measured in degrees, are rational, except θ₀ = 2 arcsin(17/40)": it motivates Lemma 8.1; θ₀ is only excluded, and its irrationality is not claimed.
+37. abstract.tex:3 (short paper only): "Assuming the computer-checked Lemmas 4.8, 6.2, 6.4 and 7.6, both main results are also proved in Lean 4, and checked with the Lean comparator.": a remark about this Lean proof; its content is the status of Theorems 1.1 and 1.2 (AUDIT.md: PROVED GIVEN; Theorem 1.1 takes the six facts and the 14 checks, Theorem 1.2 four of the facts and the 14 checks) and a run of the Lean comparator on these files.
+38. P24_short.tex:11 (short paper only), the footnote "Lean 4 formalization: https://github.com/david44hello/paper_robinson-1947-one-half-conjecture/tree/v2.80/lean": a link to this Lean proof.
+39. P24_short.tex:9 and :15 (short paper only): the title's footnote, which points to the expanded version of the paper (:9), and the manuscript's version line (:15): pointers, no mathematical claim.
+
+The new figures depict already-counted objects and bounds: figures/fig_pairs.tex:10 uses the normalized pair (`sec2_pair_normal_form`, `sec2_values_eq`) and the three angular ranges (`sec8_cover`); figures/fig_koebe.tex:6 uses Proposition 2.5 (`prop_2_5`); figures/fig_near.tex:6 uses the pair and Koebe-transform coordinates (`sec4_midpoint`, `sec4_Pi_formula`); figures/fig_bounds.tex:6 uses Remark 8.2 (`rem_8_2`) and the Koebe quotient (`sec2_koebe_limit`, `eq_Qk`). Dots, insets, line styles and axis choices are figure layout, not additional claims.
 
 ## Rows stronger than printed, and route differences
 

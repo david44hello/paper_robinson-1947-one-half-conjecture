@@ -1,15 +1,14 @@
 # Robinson's (1947) one-half conjecture is true
 
-Supporting materials for the paper "Robinson's (1947) one-half conjecture is true" by Dave Goel:
-https://doi.org/10.5281/zenodo.23953160
+Supporting materials for the paper "Robinson's (1947) one-half conjecture is true" by Dave Goel.
 
 ## What the proof takes as given
 
-The classical results cited in the paper: the strong Grunsky inequality, the area theorem, de Branges' coefficient theorem, Takagi's factorization, the argument principle, the open mapping theorem, the Jordan curve theorem and the power series of a holomorphic function on a polydisc. The proof also rests on three computer checks, each carried out by two independently written programs, all in this repository:
+The classical results cited in the paper: the strong Grunsky inequality, the area theorem, de Branges' coefficient theorem, Takagi's factorization, the argument principle, the open mapping theorem, the maximum and minimum principles, the Jordan curve theorem and the power series of a holomorphic function on a polydisc. The proof also rests on three computer checks, each carried out by two independently written programs, all in this repository:
 
 - `near/`: the exact rational certificates for small angles (Section 4 of the paper): the polynomials of Lemmas 4.3 and 4.5 (first program `check_B8_b.py`, second `check_B8_a.py`; these runs also print a cell check at the endpoint 21/100, which the paper does not use) and the cells of Lemma 4.8 (first program `check_B9_b.py`, second `check_B9_a.py`); their outputs are in `near/results/`;
 - `far/`: the exact rational certificates for large angles (Section 6): the certificate `S135_certificate.json` (first program `check_sector135.py`, second `S135_check_b.py`; a third check, `audit_S135.py`, which the paper does not use, covers the same range with its own 207 cells in 60-digit arithmetic with outward padding and exact Sturm counts); the outputs are in `far/results/`;
-- `middle/`: the interval-arithmetic verification of the middle range of angles, eleven bands, with the subdivision trees and both programs (Section 7).
+- `middle/`: the interval-arithmetic verification of the middle range of angles, eleven bands, with the subdivision trees and both programs (Section 7); the scripts `programA/*/replay_*.py` only recount the structure of a subdivision (covered volume and reasons) and are not part of the proof.
 
 ## Directions to Reproduce
 

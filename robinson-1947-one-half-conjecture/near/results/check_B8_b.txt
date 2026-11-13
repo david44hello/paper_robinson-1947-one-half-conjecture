@@ -1,7 +1,7 @@
-Derived physical model area coefficient 2
-Derived physical model area coefficient 3
-Derived physical model area coefficient 4
-Derived physical model area coefficient 5
+Derived comparison-function area coefficient 2
+Derived comparison-function area coefficient 3
+Derived comparison-function area coefficient 4
+Derived comparison-function area coefficient 5
 MODEL {"degrees": [11, 5], "count": 72, "minimum": "13603014527949/5000000000000", "positive": true}
 FINITE NORM {"degrees": [40, 9], "count": 410, "minimum": "4679574989953689/5368709120", "positive": true}
 {

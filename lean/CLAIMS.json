@@ -1,8 +1,8 @@
 {
-  "version": "0.40",
+  "version": "0.50",
   "namespace": "Robinson.Paper",
   "counts": {
-    "PROVED": 105,
+    "PROVED": 107,
     "PROVED GIVEN": 36,
     "not proved yet": 0,
     "FAIL": 0
@@ -11,7 +11,7 @@
     {
       "name": "intro_gamma_deriv",
       "doc": "sec_01_intro.tex:7: \"`Γ f(z) = (f(z) + z f'(z))/2 = ½ (z f(z))'`\", at every point where `f` is differentiable.",
-      "line": 70,
+      "line": 76,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -24,7 +24,7 @@
     {
       "name": "intro_gamma_coeff",
       "doc": "sec_01_intro.tex:9: \"`Γ` multiplies the coefficient `a_n` by `(n+1)/2`\" (for `f ∈ 𝒮`, every `n`).",
-      "line": 74,
+      "line": 80,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -37,7 +37,7 @@
     {
       "name": "intro_factor_two",
       "doc": "sec_01_intro.tex:9: \"`H = (zG)'`, which is `2 Γ G`; the factor does not affect univalence\": on every set, `2 Γ f` is injective iff `Γ f` is. (`(zf)' = 2 Γ f` is `intro_gamma_deriv`.)",
-      "line": 79,
+      "line": 85,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -50,7 +50,7 @@
     {
       "name": "intro_koebe_critical_on_circle",
       "doc": "sec_01_intro.tex:9, :45 and sec_02_reduction.tex:23: the derivative of `Γ k` vanishes at `z = -½`, a point of the circle `|z| = ½` (\"it allows critical points of `Γ f` on the circle `|z| = ½`, which occur for the Koebe function\").",
-      "line": 85,
+      "line": 91,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -63,7 +63,7 @@
     {
       "name": "intro_theta0_approx",
       "doc": "sec_01_intro.tex:46 \"`2 arcsin(17/40) ≈ 50.3°`\" and sec_04_near.tex:22 \"`θ₀ = 2 arcsin(17/40)`, about `50.30°`\": `50.295° < θ₀ < 50.305°`.",
-      "line": 90,
+      "line": 96,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -76,7 +76,7 @@
     {
       "name": "sec2_f_ne",
       "doc": "sec_02_reduction.tex:5: \"For `f ∈ 𝒮` and distinct points `z, w ∈ 𝔻` we have `f(z) ≠ f(w)`\".",
-      "line": 95,
+      "line": 101,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -89,7 +89,7 @@
     {
       "name": "sec2_Q_symm",
       "doc": "sec_02_reduction.tex:9: \"The quotient `Q_f` is symmetric in `z` and `w`\" (for every `f`, `z`, `w`).",
-      "line": 99,
+      "line": 105,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -102,7 +102,7 @@
     {
       "name": "lem_2_1",
       "doc": "Lemma 2.1 (sec_02_reduction.tex:11-17): for `f ∈ 𝒮` and distinct `z, w ∈ 𝔻`, `Γ f(z) - Γ f(w) = ½ (f(z) - f(w)) Q_f(z, w)`; in particular `Γ f(z) = Γ f(w)` iff `Q_f(z, w) = 0`.",
-      "line": 103,
+      "line": 109,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -115,7 +115,7 @@
     {
       "name": "lem_2_2",
       "doc": "Lemma 2.2 (sec_02_reduction.tex:25-27): let `ρ > 0` and let `G` be holomorphic on a neighbourhood of the closed disc `|z| ≤ ρ`. If `G` is injective on the circle `|z| = ρ`, then `G` is injective on the closed disc. PROVED GIVEN the argument principle and the Jordan curve theorem (Lean's library has neither).",
-      "line": 110,
+      "line": 116,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -131,7 +131,7 @@
     {
       "name": "lem_2_3_rot",
       "doc": "Lemma 2.3, rotation (sec_02_reduction.tex:39-40): for `f ∈ 𝒮` and real `φ`, the rotation `f_φ(z) = e^{-iφ} f(e^{iφ} z)` belongs to `𝒮`, and `Q_{f_φ}(z, w) = Q_f(e^{iφ} z, e^{iφ} w)` (for all `z, w ∈ 𝔻`).",
-      "line": 116,
+      "line": 122,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -144,7 +144,7 @@
     {
       "name": "lem_2_3_dil",
       "doc": "Lemma 2.3, dilation (sec_02_reduction.tex:40): for `f ∈ 𝒮` and `0 < r ≤ ½`, the dilation `F(u) = f(2ru)/(2r)` belongs to `𝒮`, and `Q_F(z, w) = Q_f(2rz, 2rw)` (for all `z, w ∈ 𝔻`).",
-      "line": 122,
+      "line": 128,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -157,7 +157,7 @@
     {
       "name": "sec2_pair_normal_form",
       "doc": "sec_02_reduction.tex:47-50: \"Two distinct points on the circle `|z| = ½` have an angular distance `θ ∈ (0, π]`; after naming them suitably they are `z = ½ e^{i(φ + θ/2)}` and `w = ½ e^{i(φ - θ/2)}` for some real `φ`. By Lemma 2.3, `Q_f(z, w) = Q_{f_φ}(z_θ, \\overline{z_θ})`.\"",
-      "line": 129,
+      "line": 135,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -170,7 +170,7 @@
     {
       "name": "sec2_values_eq",
       "doc": "sec_02_reduction.tex:51: \"So the values of `Q_f` on pairs of distinct points of the circle, over all `f ∈ 𝒮`, are exactly the values `Q_f(z_θ, \\overline{z_θ})`, over all `f ∈ 𝒮` and `0 < θ ≤ π`.\"",
-      "line": 137,
+      "line": 143,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -183,7 +183,7 @@
     {
       "name": "prop_2_4",
       "doc": "Proposition 2.4 (sec_02_reduction.tex:53-55): suppose that `Re Q_f(z_θ, \\overline{z_θ}) > 0` for every `f ∈ 𝒮` and every `θ ∈ (0, π]`. Then Theorems 1.1 and 1.2 hold (the sharpness of `1/2` in Theorem 1.1 is the Koebe function, Proposition 2.5). PROVED GIVEN the facts of Lemma 2.2.",
-      "line": 144,
+      "line": 150,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -199,7 +199,7 @@
     {
       "name": "koebe_mem_S",
       "doc": "The Koebe function belongs to `𝒮` (used by sec_01_intro.tex:9, sec_02_reduction.tex:61-68 and Theorem 1.1's \"sharp\").",
-      "line": 155,
+      "line": 161,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -212,7 +212,7 @@
     {
       "name": "prop_2_5",
       "doc": "Proposition 2.5 (sec_02_reduction.tex:63-69): for the Koebe function `k(z) = z/(1-z)²`, `Γ k(z) = z/(1-z)³` and `(Γ k)'(z) = (1 + 2z)/(1-z)⁴` (in `𝔻`); hence `(Γ k)'(-½) = 0`, and `Γ k` is not injective on `𝔻_r` for any `r > ½`.",
-      "line": 160,
+      "line": 166,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -225,7 +225,7 @@
     {
       "name": "sec2_koebe_limit",
       "doc": "sec_02_reduction.tex:75 (and sec_01_intro.tex:73): \"as `z` and `w` tend to `-½` along the circle, `Q_k(z, w)` tends to `0`. In the normalized position this happens for the rotation `k_π(z) = -k(-z)` as `θ → 0`.\"",
-      "line": 168,
+      "line": 174,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -238,7 +238,7 @@
     {
       "name": "sec3_deriv_ne_zero",
       "doc": "sec_03_tools.tex:13: \"`f'(a) ≠ 0` because `f` is injective\" (for `f ∈ 𝒮` and every `a ∈ 𝔻`).",
-      "line": 177,
+      "line": 183,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -251,7 +251,7 @@
     {
       "name": "sec3_koebe_transform_mem_S",
       "doc": "sec_03_tools.tex:9-13: for `f ∈ 𝒮` and `a ∈ 𝔻` the Koebe transform `f_a` again belongs to `𝒮`.",
-      "line": 180,
+      "line": 186,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -264,7 +264,7 @@
     {
       "name": "sec3_kernel_nonvanishing",
       "doc": "sec_03_tools.tex:24: for `g ∈ 𝒮`, `(g(s) - g(t))/(s - t)`, extended by `g'(s)` on the diagonal, has no zero on `𝔻 x 𝔻` and equals `1` at the origin, \"and so does `g(s)/s` on `𝔻`\" (extended by `g'(0) = 1` at `s = 0`).",
-      "line": 185,
+      "line": 191,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -277,7 +277,7 @@
     {
       "name": "sec3_grunsky_exists",
       "doc": "sec_03_tools.tex:24-28: for `g ∈ 𝒮` the Grunsky kernel `K_g` is a holomorphic function on `𝔻 x 𝔻` that vanishes when `s = 0` or `t = 0`, with coefficients `γ_{nm} = γ_{mn}`: Grunsky coefficients exist and are symmetric. PROVED GIVEN the power series of holomorphic functions on the bidisc.",
-      "line": 193,
+      "line": 199,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -292,7 +292,7 @@
     {
       "name": "sec3_grunsky_unique",
       "doc": "sec_03_tools.tex:28 (\"the Grunsky coefficients of `g`\"): two families with the property `IsGrunskyCoeff g` agree, so the predicate names the paper's coefficients.",
-      "line": 198,
+      "line": 204,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -305,7 +305,7 @@
     {
       "name": "sec3_cauchy",
       "doc": "sec_03_tools.tex:32-35 (eq:cauchy): \"In particular, for all `x, y ∈ ℓ²`, `|xᵀ C(g) y| ≤ ‖x‖ ‖y‖`\" (the bilinear form as iterated sums, which converge). PROVED GIVEN the strong Grunsky inequality.",
-      "line": 203,
+      "line": 209,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -320,7 +320,7 @@
     {
       "name": "sec3_blocks_compressions",
       "doc": "sec_03_tools.tex:36: \"The same bound holds for every principal block of `C(g)` and for every compression `Vᵀ C(g) V` by a matrix `V` with orthonormal columns\" (a principal block: rows and columns in a set `S`; `k` columns in `ℓ²`). PROVED GIVEN the strong Grunsky inequality.",
-      "line": 212,
+      "line": 218,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -335,7 +335,7 @@
     {
       "name": "sec3_oddroot_exists",
       "doc": "sec_03_tools.tex:39-43: for `f ∈ 𝒮` the odd square root `h(s) = √(f(s²))` exists.",
-      "line": 223,
+      "line": 229,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -348,7 +348,7 @@
     {
       "name": "sec3_oddroot_mem_S",
       "doc": "sec_03_tools.tex:43: \"`h ∈ 𝒮`\".",
-      "line": 226,
+      "line": 232,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -361,7 +361,7 @@
     {
       "name": "sec3_oddroot_parity",
       "doc": "sec_03_tools.tex:43: \"Because `h` is odd, `K_h(-s, -t) = K_h(s, t)`, so `γ_{nm}(h) = 0` unless `n + m` is even.\"",
-      "line": 229,
+      "line": 235,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -374,7 +374,7 @@
     {
       "name": "sec3_OE_contractions",
       "doc": "sec_03_tools.tex:43: \"The Grunsky matrix of `h` therefore splits into the block `O` of odd indices and the block `E` of even indices, and both are complex symmetric contractions\" (contractions: every finite section). PROVED GIVEN the strong Grunsky inequality.",
-      "line": 237,
+      "line": 243,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -389,7 +389,7 @@
     {
       "name": "sec3_block_sums",
       "doc": "sec_03_tools.tex:45-47: \"`∑_{n,m odd} γ_{nm}(h) sⁿ tᵐ = a(s)ᵀ O a(t)`, and similarly for the even indices\".",
-      "line": 248,
+      "line": 254,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -402,7 +402,7 @@
     {
       "name": "sec3_p_ne_zero",
       "doc": "sec_03_tools.tex:49-51: for `f ∈ 𝒮`, `p(z) = z f'(z)/f(z)` is holomorphic on `𝔻`, \"has no zero in `𝔻` and equals `1` at `z = 0`\".",
-      "line": 257,
+      "line": 263,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -415,7 +415,7 @@
     {
       "name": "lem_3_1_i",
       "doc": "Lemma 3.1(i) (sec_03_tools.tex:56-57): `2 a(s)ᵀ O a(t) = K_h(s, t) - K_h(s, -t)`, and for `s ≠ ±t`, `exp(2 a(s)ᵀ O a(t)) = ((h(s) - h(t))/(h(s) + h(t))) · ((s + t)/(s - t))`.",
-      "line": 262,
+      "line": 268,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -428,7 +428,7 @@
     {
       "name": "lem_3_1_ii",
       "doc": "Lemma 3.1(ii) (sec_03_tools.tex:58): `2 a_e(s)ᵀ E a_e(t) = K_h(s, t) + K_h(s, -t) = K_f(z, w)` (`z = s²`, `w = t²`; `γf` the Grunsky coefficients of `f`).",
-      "line": 270,
+      "line": 276,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -441,7 +441,7 @@
     {
       "name": "lem_3_1_iii",
       "doc": "Lemma 3.1(iii) (sec_03_tools.tex:59): `log p(z) = 2 a(s)ᵀ O a(s)` (`z = s²`), the logarithm vanishing at `0`: the function `s ↦ 2 a(s)ᵀ O a(s)` is continuous on `𝔻`, vanishes at `0`, and its exponential is `p(s²)`.",
-      "line": 277,
+      "line": 283,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -454,7 +454,7 @@
     {
       "name": "eq_Kf",
       "doc": "sec_03_tools.tex:67-70 (eq:Kf): \"the even block is the Grunsky matrix of `f` itself: `E_{2n,2m} = √(nm) γ_{nm}(f)`\", and `K_f(z, w) = α(z)ᵀ C(f) α(w)` for `z, w ∈ 𝔻`.",
-      "line": 284,
+      "line": 290,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -467,7 +467,7 @@
     {
       "name": "eq_gram",
       "doc": "sec_03_tools.tex:72-79 (eq:gram): on `|s|² = ½` (`z = s²`): `‖a(s)‖² = artanh ½`, `a(s)ᵀ a(s) = artanh z`, `‖a_e(s)‖² = -½ log ¾`, `a_e(s)ᵀ a_e(s) = -½ log(1 - z²)`.",
-      "line": 292,
+      "line": 298,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -480,7 +480,7 @@
     {
       "name": "sec4_midpoint",
       "doc": "sec_04_near.tex:36-48, the pair seen from its midpoint: for `θ ∈ (0, π]`, `τ = ½ cos(θ/2)`, `y = ½ sin(θ/2)`: `z_θ = τ + iy`, `τ² + y² = ¼`, `g(z) = -f(-z)` (the rotation of Lemma 2.3 with `φ = π`), `Q_f(z_θ, \\overline{z_θ}) = Q_g(-τ - iy, -τ + iy)`, `sin²(θ/2)/80 = y²/20`, and `θ ≤ θ₀ ⇔ y ≤ y₀`.",
-      "line": 303,
+      "line": 309,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -493,7 +493,7 @@
     {
       "name": "sec4_goal_equiv",
       "doc": "sec_04_near.tex:40-47: Proposition 4.1 is equivalent to (sec4:goal): `Re Q_f(-τ + iy, -τ - iy) ≥ y²/20` for `f ∈ 𝒮` and `0 < y ≤ y₀ = 17/80`, `τ = √(¼ - y²)` (\"As `f ↦ g` is a bijection of `𝒮` and `Q` is symmetric\", sec_04_near.tex:44, with `g(z) = -f(-z)`).",
-      "line": 315,
+      "line": 321,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -506,7 +506,7 @@
     {
       "name": "sec4_tau_bounds",
       "doc": "sec_04_near.tex:48-51: for `0 < y ≤ y₀` and `τ = √(¼ - y²)`: `τ² ≥ 1311/6400 > (9/20)²`, so `9/20 < τ < ½`; `v = 1 - τ² ∈ [¾, 1]` and `β = τ/v ≤ ⅔`.",
-      "line": 324,
+      "line": 330,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -519,7 +519,7 @@
     {
       "name": "sec4_c_bounds",
       "doc": "sec_04_near.tex:53-60: for `f ∈ 𝒮` and `9/20 < τ < ½`, the Koebe transform `f_{-τ}` belongs to `𝒮`; with `A = a₂(f_{-τ})`, de Branges for `n = 2` gives `|A| ≤ 2`; `c = A/2` has `|c| ≤ 1`, `e ∈ [0, 4]`, `η ∈ [0, 1]`. PROVED GIVEN de Branges' theorem.",
-      "line": 333,
+      "line": 339,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -534,7 +534,7 @@
     {
       "name": "sec4_eta_le",
       "doc": "sec_04_near.tex:69: \"Since `Re c = 1 - e/2` and `|c| ≥ |Re c|`, we have `η ≤ e - e²/4`. In particular `e = 0` forces `c = 1`, `η = 0`\" (for `|c| ≤ 1`).",
-      "line": 342,
+      "line": 348,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -547,7 +547,7 @@
     {
       "name": "sec4_rho_facts",
       "doc": "sec_04_near.tex:70-73 (sec4:rho): for `|c| ≤ 1`, `c ≠ 1`: `e > 0`, `ρ = η/e ∈ [0, 1 - e/4]`, so `e ≤ 4(1 - ρ)`, and `|c - ρ| = 1 - ρ`.",
-      "line": 347,
+      "line": 353,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -560,7 +560,7 @@
     {
       "name": "sec4_model_mem_S",
       "doc": "sec_04_near.tex:108 and sec_01_intro.tex:73: for `|c| ≤ 1` the comparison function `u/(1 - cu)²` belongs to `𝒮`, equals `k(cu)/c` for `c ≠ 0`, has second coefficient `2c`, and is the Koebe function when `c = 1`.",
-      "line": 353,
+      "line": 359,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -573,7 +573,7 @@
     {
       "name": "sec4_hat_bounds",
       "doc": "sec_04_near.tex:112 and :120: `ν(ν + 2β) = (c² - τ²)/v²`; for `9/20 ≤ τ ≤ ½` and `|c| ≤ 1`: `|ν| ≤ 1/(1 - τ) ≤ 2`, `|ν(ν + 2β)| ≤ (1 + τ²)/v² ≤ 20/9`, `y² = ¼ - τ² ≤ 19/400`; the denominators in (sec4:hat) stay away from `0` and `Q̂`, `T̂` (and `Π̂_o(iy)`) are holomorphic in `c` on a neighbourhood of `|c| ≤ 1`.",
-      "line": 360,
+      "line": 366,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -586,7 +586,7 @@
     {
       "name": "eq_Qk",
       "doc": "sec_04_near.tex:121-124 (eq:Qk): for `9/20 ≤ τ < ½`: `Q̂(τ, 1) = Q_k(τ) = y²/((½ + τ) · ¾ · (5/4 + 2τ)) ≥ (16/27) y²`, and it is the quotient of the Koebe function itself at the pair `-τ ± iy`.",
-      "line": 374,
+      "line": 380,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -599,7 +599,7 @@
     {
       "name": "lem_4_3",
       "doc": "Lemma 4.3 (sec_04_near.tex:126-136): let `9/20 ≤ τ < ½`, `|c| ≤ 1`, `c ≠ 1`, `e = 2(1 - Re c)`, `η = 1 - |c|²`, `ρ = η/e`. Then `Re Q̂(τ, c) ≥ Q_k(τ) + e m(ρ) ≥ (16/27) y² + e m(ρ)`, `m(ρ) = 22/25 + (21/100)ρ`.",
-      "line": 380,
+      "line": 386,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -612,7 +612,7 @@
     {
       "name": "sec4_circle",
       "doc": "sec_04_near.tex:139-147 (sec4:circle), the boundary step of Lemma 4.3: for `9/20 ≤ τ < ½`, `|c| = 1`, `x = Re c`, `e = 2(1 - x)`: `Re Q̂ ≥ Q_k + (13/10)e - (21/200)e² = Q_k + (1 - x)(109/50 + (21/50)x)`.",
-      "line": 386,
+      "line": 392,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -625,7 +625,7 @@
     {
       "name": "lem_4_4_iv",
       "doc": "Lemma 4.4(iv) (sec_04_near.tex:181-185): for `9/20 ≤ τ ≤ ½` with `0 < y ≤ y₀`, `|c| ≤ 1`, and a cap `|ν| ≤ ν⁺ ≤ 2` (as printed): `|T̂| ≤ T⁺` and `|Π̂_o(iy)| ≥ Π̂₋`.",
-      "line": 392,
+      "line": 398,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -638,7 +638,7 @@
     {
       "name": "lem_4_5_i",
       "doc": "Lemma 4.5(i) (sec_04_near.tex:220-228): for `9/20 ≤ τ < ½` and `|c| ≤ 1`, with `T_j` the printed closed form (`ξ = iy`), `∑_{j=2}^{5} |T_j|²/(2j - 1) ≤ 20 + 130e`.",
-      "line": 398,
+      "line": 404,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -651,7 +651,7 @@
     {
       "name": "lem_4_7",
       "doc": "Lemma 4.7 (sec_04_near.tex:286-288): let `9/20 ≤ τ ≤ ½`, `|c| ≤ 1`, `e > 0` and `ρ ≥ ρ₋`. Then `|ν| ≤ max(20/29, 2 - (8/3)ρ₋)` and `η ≤ 4ρ(1 - ρ)`.",
-      "line": 403,
+      "line": 409,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -664,7 +664,7 @@
     {
       "name": "sec4_caps_valid",
       "doc": "sec_04_near.tex:330: \"The numbers in Lemma 4.8 are the caps of Lemmas 4.5 and 4.6 for a cell ...; by Lemma 4.7 and (sec4:rho), they are valid for every `f` whose `ρ` lies in the cell\": for `9/20 ≤ τ ≤ ½`, `|c| ≤ 1`, `c ≠ 1` and `ρ = η/e ∈ [i/256, (i+1)/256]`: `|ν| ≤ ν⁺ ≤ 2`, `η ≤ η⁺ ≤ 1`, `e ≤ e⁺`, `(M + 130e)^{1/2} ≤ n⁺`.",
-      "line": 411,
+      "line": 417,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -677,7 +677,7 @@
     {
       "name": "sec4_no_constant",
       "doc": "sec_04_near.tex:31: the Koebe quotient is of the exact order `sin²(θ/2)` for nearby points (for `k_π`, in the normal position), so the bound of Proposition 4.1 cannot hold with a fixed positive constant in place of `sin²(θ/2)/80`.",
-      "line": 421,
+      "line": 427,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -690,7 +690,7 @@
     {
       "name": "sec4_Gtau",
       "doc": "sec_04_near.tex:61-65: since `f_{-τ}(u)/u` has no zero in `𝔻`, `G_τ(ζ) = (f_{-τ}(ζ⁻²))^{-1/2} = ζ - cζ⁻¹ + ∑_{j ≥ 2} b_{2j-1} ζ^{1-2j}` (`|ζ| > 1`, the branch like `ζ` at infinity) is holomorphic and odd, and it is injective. Typed with the unique square root `φ` of `u/f_{-τ}(u)` with `φ(0) = 1` and `G_τ(ζ) = ζ φ(ζ⁻²)`.",
-      "line": 434,
+      "line": 440,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -703,7 +703,7 @@
     {
       "name": "sec4_area",
       "doc": "(sec4:area), sec_04_near.tex:65-68: the area theorem for `G_τ` reads `|c|² + ∑_{j ≥ 2} (2j - 1)|b_{2j-1}|² ≤ 1`, that is, `∑_{j ≥ 2} (2j - 1)|b_{2j-1}|² ≤ η`.",
-      "line": 446,
+      "line": 452,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -718,7 +718,7 @@
     {
       "name": "sec4_e_zero",
       "doc": "sec_04_near.tex:69-70: \"`e = 0` forces `c = 1`, `η = 0` and `b_{2j-1} = 0` for all `j`, that is, `f_{-τ} = k`\".",
-      "line": 453,
+      "line": 459,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -733,7 +733,7 @@
     {
       "name": "sec4_Pi_formula",
       "doc": "(sec4:Pi), sec_04_near.tex:75-83: the automorphism `u ↦ (u - τ)/(1 - τu)` sends `u = ξ/(v + τξ)` to `-τ + ξ`, so `Π(ξ) = v f_{-τ}(ξ/(v + τξ))`; `Π = N/L²` with `N = ξ(1 + βξ)`, `L = 1 - νξ + B`; `π₁ = 1`, `π₂ = (2c - τ)/v`. Typed on `|ξ| < 1/4` (the paper: \"for small ξ\"; `y ≤ y₀ < 1/4`), with `Π L² = N`.",
-      "line": 461,
+      "line": 467,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -746,7 +746,7 @@
     {
       "name": "lem_4_2",
       "doc": "Lemma 4.2 (sec_04_near.tex:85-93): with `Π_o(ξ) = (Π(ξ) - Π(-ξ))/(2ξ)`, `D = 2(1 - 2τc)/v` and `Υ`, `Q_f(-τ + ξ, -τ - ξ) = D + ξ² Υ(ξ)/Π_o(ξ)`; at `ξ = iy`, (sec4:QDT) `Q_f(-τ + iy, -τ - iy) = D - y²T`. Typed for `0 < |ξ| < 1/4` (the paper, sec_04_near.tex:75: \"For small ξ\").",
-      "line": 472,
+      "line": 478,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -759,7 +759,7 @@
     {
       "name": "sec4_D_diagonal",
       "doc": "sec_04_near.tex:105: \"The number `D = 2 + zf''(z)/f'(z)` at `z = -τ` is the diagonal value of `Q_f`. For fixed `τ` it depends only on `c`, and so does `π₂`\" (`D = 2 - 2τπ₂`).",
-      "line": 481,
+      "line": 487,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -772,7 +772,7 @@
     {
       "name": "sec4_hat_closed",
       "doc": "sec_04_near.tex:107-119: for the comparison function (`b_{2j-1} = 0`, `Π̂ = N/(1 - νξ)²`): `π̂₁ = 1`, `π̂₂ = π₂`, and `Π̂_o(iy)`, `T̂`, `Q̂ = D - y²T̂` have the closed forms (sec4:hat).",
-      "line": 488,
+      "line": 494,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -785,7 +785,7 @@
     {
       "name": "sec4_diff",
       "doc": "(sec4:diff), sec_04_near.tex:108-110: \"As `D` and `π₂` depend only on `c`, `Q_f(-τ + iy, -τ - iy) - Q̂ = -y²(T - T̂)`.\"",
-      "line": 496,
+      "line": 502,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -800,7 +800,7 @@
     {
       "name": "sec4_majorant_split",
       "doc": "sec_04_near.tex:153-156 (used in the proof of Proposition 4.1, sec_04_near.tex:337-341): \"Split `T - T̂ = Ṫ + (T - T̂ - Ṫ)` ...; then `Re Q_f(-τ + iy, -τ - iy) ≥ Re Q̂ - y²|Ṫ| - y²|T - T̂ - Ṫ|`.\"",
-      "line": 503,
+      "line": 509,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -815,7 +815,7 @@
     {
       "name": "sec4_majorant_rules",
       "doc": "sec_04_near.tex:159: for `F ≪ Z`: `|F(ξ)| ≤ Z(|ξ|)` wherever `Z` converges; the relation is preserved by sums and products; and `(1 - F)⁻¹ ≪ (1 - Z)⁻¹` if `F(0) = Z(0) = 0` (the inverses are the solutions of `g = 1 + F g`, `G = 1 + Z G`).",
-      "line": 512,
+      "line": 518,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -828,7 +828,7 @@
     {
       "name": "sec4_hw_coeff",
       "doc": "sec_04_near.tex:164-169: for a majorant `Z` with `Z₁ = Z₂ = 0`, in terms of coefficients `𝔥[Z] = ∑_{j ≥ 1} Z_{2j+1} x^{2j}` and `𝔴[Z] = ∑_{j ≥ 1} [(2j + 10/3)Z_{2j+1} + (j+1)Z_{2j+2}] x^{2j-2}`; both increase with `x ≥ 0` (inside the disc of convergence).",
-      "line": 524,
+      "line": 530,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -841,7 +841,7 @@
     {
       "name": "lem_4_4_i",
       "doc": "Lemma 4.4(i) (sec_04_near.tex:174): if `ΔΠ = ∑_{n ≥ 3} Δπ_n ξⁿ ≪ Z` and `ΔΠ_o`, `ΔΥ` are formed from the `Δπ_n` by the linear rules of Lemma 4.2 with `π₂ = (2c - τ)/v` kept fixed, then `|ΔΠ_o(iy)| ≤ 𝔥[Z](y)` and `|ΔΥ(iy)| ≤ 𝔴[Z](y)` (`Z` converging at `y`, with the derivative-type weights).",
-      "line": 532,
+      "line": 538,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -854,7 +854,7 @@
     {
       "name": "lem_4_4_ii",
       "doc": "Lemma 4.4(ii) (sec_04_near.tex:175): for every `f ∈ 𝒮`, `|Π_o(iy) - 1| ≤ ε(y)`.",
-      "line": 539,
+      "line": 545,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -869,7 +869,7 @@
     {
       "name": "lem_4_4_iii",
       "doc": "Lemma 4.4(iii) (sec_04_near.tex:176-179): `B ≪ √η B₁` and `B² ≪ η B₂` (coefficients in `ξ`).",
-      "line": 544,
+      "line": 550,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -884,7 +884,7 @@
     {
       "name": "sec4_first_variation",
       "doc": "sec_04_near.tex:212-216 (the first variation): with `B` replaced by `λB`, `Π̇ = -2NB/(1 - νξ)³ = ∑_{j ≥ 2} b_{2j-1} Π_j` and `Ṫ = ∑_{j ≥ 2} b_{2j-1} T_j` (the derivative at `λ = 0` of `T` computed from `N/(1 - νξ + λB)²`); at `λ = 1` this is `Π`, at `λ = 0` the comparison function `Π̂`. Typed with complex `λ` (`T` is holomorphic in `λ`): stronger than the printed real `0 ≤ λ ≤ 1`, and true.",
-      "line": 553,
+      "line": 559,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -899,7 +899,7 @@
     {
       "name": "sec4_Tj_closed",
       "doc": "sec_04_near.tex:216: \"where `T_j = (Υ_j - T̂ Π_{j,o})/Π̂_o`, with `Υ_j` and `Π_{j,o}` formed from `Π_j` by the linear rules of Lemma 4.2 (`π₂` kept fixed)\", and differentiating the first formula of Lemma 4.2's proof \"gives the closed form used in Lemma 4.5\" (`Υ_j`, `Π_{j,o}` by the linear rules with `π₂` fixed).",
-      "line": 566,
+      "line": 572,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -912,7 +912,7 @@
     {
       "name": "sec4_low_coeffs",
       "doc": "Lemma 4.4(i), its last sentence (sec_04_near.tex:174) and its proof (:190): two functions of the form (sec4:Pi) with the same `τ` and `c` have the same `π₀ = 0`, `π₁ = 1` and `π₂`, so their difference starts at `ξ³`; so does each derivative `Π_j` with respect to `b_{2j-1}`.",
-      "line": 573,
+      "line": 579,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -925,7 +925,7 @@
     {
       "name": "sec4_majorant_conv",
       "doc": "sec_04_near.tex:159 and :267: the denominators of the majorants, `1 - ⅔x`, `1 - 2x`, `𝔞 = 1 - ν⁺x` (`ν⁺ ≤ 2`) and `𝔡 = 𝔞 - √η⁺ B₁` (`η⁺ ≤ 1`), stay positive for `|x| ≤ 1/4`, with `𝔡(1/4) ≥ 1/2 - 2/15`; `1 - 𝔡 = ν⁺x + √η⁺B₁` has nonnegative coefficients (those of `B₁`), \"so they converge for `|x| ≤ 1/4`\".",
-      "line": 580,
+      "line": 586,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -938,7 +938,7 @@
     {
       "name": "lem_4_5_ii",
       "doc": "Lemma 4.5(ii) (sec_04_near.tex:229-233; `𝔥`, `𝔴` as at sec_04_near.tex:159-163): if moreover `0 < y ≤ y₀` and `|ν| ≤ ν⁺ ≤ 2` (as printed), then `(∑_{j ≥ 6} |T_j|²/(2j - 1))^{1/2} ≤ N₆`.",
-      "line": 587,
+      "line": 593,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -951,7 +951,7 @@
     {
       "name": "lem_4_5_iii",
       "doc": "Lemma 4.5(iii) (sec_04_near.tex:234): under the hypotheses of (ii), `|Ṫ| ≤ √η √(M + 130e)`, `M = 20 + N₆²`.",
-      "line": 593,
+      "line": 599,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -966,7 +966,7 @@
     {
       "name": "lem_4_6",
       "doc": "Lemma 4.6 (sec_04_near.tex:253-263): if `|ν| ≤ ν⁺ ≤ 2`, `η ≤ η⁺ ≤ 1` and `(M + 130e)^{1/2} ≤ n⁺`, then `|Π_o(iy)| ≥ Π₋`, and if `Π₋ > 0`, `|T - T̂ - Ṫ| ≤ ηΛ`.",
-      "line": 601,
+      "line": 607,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -982,7 +982,7 @@
     {
       "name": "sec4_Lam_nonneg",
       "doc": "A step of the proof of Proposition 4.1 (sec_04_near.tex:342): `Λ ≥ 0` on every cell, so `ρ e Λ ≤ ρ₊ e Λ`. The paper names it there: \"`Λ ≥ 0` (the series in `Λ` have nonnegative coefficients, `T⁺, n⁺ ≥ 0` and `Π₋ > 0`)\"; the majorants have nonnegative coefficients by sec_04_near.tex:159. SUPPORT row (the paper's own step).",
-      "line": 612,
+      "line": 618,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -995,7 +995,7 @@
     {
       "name": "prop_4_1_from_layer",
       "doc": "The proof of Proposition 4.1 (sec_04_near.tex:336-346), as an implication: from the case `e = 0` (`Q_f = Q_k`) and the per-cell bound `Re Q_f ≥ (16/27)y² + e m(ρ) - y²√(ρe(M + 130e)) - y²ρeΛ` (its first display, with the cell's numbers), Lemma 4.8 gives (sec4:goal), hence Proposition 4.1. The proof uses `|c| ≤ 1` (de Branges for `n = 2`, sec_04_near.tex:57) to place `ρ` in a cell and `e ≤ e⁺`, hence the binder `hDB`.",
-      "line": 618,
+      "line": 624,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -1011,7 +1011,7 @@
     {
       "name": "sec5_s_sq",
       "doc": "sec_05_grunsky_q.tex:8-10: `s = 2^{-1/2} e^{iθ/4}`, `t = s̄`, \"so that `s² = z` and `t² = w`\".",
-      "line": 634,
+      "line": 640,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -1024,7 +1024,7 @@
     {
       "name": "sec5_coords",
       "doc": "sec_05_grunsky_q.tex:13-19, the coordinates: for `θ ∈ (0, π]`, `l₁₁ > 0`, `l₂₂ > 0` (`u`, `v` are linearly independent), and `ũ, ṽ` have the Gram matrix of `u, v`: `l₁₁² = (A_o + Re Z_o)/2`, `l₁₁ l₂₁ = Im Z_o / 2`, `l₂₁² + l₂₂² = (A_o - Re Z_o)/2`.",
-      "line": 639,
+      "line": 645,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -1037,7 +1037,7 @@
     {
       "name": "sec5_chi_qrel_entire",
       "doc": "sec_05_grunsky_q.tex:33: \"Since `tan(θ/4) > 0`, `χ` never vanishes, and `Q_rel` is an entire function of the three entries of `M`\" (for `θ ∈ (0, π]`).",
-      "line": 645,
+      "line": 651,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -1050,7 +1050,7 @@
     {
       "name": "sec5_tan_identity",
       "doc": "sec_05_grunsky_q.tex:40: \"`(s - t)/(s + t) = i tan(θ/4)`\" (for `θ ∈ (0, π]`).",
-      "line": 649,
+      "line": 655,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -1063,7 +1063,7 @@
     {
       "name": "sec5_qrel_algebra",
       "doc": "sec_05_grunsky_q.tex:44-46, the algebra of the proof of Proposition 5.1: with `ϱ = (1 + χ)/(1 - χ)` and `f(z)/f(w) = ϱ²`, `1 + (p f(z) - q f(w))/(f(z) - f(w)) = 1 + (p ϱ² - q)/(ϱ² - 1) = 1 + (p(1 + χ)² - q(1 - χ)²)/(4χ) = 1 + (p + q)/2 + (p - q)(χ + χ⁻¹)/4`.",
-      "line": 655,
+      "line": 661,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -1075,8 +1075,8 @@
     },
     {
       "name": "sec5_takagi_2x2",
-      "doc": "The Takagi factorization of a complex symmetric 2x2 matrix [Tak25], [HJ13, Corollary 4.4.4(c)], as the proof of Proposition 5.2 uses it (sec_05_grunsky_q.tex:64): `M = 𝒰 diag(σ₁, σ₂) 𝒰ᵀ` with `𝒰` unitary and `0 ≤ σⱼ ≤ ‖M‖`.",
-      "line": 665,
+      "doc": "The Takagi factorization of a complex symmetric 2x2 matrix [Tak25], [HJ13, Corollary 4.4.4], as the proof of Proposition 5.2 uses it (sec_05_grunsky_q.tex:64): `M = 𝒰 diag(σ₁, σ₂) 𝒰ᵀ` with `𝒰` unitary and `0 ≤ σⱼ ≤ ‖M‖`.",
+      "line": 671,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -1089,7 +1089,7 @@
     {
       "name": "prop_5_2",
       "doc": "Proposition 5.2 (sec_05_grunsky_q.tex:59-61): let `Φ` be holomorphic on a neighbourhood of `𝓑` in the space `ℂ³` of complex symmetric 2x2 matrices. Then the minimum of `Re Φ` over `𝓑` is attained at a symmetric unitary matrix.",
-      "line": 672,
+      "line": 678,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -1102,7 +1102,7 @@
     {
       "name": "lem_5_3",
       "doc": "Lemma 5.3 (sec_05_grunsky_q.tex:67-73): every symmetric unitary 2x2 matrix is `M(α, ψ, ω)` with `α ∈ [0, π/2]` and `ψ, ω ∈ [-π, π]`; moreover `\\overline{M(α, ψ, ω)} = M(α, π - ψ, π - ω)`. (Each `M(α, ψ, ω)` is symmetric and unitary: sec_05_grunsky_q.tex:76.)",
-      "line": 679,
+      "line": 685,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -1115,7 +1115,7 @@
     {
       "name": "lem_5_4",
       "doc": "Lemma 5.4 (sec_05_grunsky_q.tex:82-88), first part: if `Φ(M̄) = \\overline{Φ(M)}` on `𝓑`, then the values of `Re Φ` on all symmetric unitary matrices are its values on the half chart `𝓗 = {M(α, ψ, ω) : 0 ≤ α ≤ π/2, -π/2 ≤ ψ ≤ π/2, -π ≤ ω ≤ π}`.",
-      "line": 688,
+      "line": 694,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -1128,7 +1128,7 @@
     {
       "name": "lem_5_4_qrel",
       "doc": "Lemma 5.4 (sec_05_grunsky_q.tex:87), second part: \"The function `Q_rel` has this symmetry for every `θ ∈ (0, π]`\" (for every matrix `M`).",
-      "line": 694,
+      "line": 700,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -1141,7 +1141,7 @@
     {
       "name": "cor_5_5",
       "doc": "Corollary 5.5 (sec_05_grunsky_q.tex:94-96): let `Φ` be holomorphic on a neighbourhood of `𝓑` with `Φ(M̄) = \\overline{Φ(M)}`. If `Re Φ(M(α, ψ, ω)) > 0` for all `(α, ψ, ω) ∈ [0, π/2] x [-π/2, π/2] x [-π, π]`, then `Re Φ > 0` on `𝓑`.",
-      "line": 700,
+      "line": 706,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -1154,7 +1154,7 @@
     {
       "name": "rem_5_6",
       "doc": "Remark 5.6 (sec_05_grunsky_q.tex:102-103): at `θ = 60°` the real symmetric unitary matrix `M = -[[cos α, sin α], [sin α, -cos α]]` with `α = 0.535` gives `Re Q_rel(M) ≈ -0.078` (here: `-0.0785 < Re Q_rel(M) < -0.0775`).",
-      "line": 707,
+      "line": 713,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -1167,7 +1167,7 @@
     {
       "name": "sec6_c_bound",
       "doc": "sec_06_far.tex:11: for `θ ∈ [135°, 180°]`, `c = cos(θ/2)` satisfies `0 ≤ c ≤ sin(π/8) < 383/1000`.",
-      "line": 717,
+      "line": 723,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -1180,7 +1180,7 @@
     {
       "name": "sec6_margin_arith",
       "doc": "sec_06_far.tex:11 and :97: \"`277/400 - 173/250 = 1/2000`\".",
-      "line": 721,
+      "line": 727,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -1192,8 +1192,8 @@
     },
     {
       "name": "sec6_L_log3",
-      "doc": "sec_06_far.tex:16 and :34: \"`L = 2A_o = log 3`\" and \"`L < π/2`\".",
-      "line": 724,
+      "doc": "sec_06_far.tex:16 and :34: \"`L = 2A_o = log 3`\" and \"`L = log 3 < π/2`\".",
+      "line": 730,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -1206,7 +1206,7 @@
     {
       "name": "sec6_ZO_re_im",
       "doc": "sec_06_far.tex:48: \"`u_o = Re Z_o` and `v_o = Im Z_o`\" with `c = cos(θ/2)` (for `θ ∈ [0, π]`).",
-      "line": 727,
+      "line": 733,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -1219,7 +1219,7 @@
     {
       "name": "sec6_xi_ball",
       "doc": "sec_06_far.tex:26: \"The rows of `N` have norm at most `1`, so `|N₁₁|, |N₂₂| ≤ √(1 - |N₁₂|²)`; hence `ξ₁ = X/L` and `ξ₂ = Y/d` satisfy `|ξ₁|² + |ξ₂|² ≤ 1`\", with `X = 2(σ₊N₁₁ - σ₋N₂₂)`, `L = 2(σ₊ + σ₋)` (`σ₊ + σ₋ = A_o`, `L = 2A_o`), `Y = dN₁₂`. Stronger than printed: for all `σ₊, σ₋ ≥ 0` with `σ₊ + σ₋ > 0` and every `N ∈ 𝓑`, not only the numbers and the compression of the pair.",
-      "line": 734,
+      "line": 740,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -1232,7 +1232,7 @@
     {
       "name": "sec6_psum_cos",
       "doc": "sec_06_far.tex:24-28: from `log p = e^{iφ}(X + iY)` and `log q = e^{-iφ}(X - iY)`, `(p + q)/2 = e^{U*} cos V*` with `U* = cos φ X - sin φ Y` (`= L cos φ ξ₁ - d sin φ ξ₂`) and `V* = sin φ X + cos φ Y` (`= L sin φ ξ₁ + d cos φ ξ₂`). Stronger than printed: an identity for every real `φ` and all complex `X, Y`, not only `φ = arg Z_o` and the pair's `X, Y`.",
-      "line": 742,
+      "line": 748,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -1245,7 +1245,7 @@
     {
       "name": "sec6_b_change",
       "doc": "sec_06_far.tex:30-32: \"A real orthogonal change of the complex variables `(ξ₁, ξ₂)` to `(ζ₁, ζ₂)`, still with `|ζ₁|² + |ζ₂|² ≤ 1`, gives `V* = b₁ζ₁` and `U* = b₂ζ₁ + b₃ζ₂`\", with `b₁² = L² sin²φ + d² cos²φ`, `b₂ = (L² - d²) sin φ cos φ / b₁`, `b₃ = Ld/b₁` (for `L, d > 0`; the change preserves `|ζ₁|² + |ζ₂|²`). Stronger than printed: for all `L, d > 0`, real `φ` and all `ξ₁, ξ₂ ∈ ℂ`, with `|ζ₁|² + |ζ₂|² = |ξ₁|² + |ξ₂|²` (not only `≤ 1`).",
-      "line": 750,
+      "line": 756,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -1257,8 +1257,21 @@
     },
     {
       "name": "sec6_b_values",
-      "doc": "sec_06_far.tex:16, :32-34 and :48: for `θ ∈ [135°, 180°]`, with `φ = arg Z_o`, `σ± = (A_o ± |Z_o|)/2`, `d = 4√(σ₊σ₋)` and `L = log 3`, the numbers `b₁, b₂, b₃` of the orthogonal change are those of Lemma 6.2 at `c = cos(θ/2)` (\"since `d² = L² - 4|Z_o|²` and `|Z_o| cos φ = u_o`, `|Z_o| sin φ = v_o`\"); they are nonnegative, `b₁ > 0`, and `b₁ ≤ L < π/2`.",
-      "line": 763,
+      "doc": "sec_06_far.tex:16, :32-34 and :48: for `θ ∈ [135°, 180°]`, with `φ = arg Z_o`, `σ± = (A_o ± |Z_o|)/2`, `d = 4√(σ₊σ₋)` and `L = log 3`, the numbers `b₁, b₂, b₃` of the orthogonal change are those of Lemma 6.2 at `c = cos(θ/2)` (\"since `d² = L² - 4|Z_o|²` and `|Z_o| cos φ = u_o`, `|Z_o| sin φ = v_o`\"); they are nonnegative, `b₁ > 0`, and `b₁ ≤ L = log 3 < π/2`.",
+      "line": 769,
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "binders": [],
+      "status": "PROVED",
+      "waits_on": []
+    },
+    {
+      "name": "sec6_phi_d_range",
+      "doc": "sec_06_far.tex:34, after \"`b₁ ≤ L = log 3 < π/2`\": \"because `0 ≤ φ ≤ π/2` there (the point `z` lies in the closed first quadrant) and `d ≤ 2(σ₊ + σ₋) = L` (by the inequality between the arithmetic and geometric means)\", for `θ ∈ [135°, 180°]`, with `z = z_θ`, `φ = arg Z_o`, `σ± = (A_o ± |Z_o|)/2`, `d = 4√(σ₊σ₋)` and `L = log 3` as in `sec6_b_values`.",
+      "line": 781,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -1271,7 +1284,7 @@
     {
       "name": "sec6_logcos",
       "doc": "sec_06_far.tex:34: \"The function `-log cos v` has a Taylor series with nonnegative coefficients ..., so `|log cos v| ≤ -log cos |v|` for `|v| < π/2`\" (principal logarithm; `cos v` is never real `≤ 0` there).",
-      "line": 773,
+      "line": 791,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -1284,7 +1297,7 @@
     {
       "name": "sec6_Wbound_finite",
       "doc": "sec_06_far.tex:34-36 (eq:Wbound), the finite-dimensional step: if `b₁, b₂, b₃ ≥ 0`, `b₁ < π/2` and `|ζ₁|² + |ζ₂|² ≤ 1`, then `W = b₂ζ₁ + b₃ζ₂ + log cos(b₁ζ₁)` (`= U* + log cos V*`) satisfies `|W| ≤ b₂r₁ + b₃√(1 - r₁²) - log cos(b₁r₁)`, `r₁ = |ζ₁| ∈ [0, 1]`. Stronger than printed: for all `b₁, b₂, b₃ ≥ 0` with `b₁ < π/2`, not only the numbers of our range of `θ`.",
-      "line": 780,
+      "line": 798,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -1297,7 +1310,20 @@
     {
       "name": "sec6_expW_bound",
       "doc": "sec_06_far.tex:51-53 (eq:psum), the real-analysis step: on the disc `|W| ≤ T = 211/200`, `Re e^W > 277/800` (via `T sin(57/100) < 57/100`, `cos(57/100) > 21/25`, `e^{21T/25} < 672/277`, `e^T < 800/277`; the proof's step \"Since `g` is even, it suffices to take `0 ≤ γ ≤ π`\", sec_06_far.tex:51, with `g(γ) = e^{-T cos γ} cos(T sin γ)`).",
-      "line": 789,
+      "line": 807,
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "binders": [],
+      "status": "PROVED",
+      "waits_on": []
+    },
+    {
+      "name": "sec6_gamma_unique",
+      "doc": "sec_06_far.tex:51, with `T = 211/200` (sec_06_far.tex:44): \"the root `γ_* ∈ (0, π)` of `γ = T sin γ` (there is only one, since `γ - T sin γ` is strictly convex on `[0, π]` and vanishes at `0`)\".",
+      "line": 811,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -1310,7 +1336,7 @@
     {
       "name": "sec6_A0B0_closed",
       "doc": "sec_06_far.tex:74-82 with Lemma 6.4's parametrization (sec_06_far.tex:85-87): for `θ ∈ [135°, 180°]`, `c = cos(θ/2)`, `ε = π - θ` and `z = z_θ`: `e^{-iε} = 1 - 2c² - 2ic√(1 - c²)` (\"`cos ε = 1 - 2c²`, `sin ε = 2c√(1 - c²)`\"), `z² = -x e^{-iε}` with `x = ¼`, and `A_R = Re(e^{iε} z²/(1 - z²)²)`, `B_R = Re(-e^{iε} log(1 - z²))`.",
-      "line": 795,
+      "line": 820,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -1323,7 +1349,7 @@
     {
       "name": "sec6_value_180",
       "doc": "sec_06_far.tex:100: \"At `c = 0` (`θ = 180°`) the function in Lemma 6.4 is about `0.6912`\": its value at `c = 0` is in `(0.69115, 0.69125)`.",
-      "line": 803,
+      "line": 828,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -1335,8 +1361,8 @@
     },
     {
       "name": "sec6_cover_bound_arith",
-      "doc": "sec_06_far.tex:93 and :100: the largest of the cover's upper bounds, `3459999249/(5·10⁹)` (sec_06_far.tex:93), \"lies just below `173/250`\" (sec_06_far.tex:100).",
-      "line": 807,
+      "doc": "sec_06_far.tex:93: each cell's upper bound is \"below `173/250`\", and \"The largest of these upper bounds is `3459999249/(5·10⁹)`\"; so the largest one is below `173/250`.",
+      "line": 832,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -1349,7 +1375,7 @@
     {
       "name": "lem_7_2",
       "doc": "Lemma 7.2 (sec_07_middle.tex:23-25): for `θ ∈ (0, π]`, the functions `Δ`, `U` and `R` are holomorphic on the neighbourhood `{‖M‖ < π/log 9}` of `𝓑` (an open set of `ℂ³` containing `𝓑`), and `iU(M̄) = \\overline{iU(M)}`, `R(M̄) = \\overline{R(M)}` there (the proof uses that \"`A`, `B` and `C` are conjugated when `M` is\", sec_07_middle.tex:28).",
-      "line": 815,
+      "line": 840,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -1362,7 +1388,7 @@
     {
       "name": "sec7_UR_zero",
       "doc": "sec_07_middle.tex:117 (the finite-dimensional half): \"`iU` and `R` vanish\" at `M = 0` (the matrix `O₂` of the identity function `f(z) = z`), for `θ ∈ (0, π]`.",
-      "line": 825,
+      "line": 850,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -1375,7 +1401,7 @@
     {
       "name": "sec7_trace_bound",
       "doc": "The finite-dimensional core of Lemma 7.4 (sec_07_middle.tex:81-86): if `E` is a complex `N x N` matrix with `|yᵀ E x| ≤ ‖x‖ ‖y‖` for all real `x, y`, `𝒲` is a real `N x 4` matrix, `J = λJ₁ + μJ₂` and `P` is real symmetric positive definite, then `|tr(E 𝒲 J 𝒲ᵀ)| ≤ tr(𝒲ᵀ𝒲 K)` with `K = ½(P + J P⁻¹ J)`. Stronger than printed: for every size `N`, every such `E`, every real `𝒲` and all real `λ, μ`, not only the even block, the columns `u_e, v_e, β₀, β₁` and the fixed `λ = 4/5`, `μ = ½`.",
-      "line": 832,
+      "line": 857,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -1388,7 +1414,7 @@
     {
       "name": "sec7_P_minors",
       "doc": "sec_07_middle.tex:93-97: the leading principal minors of `P` are `8473/5000`, `499588663/10⁸`, `1317395036843/10¹²` and `125044355055249/(2·10¹⁵)`, all positive, so `P` is positive definite.",
-      "line": 840,
+      "line": 865,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -1401,7 +1427,7 @@
     {
       "name": "sec7_CP_linear",
       "doc": "sec_07_middle.tex:97: \"The matrix `K` is then an explicit rational matrix, and `C_P(θ)` is a linear combination with rational coefficients of the nine numbers `A_e, Re Z_e, Im Z_e, L_e, Re L_z, Im L_z, M_e, Re M_z, Im M_z`\".",
-      "line": 850,
+      "line": 875,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -1414,7 +1440,7 @@
     {
       "name": "prop_7_5_i",
       "doc": "Proposition 7.5(i) (sec_07_middle.tex:108): for `θ ∈ (0, π]`, `F` is holomorphic on a neighbourhood of `𝓑`, and `F(M̄) = \\overline{F(M)}` on `𝓑`.",
-      "line": 858,
+      "line": 883,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -1427,7 +1453,7 @@
     {
       "name": "lem_7_6_i",
       "doc": "Lemma 7.6(i) (sec_07_middle.tex:128): `Φ_F > 0` on `[50.3°, 90°] x 𝓧`. PROVED GIVEN the five band checks of Table 3 rows 1-5 (the bands `[50.3, 55], [55, 60], [60, 70], [70, 80], [80, 90]` cover `[50.3, 90]`).",
-      "line": 863,
+      "line": 888,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -1446,7 +1472,7 @@
     {
       "name": "lem_7_6_ii",
       "doc": "Lemma 7.6(ii) (sec_07_middle.tex:129): `Φ_rel > 0` on `[90°, 135°] x 𝓧`. PROVED GIVEN the six band checks of Table 3 rows 6-11 (the bands `[90, 95], ..., [125, 135]` cover `[90, 135]`).",
-      "line": 868,
+      "line": 893,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -1466,7 +1492,7 @@
     {
       "name": "tab3_totals",
       "doc": "Table 3 (sec_07_middle.tex:147-159): the column totals `304,664` (leaves, first program) and `311,506` (boxes, second program).",
-      "line": 874,
+      "line": 899,
       "axioms": [
         "propext"
       ],
@@ -1476,8 +1502,8 @@
     },
     {
       "name": "sec5_a_conj",
-      "doc": "sec_05_grunsky_q.tex:13: \"The coefficients of `a(s)` have phases `e^{inθ/4}`, so `a(t) = \\overline{a(s)}`\" (entrywise, every `s`; likewise `a_e`, `b_e`).",
-      "line": 882,
+      "doc": "sec_05_grunsky_q.tex:13: \"The coefficients of `a(s)` have phases `nθ/4`, so `a(t) = \\overline{a(s)}`\" (entrywise, every `s`; likewise `a_e`, `b_e`).",
+      "line": 907,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -1490,7 +1516,7 @@
     {
       "name": "sec5_uv_gram",
       "doc": "sec_05_grunsky_q.tex:17-19: by (eq:gram), with `u = Re a(s)`, `v = Im a(s)` (`s = s_θ`): `uᵀu = (A_o + Re Z_o)/2`, `vᵀv = (A_o - Re Z_o)/2`, `uᵀv = Im Z_o / 2`.",
-      "line": 887,
+      "line": 912,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -1503,7 +1529,7 @@
     {
       "name": "sec5_O2_contraction",
       "doc": "sec_05_grunsky_q.tex:13-17: `V` has orthonormal columns, `u = V ũ`, `v = V ṽ`, and `O₂ = Vᵀ O V` is complex symmetric with `‖O₂‖ ≤ ‖O‖ ≤ 1`. PROVED GIVEN the strong Grunsky inequality.",
-      "line": 893,
+      "line": 918,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -1518,7 +1544,7 @@
     {
       "name": "sec5_O2_entries",
       "doc": "sec_05_grunsky_q.tex:17: \"and `uᵀOu = ũᵀO₂ũ`; similarly `vᵀOv = ṽᵀO₂ṽ` and `uᵀOv = ũᵀO₂ṽ`\": `uᵀOu`, `vᵀOv`, `uᵀOv` are `A`, `B`, `C` of `M = O₂`.",
-      "line": 901,
+      "line": 926,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -1531,7 +1557,7 @@
     {
       "name": "prop_5_1",
       "doc": "Proposition 5.1 (sec_05_grunsky_q.tex:35-37): for every `f ∈ 𝒮` and `θ ∈ (0, π]`, `Q_f(z_θ, \\overline{z_θ}) = Q_rel(O₂)` (`O₂` from the Grunsky coefficients `γ` of the odd root `h` of `f`).",
-      "line": 909,
+      "line": 934,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -1544,7 +1570,7 @@
     {
       "name": "sec5_relaxation",
       "doc": "sec_05_grunsky_q.tex:54: \"If `Re Q_rel > 0` on `𝓑` for some `θ`, then `Re Q_f(z_θ, \\overline{z_θ}) > 0` for every `f ∈ 𝒮`.\" PROVED GIVEN the bidisc power series and the strong Grunsky inequality.",
-      "line": 914,
+      "line": 939,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -1560,7 +1586,7 @@
     {
       "name": "lem_6_3",
       "doc": "Lemma 6.3 (sec_06_far.tex:59-61): for `f ∈ 𝒮` and distinct `z, w ∈ 𝔻`, `Q_f(z, w) - p(z) - p(w) = β(z)ᵀ C(f) α(w) + β(w)ᵀ C(f) α(z)`.",
-      "line": 919,
+      "line": 944,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -1573,7 +1599,7 @@
     {
       "name": "sec6_barnard_series",
       "doc": "sec_06_far.tex:72 (an auxiliary remark; the proof does not use it): \"Lemma 6.3 is Barnard's identity [Bar78, (5)], written in terms of the Grunsky matrix: the right side of Lemma 6.3 is `∑_{n,m ≥ 1} (n + m) γ_{nm}(f) zⁿ wᵐ`\" (for `f ∈ 𝒮`, `z, w ∈ 𝔻`; `γ_{nm} = 0` when `n = 0` or `m = 0`, so the sum over `ℕ × ℕ` is the printed one).",
-      "line": 928,
+      "line": 953,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -1586,7 +1612,7 @@
     {
       "name": "sec6_UV_values",
       "doc": "sec_06_far.tex:74-82: for `|z| = ½`: `U_R = ‖β(z)‖² = 4/9`, `V_R = ‖α(z)‖² = log(4/3)`, `β(z)ᵀβ(z) = z²/(1 - z²)²`, `α(z)ᵀα(z) = -log(1 - z²)`, and `α(z̄) = \\overline{α(z)}`, `β(z̄) = \\overline{β(z)}`.",
-      "line": 935,
+      "line": 960,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -1599,7 +1625,7 @@
     {
       "name": "sec6_Rf_bound",
       "doc": "sec_06_far.tex:74-82: for `f ∈ 𝒮` and `θ ∈ [135°, 180°]`, `c = cos(θ/2)`: `|R_f| = |Q_f(z, w) - p(z) - p(w)| ≤ √((U_R + A_R)(V_R + B_R)) + √((U_R - A_R)(V_R - B_R))`. PROVED GIVEN the bidisc power series and the strong Grunsky inequality.",
-      "line": 943,
+      "line": 968,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -1615,7 +1641,7 @@
     {
       "name": "sec6_sigma_pos",
       "doc": "sec_06_far.tex:18: \"(both are nonzero, since `Re a(s)` and `Im a(s)` are linearly independent; see Section 5)\": `σ₊ > 0` and `σ₋ > 0` for `θ ∈ (0, π]` (stated as positive: slightly stronger than \"nonzero\", and true).",
-      "line": 949,
+      "line": 974,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -1628,7 +1654,7 @@
     {
       "name": "sec6_logp_logq",
       "doc": "sec_06_far.tex:14-28: for `f ∈ 𝒮` and `θ ∈ [135°, 180°]`, in the rotated real orthonormal basis (`a(s) = e^{iφ/2}(√σ₊, i√σ₋)`) the odd block compresses to a complex symmetric `N` with `‖N‖ ≤ 1`, and `log p = e^{iφ}(X + iY)`, `log q = e^{-iφ}(X - iY)`, `X = 2(σ₊N₁₁ - σ₋N₂₂)`, `Y = dN₁₂` (stated for `p = exp(log p)`, `q = exp(log q)`). PROVED GIVEN the bidisc power series and the strong Grunsky inequality.",
-      "line": 955,
+      "line": 980,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -1644,7 +1670,7 @@
     {
       "name": "eq_psum",
       "doc": "sec_06_far.tex:51-53 (eq:psum): for `f ∈ 𝒮` and `θ ∈ [135°, 180°]`, `Re(p + q) = 2 Re e^W > 277/400`. PROVED GIVEN the bidisc power series, the strong Grunsky inequality and Lemma 6.2's check.",
-      "line": 965,
+      "line": 990,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -1661,7 +1687,7 @@
     {
       "name": "prop_6_1_from_layer",
       "doc": "The proof of Proposition 6.1 (sec_06_far.tex:96-98): from (eq:psum) and `|R_f| < 173/250`, `Re Q_f(z, w) ≥ Re(p + q) - |R_f| > 277/400 - 173/250 = 1/2000`.",
-      "line": 971,
+      "line": 996,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -1674,7 +1700,7 @@
     {
       "name": "sec7_be_deriv",
       "doc": "sec_07_middle.tex:16: \"`b_e(s) = (√n sⁿ)_{n even}`; it is `s (d/ds) a_e(s)`\" (entrywise).",
-      "line": 979,
+      "line": 1004,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -1687,7 +1713,7 @@
     {
       "name": "lem_7_3",
       "doc": "Lemma 7.3 (sec_07_middle.tex:31-37): for `f ∈ 𝒮`, `θ ∈ (0, π]`, `E` the even block of the Grunsky matrix of `h`: `U(O₂) = (a_e(s) - a_e(t))ᵀ E (a_e(s) + a_e(t))` and `R(O₂) = b_e(s)ᵀ E a_e(t) + b_e(t)ᵀ E a_e(s)`. PROVED GIVEN the bidisc power series (`E = C(f)`) and the strong Grunsky inequality (`‖O₂‖ ≤ 1`, eq:cauchy).",
-      "line": 984,
+      "line": 1009,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -1703,7 +1729,7 @@
     {
       "name": "eq_UR",
       "doc": "sec_07_middle.tex:50-53 (eq:UR): with `a_e(s) = u_e + i v_e`, `b_e(s) = β₀ + iβ₁` (real sequences): `iU(O₂) = -4 u_eᵀ E v_e` and `R(O₂) = 2(β₀ᵀ E u_e + β₁ᵀ E v_e)`. PROVED GIVEN the facts of Lemma 7.3.",
-      "line": 993,
+      "line": 1018,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -1719,7 +1745,7 @@
     {
       "name": "sec7_gram",
       "doc": "sec_07_middle.tex:54-67: the real 4x4 Gram matrix of `u_e, v_e, β₀, β₁` is `G(θ)` (\"summing the geometric series\"; e.g. `‖b_e(s)‖² = 8/9`, `b_e(s)ᵀ b_e(s) = 2z²/(1 - z²)²`).",
-      "line": 1002,
+      "line": 1027,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -1732,7 +1758,7 @@
     {
       "name": "lem_7_4",
       "doc": "Lemma 7.4 (sec_07_middle.tex:69-79): for real `λ, μ`, `P` real symmetric positive definite, `f ∈ 𝒮` and `θ ∈ (0, π]`: `|λ iU(O₂) - μ R(O₂)| ≤ C_P(θ)`. PROVED GIVEN the bidisc power series and the strong Grunsky inequality.",
-      "line": 1008,
+      "line": 1033,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -1748,7 +1774,7 @@
     {
       "name": "prop_7_5_ii",
       "doc": "Proposition 7.5(ii) (sec_07_middle.tex:109): for every `f ∈ 𝒮` and `θ ∈ (0, π]`, `Re F(O₂) ≤ Re Q_f(z_θ, \\overline{z_θ})`. PROVED GIVEN the bidisc power series and the strong Grunsky inequality.",
-      "line": 1015,
+      "line": 1040,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -1764,7 +1790,7 @@
     {
       "name": "sec5_not_all_from_S",
       "doc": "sec_05_grunsky_q.tex:54: \"not every `M ∈ 𝓑` comes from a univalent function\": at `θ = 60°` some `M ∈ 𝓑` is `O₂` of no `f ∈ 𝒮` (Remark 5.6's matrix, with Proposition 7.1 at `θ = 60°`). PROVED GIVEN the facts and the band check used at `θ = 60°`. (Placed after Proposition 7.5(ii), which its proof uses.)",
-      "line": 1022,
+      "line": 1047,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -1781,7 +1807,7 @@
     {
       "name": "sec7_identity_O2",
       "doc": "sec_07_middle.tex:117 (the Grunsky half): for the identity function `f(z) = z` the odd root is `h(s) = s`, and for its Grunsky coefficients `O₂ = 0` (where `iU` and `R` vanish, `sec7_UR_zero`).",
-      "line": 1028,
+      "line": 1053,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -1794,7 +1820,7 @@
     {
       "name": "prop_7_1_from_layer",
       "doc": "The proof of Proposition 7.1 (sec_07_middle.tex:167-169): if every `Q_f(z_θ, \\overline{z_θ})` (`f ∈ 𝒮`, `θ ∈ (0, π]`) is `Q_rel(M)` for some `M ∈ 𝓑` with `Re F(M) ≤ Re Q_f(z_θ, \\overline{z_θ})` (Propositions 5.1, 7.5), `Φ_F > 0` on `[50.3°, 90°] x 𝓧` and `Φ_rel > 0` on `[90°, 135°] x 𝓧` (Lemma 7.6), then Proposition 7.1 holds (via Corollary 5.5).",
-      "line": 1035,
+      "line": 1060,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -1807,7 +1833,7 @@
     {
       "name": "prop_4_1",
       "doc": "Proposition 4.1 (sec_04_near.tex:24-29): for every `f ∈ 𝒮` and every `θ ∈ (0, θ₀]`, `Re Q_f(z_θ, \\overline{z_θ}) ≥ sin²(θ/2)/80`.",
-      "line": 1046,
+      "line": 1071,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -1824,7 +1850,7 @@
     {
       "name": "prop_6_1",
       "doc": "Proposition 6.1 (sec_06_far.tex:7-9): for every `f ∈ 𝒮` and every `θ ∈ [135°, 180°]`, `Re Q_f(z_θ, \\overline{z_θ}) > 1/2000`.",
-      "line": 1052,
+      "line": 1077,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -1842,7 +1868,7 @@
     {
       "name": "prop_7_1",
       "doc": "Proposition 7.1 (sec_07_middle.tex:9-11): for every `f ∈ 𝒮` and every `θ ∈ [50.3°, 135°]`, `Re Q_f(z_θ, \\overline{z_θ}) > 0`.",
-      "line": 1061,
+      "line": 1086,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -1869,7 +1895,7 @@
     {
       "name": "lem_8_1",
       "doc": "Lemma 8.1 (sec_08_proof.tex:7-9): `θ₀ > 50.3°`, that is, `sin(503π/3600) < 17/40`.",
-      "line": 1078,
+      "line": 1103,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -1882,7 +1908,7 @@
     {
       "name": "sec8_cover",
       "doc": "sec_08_proof.tex:5 and :19: \"The three ranges of angles overlap\" and \"these three ranges cover `(0°, 180°]`\": `(0, θ₀]`, `[50.3°, 135°]` and `[135°, 180°]` cover `(0, π]` (with `180° = π`).",
-      "line": 1082,
+      "line": 1107,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -1895,7 +1921,7 @@
     {
       "name": "sec8_assembly",
       "doc": "sec_08_proof.tex:18-20, the proof of Theorems 1.1 and 1.2: from Propositions 4.1, 7.1 and 6.1 (as hypotheses here), Proposition 2.4 and Proposition 2.5, Theorem 1.1 and Theorem 1.2 follow. PROVED GIVEN the facts of Lemma 2.2.",
-      "line": 1089,
+      "line": 1114,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -1910,8 +1936,8 @@
     },
     {
       "name": "thm_1_1",
-      "doc": "Theorem 1.1 (sec_01_intro.tex:13-15): for every `f ∈ 𝒮`, the function `Γ f` is injective on the closed disc `|z| ≤ ½`. The radius `½` is sharp: for every `r > ½` some `f ∈ 𝒮` has `Γ f` not injective on `|z| < r`. Its proof uses Propositions 4.1, 6.1, 7.1 (with their checks and facts) and the facts of Lemma 2.2.",
-      "line": 1103,
+      "doc": "Theorem 1.1 (sec_01_intro.tex:13-15): for every `f ∈ 𝒮`, the function `Γ f` is injective on the closed disc `|z| ≤ ½`. The radius `½` is sharp, as Robinson observed [Rob47, p. 18]: for every `r > ½` some `f ∈ 𝒮` has `Γ f` not injective on `|z| < r`. Its proof uses Propositions 4.1, 6.1, 7.1 (with their checks and facts) and the facts of Lemma 2.2.",
+      "line": 1129,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -1945,7 +1971,7 @@
     {
       "name": "thm_1_2",
       "doc": "Theorem 1.2 (sec_01_intro.tex:23-28): for every `f ∈ 𝒮`, every `r ∈ (0, ½]` and all distinct `z, w` with `|z| = |w| = r`, `Re Q_f(z, w) > 0`.",
-      "line": 1115,
+      "line": 1141,
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -1976,8 +2002,8 @@
     },
     {
       "name": "rem_8_2",
-      "doc": "Remark 8.2 (sec_08_proof.tex:22-24; sec_01_intro.tex:46): for distinct `z, w` with `|z| = |w| = r ≤ ½` and angular distance `θ` (`w = z e^{±iθ}`, `0 < θ ≤ π`): `Re Q_f(z, w) ≥ sin²(θ/2)/80` when `θ ≤ θ₀`, and `Re Q_f(z, w) > 1/2000` when `θ ≥ 135°`.",
-      "line": 1128,
+      "doc": "Remark 8.2 (sec_08_proof.tex:22-24; sec_01_intro.tex:46): for distinct `z, w` with `|z| = |w| = r ≤ ½` and angular distance `θ` (`w = z e^{±iθ}`, `0 < θ ≤ π`): `Re Q_f(z, w) ≥ sin²(θ/2)/80` when `θ ≤ θ₀`, and `Re Q_f(z, w) > 1/2000` when `θ ≥ 135°`. The remark's middle range, \"the bound is `Re Q_f > 0` (Proposition 7.1)\" (sec_08_proof.tex:23), is `thm_1_2` (for every angle), through `prop_7_1`.",
+      "line": 1155,
       "axioms": [
         "Classical.choice",
         "Quot.sound",

@@ -296,12 +296,16 @@ run_cmd RobinsonAudit.inspect ``Robinson.Paper.sec6_psum_cos "sec6_psum_cos"
 run_cmd RobinsonAudit.inspect ``Robinson.Paper.sec6_b_change "sec6_b_change"
 #print axioms Robinson.Paper.sec6_b_values
 run_cmd RobinsonAudit.inspect ``Robinson.Paper.sec6_b_values "sec6_b_values"
+#print axioms Robinson.Paper.sec6_phi_d_range
+run_cmd RobinsonAudit.inspect ``Robinson.Paper.sec6_phi_d_range "sec6_phi_d_range"
 #print axioms Robinson.Paper.sec6_logcos
 run_cmd RobinsonAudit.inspect ``Robinson.Paper.sec6_logcos "sec6_logcos"
 #print axioms Robinson.Paper.sec6_Wbound_finite
 run_cmd RobinsonAudit.inspect ``Robinson.Paper.sec6_Wbound_finite "sec6_Wbound_finite"
 #print axioms Robinson.Paper.sec6_expW_bound
 run_cmd RobinsonAudit.inspect ``Robinson.Paper.sec6_expW_bound "sec6_expW_bound"
+#print axioms Robinson.Paper.sec6_gamma_unique
+run_cmd RobinsonAudit.inspect ``Robinson.Paper.sec6_gamma_unique "sec6_gamma_unique"
 #print axioms Robinson.Paper.sec6_A0B0_closed
 run_cmd RobinsonAudit.inspect ``Robinson.Paper.sec6_A0B0_closed "sec6_A0B0_closed"
 #print axioms Robinson.Paper.sec6_value_180

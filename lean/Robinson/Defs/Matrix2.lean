@@ -2,7 +2,8 @@
 Robinson/Defs/Matrix2.lean — the finite-dimensional objects of Sections 5 and 7 (functions of a complex
 symmetric 2x2 matrix M at the angle θ).
 Paper author: Dave Goel. Copyright (C) Dave Goel 2026--now. All rights reserved.
-TRUST SURFACE: every definition is read against sec_05_grunsky_q.tex and sec_07_middle.tex (v2.00 lines).
+TRUST SURFACE: every definition is read against sec_05_grunsky_q.tex and sec_07_middle.tex (their lines; AUDIT_NOTES.md
+names the version).
 -/
 import Robinson.Defs.Basic
 

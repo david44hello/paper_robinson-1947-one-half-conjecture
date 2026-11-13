@@ -1,9 +1,10 @@
 /-
 Robinson/Defs/Basic.lean — the basic objects of the paper.
 Paper author: Dave Goel. Copyright (C) Dave Goel 2026--now. All rights reserved.
-TRUST SURFACE: every definition here is to be compared with the paper, line by line. Pointers are lines of the v2.00
-sources (`sec_0N_*.tex:<line>`). A function `f : ℂ → ℂ` stands for a function on the unit disc: only its values on
-`ball 0 1` enter the class `S`, and `deriv f z` at a point of the open disc depends only on values near `z`.
+TRUST SURFACE: every definition here is to be compared with the paper, line by line. Pointers are lines of the paper's
+TeX sources (`sec_0N_*.tex:<line>`); AUDIT_NOTES.md names the version. A function `f : ℂ → ℂ` stands for a function
+on the unit disc: only its values on `ball 0 1` enter the class `S`, and `deriv f z` at a point of the open disc
+depends only on values near `z`.
 -/
 import Mathlib
 

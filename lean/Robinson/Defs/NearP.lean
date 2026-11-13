@@ -2,7 +2,8 @@
 Robinson/Defs/NearP.lean — the power-series objects of Section 4 that depend on `f` (the coefficients
 `b_{2j-1}` of `G_τ`, the series `Π`, `Π_o`, `Υ`, `T`, the first variation `Ṫ`) and the majorant calculus.
 Paper author: Dave Goel. Copyright (C) Dave Goel 2026--now. All rights reserved.
-TRUST SURFACE: every definition is to be compared with sec_04_near.tex (v2.00 lines). Coefficients of a function at
+TRUST SURFACE: every definition is to be compared with sec_04_near.tex (its lines; AUDIT_NOTES.md names the version).
+Coefficients of a function at
 `0` are `coeff g n = iteratedDeriv n g 0 / n!` (Robinson/Defs/Basic.lean); a sequence `p : ℕ → ℂ` stands for the
 coefficients `(π_n)` of a power series.
 -/

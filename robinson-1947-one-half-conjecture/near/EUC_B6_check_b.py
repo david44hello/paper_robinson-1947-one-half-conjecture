@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Independent B6 exact model derivatives, positive polynomial and infinite tails.
-Version 0.10 — program b, 20261101__22:17 EST. Own quadratic field, projective coefficient positivity,192 cells with rigorous48-term Cauchy tails. No author imports.
+Version 0.20 — program b (0.10 of 20261101; 0.20: printed label names the comparison function). Own quadratic field, projective coefficient positivity,192 cells with rigorous48-term Cauchy tails. No author imports.
 """
 
 import argparse
@@ -67,7 +67,7 @@ def derive_model_area():
         value = -numerator/span/constant(size)
         assert value.second == 0
         output.append(value.first)
-        print('Derived physical model area coefficient', index, flush=True)
+        print('Derived comparison-function area coefficient', index, flush=True)
     return base, output, quotient.first
 
 
