@@ -100,14 +100,18 @@ private lemma orth_norm (α β : ℝ) (h : α ^ 2 + β ^ 2 = 1) (ξ₁ ξ₂ : �
     Complex.sub_im, Complex.re_ofReal_mul, Complex.im_ofReal_mul]
   linear_combination (ξ₁.re ^ 2 + ξ₁.im ^ 2 + ξ₂.re ^ 2 + ξ₂.im ^ 2) * h
 
-theorem sec6_b_change_proved (L d φ : ℝ) (hL : 0 < L) (hd : 0 < d) (ξ₁ ξ₂ : ℂ) :
-    ∃ ζ₁ ζ₂ : ℂ, ‖ζ₁‖ ^ 2 + ‖ζ₂‖ ^ 2 = ‖ξ₁‖ ^ 2 + ‖ξ₂‖ ^ 2 ∧
+/-- The change of `sec6_b_change` with `ζ₁ = (L sin φ / B) ξ₁ + (d cos φ / B) ξ₂`,
+`ζ₂ = (d cos φ / B) ξ₁ - (L sin φ / B) ξ₂`, where `B = √(L² sin²φ + d² cos²φ)`. -/
+private lemma b_change_aux (L d φ : ℝ) (hL : 0 < L) (hd : 0 < d) (ξ₁ ξ₂ : ℂ) (B : ℝ)
+    (hBdef : B = Real.sqrt (L ^ 2 * Real.sin φ ^ 2 + d ^ 2 * Real.cos φ ^ 2)) :
+    ‖((L * Real.sin φ / B : ℝ) : ℂ) * ξ₁ + ((d * Real.cos φ / B : ℝ) : ℂ) * ξ₂‖ ^ 2 +
+        ‖((d * Real.cos φ / B : ℝ) : ℂ) * ξ₁ - ((L * Real.sin φ / B : ℝ) : ℂ) * ξ₂‖ ^ 2 = ‖ξ₁‖ ^ 2 + ‖ξ₂‖ ^ 2 ∧
       (L * Real.sin φ : ℂ) * ξ₁ + (d * Real.cos φ : ℂ) * ξ₂ =
-        (Real.sqrt (L ^ 2 * Real.sin φ ^ 2 + d ^ 2 * Real.cos φ ^ 2) : ℂ) * ζ₁ ∧
+        (B : ℂ) * (((L * Real.sin φ / B : ℝ) : ℂ) * ξ₁ + ((d * Real.cos φ / B : ℝ) : ℂ) * ξ₂) ∧
       (L * Real.cos φ : ℂ) * ξ₁ - (d * Real.sin φ : ℂ) * ξ₂ =
-        (((L ^ 2 - d ^ 2) * Real.sin φ * Real.cos φ / Real.sqrt (L ^ 2 * Real.sin φ ^ 2 + d ^ 2 * Real.cos φ ^ 2) : ℝ) : ℂ)
-            * ζ₁ +
-          ((L * d / Real.sqrt (L ^ 2 * Real.sin φ ^ 2 + d ^ 2 * Real.cos φ ^ 2) : ℝ) : ℂ) * ζ₂ := by
+        (((L ^ 2 - d ^ 2) * Real.sin φ * Real.cos φ / B : ℝ) : ℂ) *
+            (((L * Real.sin φ / B : ℝ) : ℂ) * ξ₁ + ((d * Real.cos φ / B : ℝ) : ℂ) * ξ₂) +
+          ((L * d / B : ℝ) : ℂ) * (((d * Real.cos φ / B : ℝ) : ℂ) * ξ₁ - ((L * Real.sin φ / B : ℝ) : ℂ) * ξ₂) := by
   have hsc : Real.sin φ ^ 2 + Real.cos φ ^ 2 = 1 := Real.sin_sq_add_cos_sq φ
   have hB2pos : 0 < L ^ 2 * Real.sin φ ^ 2 + d ^ 2 * Real.cos φ ^ 2 := by
     rcases eq_or_ne (Real.sin φ) 0 with h0 | h0
@@ -115,18 +119,16 @@ theorem sec6_b_change_proved (L d φ : ℝ) (hL : 0 < L) (hd : 0 < d) (ξ₁ ξ�
       rw [h0, this]; positivity
     · have : 0 < Real.sin φ ^ 2 := by positivity
       positivity
-  have hB : 0 < Real.sqrt (L ^ 2 * Real.sin φ ^ 2 + d ^ 2 * Real.cos φ ^ 2) := Real.sqrt_pos.mpr hB2pos
-  have hBB : Real.sqrt (L ^ 2 * Real.sin φ ^ 2 + d ^ 2 * Real.cos φ ^ 2) ^ 2 =
-      L ^ 2 * Real.sin φ ^ 2 + d ^ 2 * Real.cos φ ^ 2 := Real.sq_sqrt hB2pos.le
-  generalize Real.sqrt (L ^ 2 * Real.sin φ ^ 2 + d ^ 2 * Real.cos φ ^ 2) = B at hB hBB ⊢
+  have hB : 0 < B := by rw [hBdef]; exact Real.sqrt_pos.mpr hB2pos
+  have hBB : B ^ 2 = L ^ 2 * Real.sin φ ^ 2 + d ^ 2 * Real.cos φ ^ 2 := by rw [hBdef]; exact Real.sq_sqrt hB2pos.le
+  clear hBdef
   generalize Real.sin φ = s at hsc hBB ⊢
   generalize Real.cos φ = c at hsc hBB ⊢
   have hB0 : B ≠ 0 := hB.ne'
   have hαβ : (L * s / B) ^ 2 + (d * c / B) ^ 2 = 1 := by
     rw [div_pow, div_pow, ← add_div, div_eq_one_iff_eq (by positivity), hBB]
     ring
-  refine ⟨((L * s / B : ℝ) : ℂ) * ξ₁ + ((d * c / B : ℝ) : ℂ) * ξ₂,
-    ((d * c / B : ℝ) : ℂ) * ξ₁ - ((L * s / B : ℝ) : ℂ) * ξ₂, orth_norm _ _ hαβ ξ₁ ξ₂, ?_, ?_⟩
+  refine ⟨orth_norm _ _ hαβ ξ₁ ξ₂, ?_, ?_⟩
   · have hα : (B : ℂ) * ((L * s / B : ℝ) : ℂ) = (L : ℂ) * (s : ℂ) := by
       rw [← ofReal_mul, ← ofReal_mul, mul_div_cancel₀ _ hB0]
     have hβ : (B : ℂ) * ((d * c / B : ℝ) : ℂ) = (d : ℂ) * (c : ℂ) := by
@@ -143,6 +145,26 @@ theorem sec6_b_change_proved (L d φ : ℝ) (hL : 0 < L) (hd : 0 < d) (ξ₁ ξ�
     have r2c : (((L ^ 2 - d ^ 2) * s * c / B : ℝ) : ℂ) * ((d * c / B : ℝ) : ℂ) -
         ((L * d / B : ℝ) : ℂ) * ((L * s / B : ℝ) : ℂ) = -((d : ℂ) * s) := by exact_mod_cast r2
     linear_combination (-ξ₁) * r1c - ξ₂ * r2c
+
+theorem sec6_b_change_proved (L d φ : ℝ) (hL : 0 < L) (hd : 0 < d) (ξ₁ ξ₂ : ℂ) :
+    let b₁ : ℝ := Real.sqrt (L ^ 2 * Real.sin φ ^ 2 + d ^ 2 * Real.cos φ ^ 2)
+    let ζ₁ : ℂ := ((L * Real.sin φ : ℂ) * ξ₁ + (d * Real.cos φ : ℂ) * ξ₂) / b₁
+    let ζ₂ : ℂ := ((d * Real.cos φ : ℂ) * ξ₁ - (L * Real.sin φ : ℂ) * ξ₂) / b₁
+    ‖ζ₁‖ ^ 2 + ‖ζ₂‖ ^ 2 = ‖ξ₁‖ ^ 2 + ‖ξ₂‖ ^ 2 ∧
+      (L * Real.sin φ : ℂ) * ξ₁ + (d * Real.cos φ : ℂ) * ξ₂ = (b₁ : ℂ) * ζ₁ ∧
+      (L * Real.cos φ : ℂ) * ξ₁ - (d * Real.sin φ : ℂ) * ξ₂ =
+        (((L ^ 2 - d ^ 2) * Real.sin φ * Real.cos φ / b₁ : ℝ) : ℂ) * ζ₁ + ((L * d / b₁ : ℝ) : ℂ) * ζ₂ := by
+  intro b₁ ζ₁ ζ₂
+  have e₁ : ζ₁ = ((L * Real.sin φ / b₁ : ℝ) : ℂ) * ξ₁ + ((d * Real.cos φ / b₁ : ℝ) : ℂ) * ξ₂ := by
+    simp only [ζ₁]
+    push_cast
+    ring
+  have e₂ : ζ₂ = ((d * Real.cos φ / b₁ : ℝ) : ℂ) * ξ₁ - ((L * Real.sin φ / b₁ : ℝ) : ℂ) * ξ₂ := by
+    simp only [ζ₂]
+    push_cast
+    ring
+  rw [e₁, e₂]
+  exact b_change_aux L d φ hL hd ξ₁ ξ₂ b₁ rfl
 
 /-! ## `|log cos v| ≤ -log cos |v|` on the disc `|v| < π/2` -/
 

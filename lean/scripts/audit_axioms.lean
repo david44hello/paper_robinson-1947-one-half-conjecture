@@ -202,8 +202,24 @@ run_cmd RobinsonAudit.inspect ``Robinson.Paper.lem_4_3 "lem_4_3"
 run_cmd RobinsonAudit.inspect ``Robinson.Paper.sec4_circle "sec4_circle"
 #print axioms Robinson.Paper.lem_4_4_iv
 run_cmd RobinsonAudit.inspect ``Robinson.Paper.lem_4_4_iv "lem_4_4_iv"
+#print axioms Robinson.Paper.sec4_That_num
+run_cmd RobinsonAudit.inspect ``Robinson.Paper.sec4_That_num "sec4_That_num"
+#print axioms Robinson.Paper.sec4_That_den
+run_cmd RobinsonAudit.inspect ``Robinson.Paper.sec4_That_den "sec4_That_den"
+#print axioms Robinson.Paper.sec4_hat_elem_bounds
+run_cmd RobinsonAudit.inspect ``Robinson.Paper.sec4_hat_elem_bounds "sec4_hat_elem_bounds"
+#print axioms Robinson.Paper.sec4_hat_quotients
+run_cmd RobinsonAudit.inspect ``Robinson.Paper.sec4_hat_quotients "sec4_hat_quotients"
+#print axioms Robinson.Paper.sec4_PihatO_num
+run_cmd RobinsonAudit.inspect ``Robinson.Paper.sec4_PihatO_num "sec4_PihatO_num"
+#print axioms Robinson.Paper.sec4_PihatO_den
+run_cmd RobinsonAudit.inspect ``Robinson.Paper.sec4_PihatO_den "sec4_PihatO_den"
 #print axioms Robinson.Paper.lem_4_5_i
 run_cmd RobinsonAudit.inspect ``Robinson.Paper.lem_4_5_i "lem_4_5_i"
+#print axioms Robinson.Paper.sec4_Qcal
+run_cmd RobinsonAudit.inspect ``Robinson.Paper.sec4_Qcal "sec4_Qcal"
+#print axioms Robinson.Paper.sec4_TJ_holo
+run_cmd RobinsonAudit.inspect ``Robinson.Paper.sec4_TJ_holo "sec4_TJ_holo"
 #print axioms Robinson.Paper.lem_4_7
 run_cmd RobinsonAudit.inspect ``Robinson.Paper.lem_4_7 "lem_4_7"
 #print axioms Robinson.Paper.sec4_caps_valid
@@ -232,6 +248,8 @@ run_cmd RobinsonAudit.inspect ``Robinson.Paper.sec4_majorant_split "sec4_majoran
 run_cmd RobinsonAudit.inspect ``Robinson.Paper.sec4_majorant_rules "sec4_majorant_rules"
 #print axioms Robinson.Paper.sec4_hw_coeff
 run_cmd RobinsonAudit.inspect ``Robinson.Paper.sec4_hw_coeff "sec4_hw_coeff"
+#print axioms Robinson.Paper.sec4_weight_bounds
+run_cmd RobinsonAudit.inspect ``Robinson.Paper.sec4_weight_bounds "sec4_weight_bounds"
 #print axioms Robinson.Paper.lem_4_4_i
 run_cmd RobinsonAudit.inspect ``Robinson.Paper.lem_4_4_i "lem_4_4_i"
 #print axioms Robinson.Paper.lem_4_4_ii
@@ -282,6 +300,8 @@ run_cmd RobinsonAudit.inspect ``Robinson.Paper.cor_5_5 "cor_5_5"
 run_cmd RobinsonAudit.inspect ``Robinson.Paper.rem_5_6 "rem_5_6"
 #print axioms Robinson.Paper.sec6_c_bound
 run_cmd RobinsonAudit.inspect ``Robinson.Paper.sec6_c_bound "sec6_c_bound"
+#print axioms Robinson.Paper.sec6_sin_pi_8
+run_cmd RobinsonAudit.inspect ``Robinson.Paper.sec6_sin_pi_8 "sec6_sin_pi_8"
 #print axioms Robinson.Paper.sec6_margin_arith
 run_cmd RobinsonAudit.inspect ``Robinson.Paper.sec6_margin_arith "sec6_margin_arith"
 #print axioms Robinson.Paper.sec6_L_log3
@@ -308,20 +328,22 @@ run_cmd RobinsonAudit.inspect ``Robinson.Paper.sec6_expW_bound "sec6_expW_bound"
 run_cmd RobinsonAudit.inspect ``Robinson.Paper.sec6_gamma_unique "sec6_gamma_unique"
 #print axioms Robinson.Paper.sec6_A0B0_closed
 run_cmd RobinsonAudit.inspect ``Robinson.Paper.sec6_A0B0_closed "sec6_A0B0_closed"
+#print axioms Robinson.Paper.sec6_A0_printed
+run_cmd RobinsonAudit.inspect ``Robinson.Paper.sec6_A0_printed "sec6_A0_printed"
 #print axioms Robinson.Paper.sec6_value_180
 run_cmd RobinsonAudit.inspect ``Robinson.Paper.sec6_value_180 "sec6_value_180"
 #print axioms Robinson.Paper.sec6_cover_bound_arith
 run_cmd RobinsonAudit.inspect ``Robinson.Paper.sec6_cover_bound_arith "sec6_cover_bound_arith"
 #print axioms Robinson.Paper.lem_7_2
 run_cmd RobinsonAudit.inspect ``Robinson.Paper.lem_7_2 "lem_7_2"
-#print axioms Robinson.Paper.sec7_UR_zero
-run_cmd RobinsonAudit.inspect ``Robinson.Paper.sec7_UR_zero "sec7_UR_zero"
 #print axioms Robinson.Paper.sec7_trace_bound
 run_cmd RobinsonAudit.inspect ``Robinson.Paper.sec7_trace_bound "sec7_trace_bound"
 #print axioms Robinson.Paper.sec7_P_minors
 run_cmd RobinsonAudit.inspect ``Robinson.Paper.sec7_P_minors "sec7_P_minors"
 #print axioms Robinson.Paper.sec7_CP_linear
 run_cmd RobinsonAudit.inspect ``Robinson.Paper.sec7_CP_linear "sec7_CP_linear"
+#print axioms Robinson.Paper.sec7_CP_explicit
+run_cmd RobinsonAudit.inspect ``Robinson.Paper.sec7_CP_explicit "sec7_CP_explicit"
 #print axioms Robinson.Paper.prop_7_5_i
 run_cmd RobinsonAudit.inspect ``Robinson.Paper.prop_7_5_i "prop_7_5_i"
 #print axioms Robinson.Paper.lem_7_6_i
@@ -372,8 +394,6 @@ run_cmd RobinsonAudit.inspect ``Robinson.Paper.lem_7_4 "lem_7_4"
 run_cmd RobinsonAudit.inspect ``Robinson.Paper.prop_7_5_ii "prop_7_5_ii"
 #print axioms Robinson.Paper.sec5_not_all_from_S
 run_cmd RobinsonAudit.inspect ``Robinson.Paper.sec5_not_all_from_S "sec5_not_all_from_S"
-#print axioms Robinson.Paper.sec7_identity_O2
-run_cmd RobinsonAudit.inspect ``Robinson.Paper.sec7_identity_O2 "sec7_identity_O2"
 #print axioms Robinson.Paper.prop_7_1_from_layer
 run_cmd RobinsonAudit.inspect ``Robinson.Paper.prop_7_1_from_layer "prop_7_1_from_layer"
 #print axioms Robinson.Paper.prop_4_1

@@ -41,14 +41,14 @@ noncomputable def Glaurent (c : ℂ) (φ : ℂ → ℂ) (n : ℕ) : ℂ :=
 noncomputable def PiF (f : ℂ → ℂ) (τ : ℝ) (ξ : ℂ) : ℂ :=
   (f (-(τ : ℂ) + ξ) - f (-(τ : ℂ))) / deriv f (-(τ : ℂ))
 
-/-- `N(ξ) = ξ(1 + βξ)` (sec_04_near.tex:81). -/
+/-- `N(ξ) = ξ(1 + τ₁ξ)` (sec_04_near.tex:81). -/
 noncomputable def Nfun (τ : ℝ) (ξ : ℂ) : ℂ := ξ * (1 + (βτ τ : ℂ) * ξ)
 
-/-- `B(ξ) = ∑_{j ≥ 2} b_{2j-1} ξ^j / (v (v + τξ)^{j-1})` with `b_{2j-1} = coeff φ j` (sec_04_near.tex:81). -/
+/-- `B(ξ) = ∑_{j ≥ 2} b_{2j-1} ξ^j / (Ψ (Ψ + τξ)^{j-1})` with `b_{2j-1} = coeff φ j` (sec_04_near.tex:81). -/
 noncomputable def Bser (τ : ℝ) (φ : ℂ → ℂ) (ξ : ℂ) : ℂ :=
   ∑' j : ℕ, if 2 ≤ j then coeff φ j * ξ ^ j / ((vτ τ : ℂ) * ((vτ τ : ℂ) + (τ : ℂ) * ξ) ^ (j - 1)) else 0
 
-/-- `L(ξ) = 1 - νξ + B(ξ)` (sec_04_near.tex:81). -/
+/-- `1 - νξ + B(ξ)`, the base of the denominator of `Π = N/(1 - νξ + B)²` (sec_04_near.tex:81). -/
 noncomputable def Lfun (τ : ℝ) (c : ℂ) (φ : ℂ → ℂ) (ξ : ℂ) : ℂ := 1 - nuτ τ c * ξ + Bser τ φ ξ
 
 /-- `Π_o` from coefficients `p`: `∑_{m ≥ 0} p_{2m+1} ξ^{2m}`, which is `(Π(ξ) - Π(-ξ))/(2ξ)` (Lemma 4.2,
@@ -98,7 +98,7 @@ noncomputable def wCoef (Z : ℕ → ℝ) (x : ℝ) : ℝ :=
 /-- `𝔥[Z](x) = (Z(x) - Z(-x))/(2x)` for a function `Z`, at a general point `x` (sec_04_near.tex:161). -/
 noncomputable def frakHat (Z : ℝ → ℝ) (x : ℝ) : ℝ := oddPart Z x / x
 
-/-- `𝔴[Z](x) = (x Z_o'(x) + (7/3) Z_o(x))/x³ + Z_e'(x)/(2x³)` at a general point `x` (sec_04_near.tex:162). -/
+/-- `𝔴[Z](x) = (x Z_odd'(x) + (7/3) Z_odd(x))/x³ + Z_even'(x)/(2x³)` at a general point `x` (sec_04_near.tex:162). -/
 noncomputable def frakWat (Z : ℝ → ℝ) (x : ℝ) : ℝ :=
   (x * deriv (oddPart Z) x + 7 / 3 * oddPart Z x) / x ^ 3 + deriv (evenPart Z) x / (2 * x ^ 3)
 

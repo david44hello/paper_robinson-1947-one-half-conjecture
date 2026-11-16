@@ -836,11 +836,11 @@ theorem sec5_relaxation_proved_from
 /-- sec_05_grunsky_q.tex:54 ("not every `M ∈ 𝓑` comes from a univalent function", at `θ = 60°`), assuming the
 statements of `rem_5_6`, `prop_7_5_ii`, `lem_3_1_i`, `sec3_grunsky_unique` and `sec5_coords`. -/
 theorem sec5_not_all_from_S_proved_from
-    (hrem : IsSymmUnitary (-!![(Real.cos 0.535 : ℂ), (Real.sin 0.535 : ℂ); (Real.sin 0.535 : ℂ), -(Real.cos 0.535 : ℂ)]) ∧
+    (hrem : IsSymmUnitary (!![-(Real.cos 0.535 : ℂ), -(Real.sin 0.535 : ℂ); -(Real.sin 0.535 : ℂ), (Real.cos 0.535 : ℂ)]) ∧
       -0.0785 < (Qrel (deg 60)
-        (-!![(Real.cos 0.535 : ℂ), (Real.sin 0.535 : ℂ); (Real.sin 0.535 : ℂ), -(Real.cos 0.535 : ℂ)])).re ∧
+        (!![-(Real.cos 0.535 : ℂ), -(Real.sin 0.535 : ℂ); -(Real.sin 0.535 : ℂ), (Real.cos 0.535 : ℂ)])).re ∧
       (Qrel (deg 60)
-        (-!![(Real.cos 0.535 : ℂ), (Real.sin 0.535 : ℂ); (Real.sin 0.535 : ℂ), -(Real.cos 0.535 : ℂ)])).re < -0.0775)
+        (!![-(Real.cos 0.535 : ℂ), -(Real.sin 0.535 : ℂ); -(Real.sin 0.535 : ℂ), (Real.cos 0.535 : ℂ)])).re < -0.0775)
     (h755 : ∀ (hB : FactBidiscPowerSeries) (hG : FactGrunsky) (f h : ℂ → ℂ) (hf : InS f) (hh : IsOddRoot f h)
       (γ : ℕ → ℕ → ℂ) (hγ : IsGrunskyCoeff h γ) (θ : ℝ) (h0 : 0 < θ) (hπ : θ ≤ Real.pi),
       (Ffun θ (O2 γ θ)).re ≤ (Q f (zθ θ) (conj (zθ θ))).re)
@@ -857,6 +857,11 @@ theorem sec5_not_all_from_S_proved_from
     (hB : FactBidiscPowerSeries) (hG : FactGrunsky) (h2 : Check_7_6_band02) :
     ∃ M, InBall M ∧ ∀ f h : ℂ → ℂ, InS f → IsOddRoot f h → ∀ γ : ℕ → ℕ → ℂ, IsGrunskyCoeff h γ →
       O2 γ (deg 60) ≠ M := by
+  have hM : (-!![(Real.cos 0.535 : ℂ), (Real.sin 0.535 : ℂ); (Real.sin 0.535 : ℂ), -(Real.cos 0.535 : ℂ)]) =
+      !![-(Real.cos 0.535 : ℂ), -(Real.sin 0.535 : ℂ); -(Real.sin 0.535 : ℂ), (Real.cos 0.535 : ℂ)] := by
+    ext i j
+    fin_cases i <;> fin_cases j <;> simp
+  rw [← hM] at hrem
   refine ⟨_, s5g_inBall_of_symmUnitary hrem.1, ?_⟩
   intro f h hf hh γ hγ hO2
   have h60 : 0 < deg 60 := by

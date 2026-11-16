@@ -1,6 +1,6 @@
 /-
 Robinson/Proofs/Sec6Values.lean — proofs of sec6_ZO_re_im, sec6_b_values, sec6_A0B0_closed,
-sec6_value_180.
+sec6_value_180, sec6_A0_printed.
 Paper author: Dave Goel. Copyright (C) Dave Goel 2026--now. All rights reserved.
 -/
 import Robinson.Defs.Matrix2
@@ -151,6 +151,20 @@ private lemma zθ_sq_eq (θ : ℝ) : zθ θ ^ 2 = -(xfar : ℂ) * exp (-(((Real.
   rw [zθ, mul_pow, e1, e2, xfar]
   push_cast
   ring
+
+/-- `-(1/4)/(1 + e/4)² = -4/(4 + e)²` (both sides are `0` when `4 + e = 0`). -/
+private lemma quarter_form (e : ℂ) : -(1 / 4 : ℂ) / (1 + 1 / 4 * e) ^ 2 = -4 / (4 + e) ^ 2 := by
+  have h : (1 + 1 / 4 * e) ^ 2 = (4 + e) ^ 2 / 16 := by ring
+  rw [h, div_div_eq_mul_div]
+  ring
+
+/-- `A_R = Re(-4/(4 + e^{-iε})²)`, for every `c` (Lean's `A0` is `Re(-x/(1 + x e^{-iε})²)` with `x = ¼`). -/
+theorem sec6_A0_printed_proved (c : ℝ) : A0 c = (-4 / (4 + emeps c) ^ 2).re := by
+  have h := quarter_form (emeps c)
+  unfold A0 xfar
+  congr 1
+  push_cast
+  linear_combination h
 
 theorem sec6_A0B0_closed_proved (θ : ℝ) (h1 : deg 135 ≤ θ) (h2 : θ ≤ deg 180) :
     emeps (Real.cos (θ / 2)) = exp (-(((Real.pi - θ : ℝ) : ℂ) * I)) ∧

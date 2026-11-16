@@ -47,25 +47,25 @@ noncomputable def vt (θ : ℝ) : Fin 2 → ℂ := ![(l21 θ : ℂ), (l22 θ : �
 /-- The bilinear (not Hermitian) form `xᵀ M y` (sec_03_tools.tex:36). -/
 def bil (x : Fin 2 → ℂ) (M : Matrix (Fin 2) (Fin 2) ℂ) (y : Fin 2 → ℂ) : ℂ := x ⬝ᵥ (M *ᵥ y)
 
-/-- `A = ũᵀ M ũ` (sec_05_grunsky_q.tex:23). -/
+/-- `m_uu = ũᵀ M ũ` (sec_05_grunsky_q.tex:23). -/
 noncomputable def cA (θ : ℝ) (M : Matrix (Fin 2) (Fin 2) ℂ) : ℂ := bil (ut θ) M (ut θ)
 
-/-- `B = ṽᵀ M ṽ` (sec_05_grunsky_q.tex:23). -/
+/-- `m_vv = ṽᵀ M ṽ` (sec_05_grunsky_q.tex:23). -/
 noncomputable def cB (θ : ℝ) (M : Matrix (Fin 2) (Fin 2) ℂ) : ℂ := bil (vt θ) M (vt θ)
 
-/-- `C = ũᵀ M ṽ` (sec_05_grunsky_q.tex:23). -/
+/-- `m_uv = ũᵀ M ṽ` (sec_05_grunsky_q.tex:23). -/
 noncomputable def cC (θ : ℝ) (M : Matrix (Fin 2) (Fin 2) ℂ) : ℂ := bil (ut θ) M (vt θ)
 
-/-- `ℓ₁ = 2(A - B) + 4iC` (sec_05_grunsky_q.tex:26). -/
+/-- `ℓ₁ = 2(m_uu - m_vv) + 4i m_uv` (sec_05_grunsky_q.tex:26). -/
 noncomputable def ell1 (θ : ℝ) (M : Matrix (Fin 2) (Fin 2) ℂ) : ℂ := 2 * (cA θ M - cB θ M) + 4 * I * cC θ M
 
-/-- `ℓ₂ = 2(A - B) - 4iC` (sec_05_grunsky_q.tex:26). -/
+/-- `ℓ₂ = 2(m_uu - m_vv) - 4i m_uv` (sec_05_grunsky_q.tex:26). -/
 noncomputable def ell2 (θ : ℝ) (M : Matrix (Fin 2) (Fin 2) ℂ) : ℂ := 2 * (cA θ M - cB θ M) - 4 * I * cC θ M
 
-/-- `κ = A + B` (sec_05_grunsky_q.tex:26). -/
+/-- `m₊ = m_uu + m_vv` (sec_05_grunsky_q.tex:26). -/
 noncomputable def kappa (θ : ℝ) (M : Matrix (Fin 2) (Fin 2) ℂ) : ℂ := cA θ M + cB θ M
 
-/-- `χ = i tan(θ/4) e^{2κ}` (sec_05_grunsky_q.tex:30). -/
+/-- `χ = i tan(θ/4) e^{2m₊}` (sec_05_grunsky_q.tex:30). -/
 noncomputable def chi (θ : ℝ) (M : Matrix (Fin 2) (Fin 2) ℂ) : ℂ :=
   I * (Real.tan (θ / 4) : ℂ) * exp (2 * kappa θ M)
 
@@ -107,7 +107,7 @@ noncomputable def chart (α ψ ω : ℝ) : Matrix (Fin 2) (Fin 2) ℂ :=
 noncomputable def Delta (θ : ℝ) (M : Matrix (Fin 2) (Fin 2) ℂ) : ℂ :=
   I * ((θ / 2 : ℝ) : ℂ) - log (1 + chi θ M) + log (1 - chi θ M)
 
-/-- `U(M) = Δ(M) + 4iC` (sec_07_middle.tex:18). -/
+/-- `U(M) = Δ(M) + 4i m_uv` (sec_07_middle.tex:18). -/
 noncomputable def Ufun (θ : ℝ) (M : Matrix (Fin 2) (Fin 2) ℂ) : ℂ := Delta θ M + 4 * I * cC θ M
 
 /-- `R(M) = Q_rel(M) - e^{ℓ₁} - e^{ℓ₂}` (sec_07_middle.tex:19). -/
@@ -133,7 +133,7 @@ noncomputable def Me : ℝ := 8 / 9
 noncomputable def Mz (θ : ℝ) : ℂ := 2 * zθ θ ^ 2 / (1 - zθ θ ^ 2) ^ 2
 
 /-- The real 4x4 Gram matrix `G(θ)` of `u_e, v_e, β₀, β₁` (sec_07_middle.tex:54-66), written out from the blocks
-`𝓡(a, c) = ½ [[a + Re c, Im c], [Im c, a - Re c]]`: `G = [[𝓡(A_e, Z_e), 𝓡(L_e, L_z)], [𝓡(L_e, L_z), 𝓡(M_e, M_z)]]`. -/
+`S(a, c) = ½ [[a + Re c, Im c], [Im c, a - Re c]]`: `G = [[S(A_e, Z_e), S(L_e, L_z)], [S(L_e, L_z), S(M_e, M_z)]]`. -/
 noncomputable def Gram (θ : ℝ) : Matrix (Fin 4) (Fin 4) ℝ :=
   (1 / 2 : ℝ) •
     !![Ae + (Ze θ).re, (Ze θ).im, Le + (Lz θ).re, (Lz θ).im;

@@ -36,8 +36,8 @@ def FactArgumentPrinciple : Prop :=
 /-- NOT FORMALIZED: no Jordan curve theorem in Lean's library. The Jordan curve theorem with winding numbers, as
 sec_02_reduction.tex:30 uses it: if `G` is holomorphic on a neighbourhood of `|z| ≤ ρ` and injective on the circle
 `|z| = ρ`, then its image `J` is a Jordan curve; `ℂ \ J` is the disjoint union of a bounded component `Ω` and an
-unbounded component `Ω'` (connected open sets); `J` is the boundary of `Ω'`; `ind_J = 0` on `Ω'`, and `ind_J` is a
-constant `ε ∈ {1, -1}` on `Ω`. Sources, as sec_02_reduction.tex:30 cites them: [HS18, Corollaries 1.4 and 1.6]
+unbounded component `Ω'` (connected open sets); `J` is the boundary of `Ω'`; `ind_J = 0` on `Ω'`, and `ind_J` is
+constant on `Ω`, with value `1` or `-1`. Sources, as sec_02_reduction.tex:30 cites them: [HS18, Corollaries 1.4 and 1.6]
 (Hemasundar and Simha: the two components, and `J` is the boundary of each), [Ahl79, Chapter 4, Section 2.1] (the
 winding number is `0` on the unbounded component and constant on each component) and [HS18, Theorem 3.2] (its value
 on `Ω` is `1` or `-1`). -/

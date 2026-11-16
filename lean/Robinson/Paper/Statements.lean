@@ -10,6 +10,11 @@ Paper author: Dave Goel. Copyright (C) Dave Goel 2026--now. All rights reserved.
 
 
 
+
+
+
+
+
 Paper = the short paper (\longfalse); AUDIT_NOTES.md and CLAIM_MAP.tsv name its text version.
 Pointers "sec_0N_*.tex:<line>" = lines of the paper's TeX sources. A row is proved iff its body is a proof term.
 A row with a binder `(h : Fact…)` is PROVED GIVEN that published fact (Robinson/NotFormalized.lean); a row with a
@@ -63,6 +68,7 @@ import Robinson.Proofs.SigmaPos
 import Robinson.Proofs.NearP_D
 import Robinson.Proofs.GammaUnique
 import Robinson.Proofs.Sec6PhiD
+import Robinson.Proofs.Rows292
 
 namespace Robinson.Paper
 
@@ -85,9 +91,8 @@ theorem intro_gamma_coeff (f : ℂ → ℂ) (hf : InS f) (n : ℕ) :
 theorem intro_factor_two (f : ℂ → ℂ) (U : Set ℂ) :
     Set.InjOn (fun z => 2 * Gam f z) U ↔ Set.InjOn (Gam f) U := Proofs.intro_factor_two_proved f U
 
-/-- sec_01_intro.tex:9, :45 and sec_02_reduction.tex:23: the derivative of `Γ k` vanishes at `z = -½`, a point of
-the circle `|z| = ½` ("it allows critical points of `Γ f` on the circle `|z| = ½`, which occur for the Koebe
-function"). -/
+/-- sec_01_intro.tex:9 and :45: the derivative of `Γ k` vanishes at `z = -½`, a point of the circle `|z| = ½`
+("it cannot use `(Γ f)' ≠ 0` on the circle `|z| = ½`, since `(Γ k)'(-½) = 0`"). -/
 theorem intro_koebe_critical_on_circle :
     ‖(-1 / 2 : ℂ)‖ = 1 / 2 ∧ deriv (Gam koebe) (-1 / 2) = 0 := Proofs.intro_koebe_critical_on_circle_proved
 
@@ -169,7 +174,7 @@ theorem prop_2_5 :
       deriv (Gam koebe) (-1 / 2) = 0 ∧
       ∀ r : ℝ, 1 / 2 < r → ¬ Set.InjOn (Gam koebe) (ball (0 : ℂ) r) := Proofs.prop_2_5_proved
 
-/-- sec_02_reduction.tex:75 (and sec_01_intro.tex:73): "as `z` and `w` tend to `-½` along the circle, `Q_k(z, w)`
+/-- sec_02_reduction.tex:75: "as `z` and `w` tend to `-½` along the circle, `Q_k(z, w)`
 tends to `0`. In the normalized position this happens for the rotation `k_π(z) = -k(-z)` as `θ → 0`." -/
 theorem sec2_koebe_limit :
     Tendsto (fun p : ℂ × ℂ => Q koebe p.1 p.2)
@@ -326,7 +331,7 @@ theorem sec4_goal_equiv :
           (-((Real.sqrt (1 / 4 - y ^ 2) : ℝ) : ℂ) - (y : ℂ) * I)).re := Proofs.sec4_goal_equiv_proved
 
 /-- sec_04_near.tex:48-51: for `0 < y ≤ y₀` and `τ = √(¼ - y²)`: `τ² ≥ 1311/6400 > (9/20)²`, so `9/20 < τ < ½`;
-`v = 1 - τ² ∈ [¾, 1]` and `β = τ/v ≤ ⅔`. -/
+`Ψ = 1 - τ² ∈ [¾, 1]` and `τ₁ = τ/Ψ ≤ ⅔`. -/
 theorem sec4_tau_bounds (y : ℝ) (hy : 0 < y) (hy0 : y ≤ y0) :
     1311 / 6400 ≤ Real.sqrt (1 / 4 - y ^ 2) ^ 2 ∧ (9 / 20 : ℝ) ^ 2 < 1311 / 6400 ∧
       9 / 20 < Real.sqrt (1 / 4 - y ^ 2) ∧ Real.sqrt (1 / 4 - y ^ 2) < 1 / 2 ∧
@@ -334,7 +339,7 @@ theorem sec4_tau_bounds (y : ℝ) (hy : 0 < y) (hy0 : y ≤ y0) :
       βτ (Real.sqrt (1 / 4 - y ^ 2)) ≤ 2 / 3 := Proofs.sec4_tau_bounds_proved y hy hy0
 
 /-- sec_04_near.tex:53-60: for `f ∈ 𝒮` and `9/20 < τ < ½`, the Koebe transform `f_{-τ}` belongs to `𝒮`; with
-`A = a₂(f_{-τ})`, de Branges for `n = 2` gives `|A| ≤ 2`; `c = A/2` has `|c| ≤ 1`, `e ∈ [0, 4]`, `η ∈ [0, 1]`.
+`A = a₂(f_{-τ})`, `|A| ≤ 2` (Bieberbach's inequality, the case `n = 2` of de Branges' theorem); `c = A/2` has `|c| ≤ 1`, `e ∈ [0, 4]`, `η ∈ [0, 1]`.
 PROVED GIVEN de Branges' theorem. -/
 theorem sec4_c_bounds (hDB : FactDeBranges) (f : ℂ → ℂ) (hf : InS f) (τ : ℝ) (h1 : 9 / 20 < τ) (h2 : τ < 1 / 2) :
     InS (koebeTransform f (-(τ : ℂ))) ∧ ‖coeff (koebeTransform f (-(τ : ℂ))) 2‖ ≤ 2 ∧
@@ -343,7 +348,7 @@ theorem sec4_c_bounds (hDB : FactDeBranges) (f : ℂ → ℂ) (hf : InS f) (τ :
       0 ≤ etadef (coeff (koebeTransform f (-(τ : ℂ))) 2 / 2) ∧
       etadef (coeff (koebeTransform f (-(τ : ℂ))) 2 / 2) ≤ 1 := Proofs.sec4_c_bounds_proved hDB f hf τ h1 h2
 
-/-- sec_04_near.tex:69: "Since `Re c = 1 - e/2` and `|c| ≥ |Re c|`, we have `η ≤ e - e²/4`. In particular `e = 0` forces
+/-- sec_04_near.tex:69: "Since `Re c = 1 - ϰ/2` and `|c| ≥ |Re c|`, we have `η ≤ ϰ - ϰ²/4`. In particular `ϰ = 0` forces
 `c = 1`, `η = 0`" (for `|c| ≤ 1`). -/
 theorem sec4_eta_le (c : ℂ) (hc : ‖c‖ ≤ 1) :
     etadef c ≤ edef c - edef c ^ 2 / 4 ∧ (edef c = 0 → c = 1 ∧ etadef c = 0) := Proofs.sec4_eta_le_proved c hc
@@ -360,8 +365,8 @@ theorem sec4_model_mem_S (c : ℂ) (hc : ‖c‖ ≤ 1) :
     InS (fun u => u / (1 - c * u) ^ 2) ∧ (c ≠ 0 → ∀ u : ℂ, u / (1 - c * u) ^ 2 = koebe (c * u) / c) ∧
       coeff (fun u => u / (1 - c * u) ^ 2) 2 = 2 * c ∧ (c = 1 → (fun u => u / (1 - c * u) ^ 2) = koebe) := Proofs.sec4_model_mem_S_proved c hc
 
-/-- sec_04_near.tex:112 and :120: `ν(ν + 2β) = (c² - τ²)/v²`; for `9/20 ≤ τ ≤ ½` and `|c| ≤ 1`: `|ν| ≤ 1/(1 - τ) ≤ 2`,
-`|ν(ν + 2β)| ≤ (1 + τ²)/v² ≤ 20/9`, `y² = ¼ - τ² ≤ 19/400`; the denominators in (sec4:hat) stay away from `0` and `Q̂`,
+/-- sec_04_near.tex:112 and :120: `ν(ν + 2τ₁) = (c² - τ²)/Ψ²`; for `9/20 ≤ τ ≤ ½` and `|c| ≤ 1`: `|ν| ≤ 1/(1 - τ) ≤ 2`,
+`|ν(ν + 2τ₁)| ≤ (1 + τ²)/Ψ² ≤ 20/9`, `y² = ¼ - τ² ≤ 19/400`; the denominators in (sec4:hat) stay away from `0` and `Q̂`,
 `T̂` (and `Π̂_o(iy)`) are holomorphic in `c` on a neighbourhood of `|c| ≤ 1`. -/
 theorem sec4_hat_bounds (τ : ℝ) (h1 : 9 / 20 ≤ τ) (h2 : τ ≤ 1 / 2) :
     (∀ c : ℂ, nuτ τ c * (nuτ τ c + 2 * (βτ τ : ℂ)) = (c ^ 2 - (τ : ℂ) ^ 2) / (vτ τ : ℂ) ^ 2) ∧
@@ -387,8 +392,8 @@ theorem lem_4_3 (τ : ℝ) (h1 : 9 / 20 ≤ τ) (h2 : τ < 1 / 2) (c : ℂ) (hc 
     Qk τ + edef c * mρ (etadef c / edef c) ≤ (Qhat τ c).re ∧
       16 / 27 * ysq τ + edef c * mρ (etadef c / edef c) ≤ Qk τ + edef c * mρ (etadef c / edef c) := Proofs.lem_4_3_proved τ h1 h2 c hc hc1
 
-/-- sec_04_near.tex:139-147 (sec4:circle), the boundary step of Lemma 4.3: for `9/20 ≤ τ < ½`, `|c| = 1`, `x = Re c`,
-`e = 2(1 - x)`: `Re Q̂ ≥ Q_k + (13/10)e - (21/200)e² = Q_k + (1 - x)(109/50 + (21/50)x)`. -/
+/-- sec_04_near.tex:139-147 (sec4:circle), the boundary step of Lemma 4.3: for `9/20 ≤ τ < ½`, `|c| = 1`, `c₁ = Re c`,
+`e = 2(1 - c₁)`: `Re Q̂ ≥ Q_k + (13/10)e - (21/200)e² = Q_k + (1 - c₁)(109/50 + (21/50)c₁)`. -/
 theorem sec4_circle (τ : ℝ) (h1 : 9 / 20 ≤ τ) (h2 : τ < 1 / 2) (c : ℂ) (hc : ‖c‖ = 1) :
     Qk τ + 13 / 10 * edef c - 21 / 200 * edef c ^ 2 ≤ (Qhat τ c).re ∧
       13 / 10 * edef c - 21 / 200 * edef c ^ 2 = (1 - c.re) * (109 / 50 + 21 / 50 * c.re) := Proofs.sec4_circle_proved τ h1 h2 c hc
@@ -399,10 +404,74 @@ theorem lem_4_4_iv (τ : ℝ) (h1 : 9 / 20 ≤ τ) (h2 : τ ≤ 1 / 2) (hy : 0 <
     (hc : ‖c‖ ≤ 1) (νp : ℝ) (hν : ‖nuτ τ c‖ ≤ νp) (hνp : νp ≤ 2) :
     ‖That τ c‖ ≤ TPlusOf νp ∧ PihatLowOf νp ≤ ‖PihatO τ c‖ := Proofs.lem_4_4_iv_proved τ h1 h2 hy hy0 c hc νp hν hνp
 
+/-- Proof of Lemma 4.4(iv) (sec_04_near.tex:208), first line of the display: the numerator of `T̂` satisfies
+`|-4τν³ + (6 + 2τ²/Ψ)ν² + (4τ/Ψ²)ν - Q_0(ν⁴ + 2τ₁ν³)y²| ≤ 2(ν⁺)³ + (20/3)(ν⁺)² + (32/9)ν⁺ + (16/3)((ν⁺)⁴ + (4/3)(ν⁺)³)y₀²`
+(Lean's `vτ`, `βτ`, `Dτ`, `ysq` are `Ψ`, `τ₁`, `Q_0`, `y²`). -/
+theorem sec4_That_num (τ : ℝ) (h1 : 9 / 20 ≤ τ) (h2 : τ ≤ 1 / 2) (hy0 : yτ τ ≤ y0) (c : ℂ) (hc : ‖c‖ ≤ 1)
+    (νp : ℝ) (hν : ‖nuτ τ c‖ ≤ νp) :
+    ‖-4 * τ * nuτ τ c ^ 3 + (6 + 2 * τ ^ 2 / (vτ τ : ℂ)) * nuτ τ c ^ 2 + 4 * τ / (vτ τ : ℂ) ^ 2 * nuτ τ c -
+        Dτ τ c * (nuτ τ c ^ 4 + 2 * (βτ τ : ℂ) * nuτ τ c ^ 3) * (ysq τ : ℂ)‖ ≤
+      2 * νp ^ 3 + 20 / 3 * νp ^ 2 + 32 / 9 * νp + 16 / 3 * (νp ^ 4 + 4 / 3 * νp ^ 3) * y0 ^ 2 := Proofs.sec4_That_num_proved τ h1 h2 hy0 c hc νp hν
+
+/-- Proof of Lemma 4.4(iv) (sec_04_near.tex:208), second line of the display and the last sentence: the denominator
+of `T̂` satisfies `|1 - 2τ₁νy² - (ν⁴ + 2τ₁ν³)y⁴| ≥ 1 - (4/3)ν⁺y₀² - ((ν⁺)⁴ + (4/3)(ν⁺)³)y₀⁴`, and since `ν⁺ ≤ 2` this
+is at least `1 - (8/3)y₀² - (80/3)y₀⁴ > 4/5`. -/
+theorem sec4_That_den (τ : ℝ) (h1 : 9 / 20 ≤ τ) (h2 : τ ≤ 1 / 2) (hy0 : yτ τ ≤ y0) (c : ℂ)
+    (νp : ℝ) (hν : ‖nuτ τ c‖ ≤ νp) (hνp : νp ≤ 2) :
+    1 - 4 / 3 * νp * y0 ^ 2 - (νp ^ 4 + 4 / 3 * νp ^ 3) * y0 ^ 4 ≤
+        ‖1 - 2 * (βτ τ : ℂ) * nuτ τ c * (ysq τ : ℂ) - (nuτ τ c ^ 4 + 2 * (βτ τ : ℂ) * nuτ τ c ^ 3) * (ysq τ : ℂ) ^ 2‖ ∧
+      1 - 8 / 3 * y0 ^ 2 - 80 / 3 * y0 ^ 4 ≤ 1 - 4 / 3 * νp * y0 ^ 2 - (νp ^ 4 + 4 / 3 * νp ^ 3) * y0 ^ 4 ∧
+      (4 / 5 : ℝ) < 1 - 8 / 3 * y0 ^ 2 - 80 / 3 * y0 ^ 4 := Proofs.sec4_That_den_proved τ h1 h2 hy0 c νp hν hνp
+
+/-- Proof of Lemma 4.4(iv) (sec_04_near.tex:208), the bounds used in (sec4:hat): with `|ν| ≤ ν⁺`, `2τ ≤ 1`:
+`τ²/Ψ ≤ 1/3`, `τ/Ψ² ≤ 8/9`, `|Q_0| ≤ 16/3` and `|2τ₁ν| ≤ (4/3)ν⁺`. -/
+theorem sec4_hat_elem_bounds (τ : ℝ) (h1 : 9 / 20 ≤ τ) (h2 : τ ≤ 1 / 2) (c : ℂ) (hc : ‖c‖ ≤ 1)
+    (νp : ℝ) (hν : ‖nuτ τ c‖ ≤ νp) :
+    τ ^ 2 / vτ τ ≤ 1 / 3 ∧ τ / vτ τ ^ 2 ≤ 8 / 9 ∧ ‖Dτ τ c‖ ≤ 16 / 3 ∧
+      ‖2 * (βτ τ : ℂ) * nuτ τ c‖ ≤ 4 / 3 * νp := Proofs.sec4_hat_elem_bounds_proved τ h1 h2 c hc νp hν
+
+/-- Proof of Lemma 4.4(iv) (sec_04_near.tex:208): "`T⁺` and `Π̂₋` are the quotients of the right-hand sides" of the
+display. -/
+theorem sec4_hat_quotients (νp : ℝ) :
+    TPlusOf νp = (2 * νp ^ 3 + 20 / 3 * νp ^ 2 + 32 / 9 * νp + 16 / 3 * (νp ^ 4 + 4 / 3 * νp ^ 3) * y0 ^ 2) /
+        (1 - 4 / 3 * νp * y0 ^ 2 - (νp ^ 4 + 4 / 3 * νp ^ 3) * y0 ^ 4) ∧
+      PihatLowOf νp = (1 - min (20 / 9) (νp ^ 2 + 4 / 3 * νp) * y0 ^ 2) / (1 + νp ^ 2 * y0 ^ 2) ^ 2 := Proofs.sec4_hat_quotients_proved νp
+
+/-- Proof of Lemma 4.4(iv) (sec_04_near.tex:208), third line of the display: the numerator of `Π̂_o(iy)` satisfies
+`|1 - ν(ν + 2τ₁)y²| ≥ 1 - min(20/9, (ν⁺)² + (4/3)ν⁺)y₀²`, from `|ν(ν + 2τ₁)| ≤ min(20/9, (ν⁺)² + (4/3)ν⁺)`. -/
+theorem sec4_PihatO_num (τ : ℝ) (h1 : 9 / 20 ≤ τ) (h2 : τ ≤ 1 / 2) (hy0 : yτ τ ≤ y0) (c : ℂ)
+    (hc : ‖c‖ ≤ 1) (νp : ℝ) (hν : ‖nuτ τ c‖ ≤ νp) :
+    ‖nuτ τ c * (nuτ τ c + 2 * (βτ τ : ℂ))‖ ≤ min (20 / 9) (νp ^ 2 + 4 / 3 * νp) ∧
+      1 - min (20 / 9) (νp ^ 2 + 4 / 3 * νp) * y0 ^ 2 ≤
+        ‖1 - nuτ τ c * (nuτ τ c + 2 * (βτ τ : ℂ)) * (ysq τ : ℂ)‖ := Proofs.sec4_PihatO_num_proved τ h1 h2 hy0 c hc νp hν
+
+/-- Proof of Lemma 4.4(iv) (sec_04_near.tex:208), fourth line of the display: the denominator of `Π̂_o(iy)` satisfies
+`|1 + ν²y²|² ≤ (1 + (ν⁺)²y₀²)²`. -/
+theorem sec4_PihatO_den (τ : ℝ) (h1 : 9 / 20 ≤ τ) (h2 : τ ≤ 1 / 2) (hy0 : yτ τ ≤ y0) (c : ℂ)
+    (νp : ℝ) (hν : ‖nuτ τ c‖ ≤ νp) :
+    ‖1 + nuτ τ c ^ 2 * (ysq τ : ℂ)‖ ^ 2 ≤ (1 + νp ^ 2 * y0 ^ 2) ^ 2 := Proofs.sec4_PihatO_den_proved τ h1 h2 hy0 c νp hν
+
 /-- Lemma 4.5(i) (sec_04_near.tex:220-228): for `9/20 ≤ τ < ½` and `|c| ≤ 1`, with `T_j` the printed closed form
 (`ξ = iy`), `∑_{j=2}^{5} |T_j|²/(2j - 1) ≤ 20 + 130e`. -/
 theorem lem_4_5_i (τ : ℝ) (h1 : 9 / 20 ≤ τ) (h2 : τ < 1 / 2) (c : ℂ) (hc : ‖c‖ ≤ 1) :
     ∑ j ∈ Finset.Icc 2 5, ‖TJ τ c j‖ ^ 2 / (2 * (j : ℝ) - 1) ≤ 20 + 130 * edef c := Proofs.lem_4_5_i_proved τ h1 h2 c hc
+
+/-- sec_04_near.tex:143 and :239: "Let `𝒫(c)` and `𝒥(c)` be `Ψ⁴` times the numerator and the denominator of `Q̂`"
+with "`𝒥(c) = (Ψ² + (c - τ)²y²)(Ψ² - (c² - τ²)y²)`" (:143, recalled at :239), "the factor
+`4 - 7τ² = 4Ψ²(1 + τ₁²y²)`" and "Since `4 - 7τ² ≥ 9/4`": the denominator of `Q̂` is `(1 + ν²y²)(1 - ν(ν + 2τ₁)y²)`
+(sec4_hat_bounds); the identity holds for every `c`. -/
+theorem sec4_Qcal (τ : ℝ) (h1 : 9 / 20 ≤ τ) (h2 : τ ≤ 1 / 2) (c : ℂ) :
+    (vτ τ : ℂ) ^ 4 * ((1 + nuτ τ c ^ 2 * (ysq τ : ℂ)) *
+        (1 - nuτ τ c * (nuτ τ c + 2 * (βτ τ : ℂ)) * (ysq τ : ℂ))) =
+      ((vτ τ : ℂ) ^ 2 + (c - τ) ^ 2 * (ysq τ : ℂ)) * ((vτ τ : ℂ) ^ 2 - (c ^ 2 - (τ : ℂ) ^ 2) * (ysq τ : ℂ)) ∧
+    4 - 7 * τ ^ 2 = 4 * vτ τ ^ 2 * (1 + βτ τ ^ 2 * ysq τ) ∧ (9 / 4 : ℝ) ≤ 4 - 7 * τ ^ 2 :=
+  Proofs.sec4_Qcal_proved τ h1 h2 c
+
+/-- sec_04_near.tex:239: "the `T_j` are holomorphic in `c` there", that is near the closed disc `|c| ≤ 1`: here on a
+disc of radius `R > 1`, for every `j`. -/
+theorem sec4_TJ_holo (τ : ℝ) (h1 : 9 / 20 ≤ τ) (h2 : τ < 1 / 2) :
+    ∃ R : ℝ, 1 < R ∧ ∀ j : ℕ, DifferentiableOn ℂ (fun c => TJ τ c j) (ball (0 : ℂ) R) :=
+  Proofs.sec4_TJ_holo_proved τ h1 h2
 
 /-- Lemma 4.7 (sec_04_near.tex:286-288): let `9/20 ≤ τ ≤ ½`, `|c| ≤ 1`, `e > 0` and `ρ ≥ ρ₋`. Then
 `|ν| ≤ max(20/29, 2 - (8/3)ρ₋)` and `η ≤ 4ρ(1 - ρ)`. -/
@@ -455,15 +524,15 @@ theorem sec4_area (hArea : FactArea) (f : ℂ → ℂ) (hf : InS f) (τ : ℝ) (
       ‖cOf f τ‖ ^ 2 + ∑' j : ℕ, (if 2 ≤ j then (2 * (j : ℝ) - 1) * ‖coeff φ j‖ ^ 2 else 0) ≤ 1 ∧
       ∑' j : ℕ, (if 2 ≤ j then (2 * (j : ℝ) - 1) * ‖coeff φ j‖ ^ 2 else 0) ≤ etadef (cOf f τ) := Proofs.sec4_area_proved hArea f hf τ h1 h2 φ hφ
 
-/-- sec_04_near.tex:69-70: "`e = 0` forces `c = 1`, `η = 0` and `b_{2j-1} = 0` for all `j`, that is, `f_{-τ} = k`". -/
+/-- sec_04_near.tex:69-70: "`ϰ = 0` forces `c = 1`, `η = 0` and `b_{2j-1} = 0` for all `j`, that is, `f_{-τ} = k`". -/
 theorem sec4_e_zero (hArea : FactArea) (f : ℂ → ℂ) (hf : InS f) (τ : ℝ) (h1 : 9 / 20 ≤ τ) (h2 : τ < 1 / 2)
     (φ : ℂ → ℂ) (hφ : IsSqrtQuot (fT f τ) φ) (he : edef (cOf f τ) = 0) :
     cOf f τ = 1 ∧ etadef (cOf f τ) = 0 ∧ (∀ j : ℕ, 2 ≤ j → coeff φ j = 0) ∧
       Set.EqOn (fT f τ) koebe (ball (0 : ℂ) 1) := Proofs.sec4_e_zero_proved hArea f hf τ h1 h2 φ hφ he
 
-/-- (sec4:Pi), sec_04_near.tex:75-83: the automorphism `u ↦ (u - τ)/(1 - τu)` sends `u = ξ/(v + τξ)` to `-τ + ξ`, so
-`Π(ξ) = v f_{-τ}(ξ/(v + τξ))`; `Π = N/L²` with `N = ξ(1 + βξ)`, `L = 1 - νξ + B`; `π₁ = 1`, `π₂ = (2c - τ)/v`.
-Typed on `|ξ| < 1/4` (the paper: "for small ξ"; `y ≤ y₀ < 1/4`), with `Π L² = N`. -/
+/-- (sec4:Pi), sec_04_near.tex:75-83: the automorphism `u ↦ (u - τ)/(1 - τu)` sends `u = ξ/(Ψ + τξ)` to `-τ + ξ`, so
+`Π(ξ) = Ψ f_{-τ}(ξ/(Ψ + τξ))`; `Π = N/(1 - νξ + B)²` with `N = ξ(1 + τ₁ξ)`; `π₁ = 1`, `π₂ = (2c - τ)/Ψ`.
+Typed on `|ξ| < 1/4` (the paper: "for small ξ"; `y ≤ y₀ < 1/4`), with `Π (1 - νξ + B)² = N`. -/
 theorem sec4_Pi_formula (f : ℂ → ℂ) (hf : InS f) (τ : ℝ) (h1 : 9 / 20 ≤ τ) (h2 : τ < 1 / 2)
     (φ : ℂ → ℂ) (hφ : IsSqrtQuot (fT f τ) φ) :
     (∀ ξ ∈ ball (0 : ℂ) (1 / 4),
@@ -472,7 +541,7 @@ theorem sec4_Pi_formula (f : ℂ → ℂ) (hf : InS f) (τ : ℝ) (h1 : 9 / 20 �
       (∀ ξ ∈ ball (0 : ℂ) (1 / 4), PiF f τ ξ * Lfun τ (cOf f τ) φ ξ ^ 2 = Nfun τ ξ) ∧
       coeff (PiF f τ) 1 = 1 ∧ coeff (PiF f τ) 2 = (2 * cOf f τ - (τ : ℂ)) / (vτ τ : ℂ) := Proofs.sec4_Pi_formula_proved f hf τ h1 h2 φ hφ
 
-/-- Lemma 4.2 (sec_04_near.tex:85-93): with `Π_o(ξ) = (Π(ξ) - Π(-ξ))/(2ξ)`, `D = 2(1 - 2τc)/v` and `Υ`,
+/-- Lemma 4.2 (sec_04_near.tex:85-93): with `Π_o(ξ) = (Π(ξ) - Π(-ξ))/(2ξ)`, `D = 2(1 - 2τc)/Ψ` and `Υ`,
 `Q_f(-τ + ξ, -τ - ξ) = D + ξ² Υ(ξ)/Π_o(ξ)`; at `ξ = iy`, (sec4:QDT) `Q_f(-τ + iy, -τ - iy) = D - y²T`. Typed for
 `0 < |ξ| < 1/4` (the paper, sec_04_near.tex:75: "For small ξ"). -/
 theorem lem_4_2 (f : ℂ → ℂ) (hf : InS f) (τ : ℝ) (h1 : 9 / 20 ≤ τ) (h2 : τ < 1 / 2) :
@@ -482,8 +551,8 @@ theorem lem_4_2 (f : ℂ → ℂ) (hf : InS f) (τ : ℝ) (h1 : 9 / 20 ≤ τ) (
           Dτ τ (cOf f τ) + ξ ^ 2 * UpsSer τ (coeff (PiF f τ)) ξ / PiOddSer (coeff (PiF f τ)) ξ) ∧
       Q f (-(τ : ℂ) + xiτ τ) (-(τ : ℂ) - xiτ τ) = Dτ τ (cOf f τ) - (ysq τ : ℂ) * Tser τ (coeff (PiF f τ)) := Proofs.lem_4_2_proved f hf τ h1 h2
 
-/-- sec_04_near.tex:105: "The number `D = 2 + zf''(z)/f'(z)` at `z = -τ` is the diagonal value of `Q_f`. For fixed `τ`
-it depends only on `c`, and so does `π₂`" (`D = 2 - 2τπ₂`). -/
+/-- sec_04_near.tex:105: "The number `Q_0 = 2 + zf''(z)/f'(z)` at `z = -τ` is the diagonal value of `Q_f`. For fixed `τ`
+it depends only on `c`, and so does `π₂`" (`Q_0 = 2 - 2τπ₂`). -/
 theorem sec4_D_diagonal (f : ℂ → ℂ) (hf : InS f) (τ : ℝ) (h1 : 9 / 20 ≤ τ) (h2 : τ < 1 / 2) :
     Dτ τ (cOf f τ) = 2 + -(τ : ℂ) * deriv (deriv f) (-(τ : ℂ)) / deriv f (-(τ : ℂ)) ∧
       Dτ τ (cOf f τ) = 2 - 2 * (τ : ℂ) * coeff (PiF f τ) 2 ∧
@@ -497,7 +566,7 @@ theorem sec4_hat_closed (τ : ℝ) (h1 : 9 / 20 ≤ τ) (h2 : τ < 1 / 2) (c : �
       Tser τ (coeff (Pihat τ c)) = That τ c ∧
       Dτ τ c - (ysq τ : ℂ) * That τ c = Qhat τ c := Proofs.sec4_hat_closed_proved τ h1 h2 c hc
 
-/-- (sec4:diff), sec_04_near.tex:108-110: "As `D` and `π₂` depend only on `c`, `Q_f(-τ + iy, -τ - iy) - Q̂ =
+/-- (sec4:diff), sec_04_near.tex:108-110: "As `Q_0` and `π₂` depend only on `c`, `Q_f(-τ + iy, -τ - iy) - Q̂ =
 -y²(T - T̂)`." -/
 theorem sec4_diff (hDB : FactDeBranges) (f : ℂ → ℂ) (hf : InS f) (τ : ℝ) (h1 : 9 / 20 ≤ τ) (h2 : τ < 1 / 2) :
     Q f (-(τ : ℂ) + xiτ τ) (-(τ : ℂ) - xiτ τ) - Qhat τ (cOf f τ) =
@@ -532,8 +601,16 @@ theorem sec4_hw_coeff (Z : ℕ → ℝ) (hZ : ∀ n, 0 ≤ Z n) (hZ1 : Z 1 = 0) 
     (∀ x : ℝ, 0 < x → x < r → frakHat Zf x = hCoef Z x ∧ frakWat Zf x = wCoef Z x) ∧
       MonotoneOn (hCoef Z) (Set.Ico 0 r) ∧ MonotoneOn (wCoef Z) (Set.Ico 0 r) := Proofs.sec4_hw_coeff_proved Z hZ hZ1 hZ2 Zf r hr hsum
 
+/-- sec_04_near.tex:169: "The weights `2j + 10/3` and `j + 1` bound the factors `2j + 2τπ₂` and `2τ(j + 1)` in the
+coefficients of `Υ` ..., because `2τ ≤ 1` and `|π₂| ≤ 10/3`", with `π₂ = (2c - τ)/Ψ` (sec_04_near.tex:83). -/
+theorem sec4_weight_bounds (τ : ℝ) (h1 : 9 / 20 ≤ τ) (h2 : τ ≤ 1 / 2) (c : ℂ) (hc : ‖c‖ ≤ 1) :
+    ‖(2 * c - (τ : ℂ)) / (vτ τ : ℂ)‖ ≤ 10 / 3 ∧
+      ∀ j : ℕ, ‖2 * (j : ℂ) + 2 * (τ : ℂ) * ((2 * c - (τ : ℂ)) / (vτ τ : ℂ))‖ ≤ 2 * j + 10 / 3 ∧
+        ‖2 * (τ : ℂ) * ((j : ℂ) + 1)‖ ≤ (j : ℝ) + 1 :=
+  Proofs.sec4_weight_bounds_proved τ h1 h2 c hc
+
 /-- Lemma 4.4(i) (sec_04_near.tex:174): if `ΔΠ = ∑_{n ≥ 3} Δπ_n ξⁿ ≪ Z` and `ΔΠ_o`, `ΔΥ` are formed from the `Δπ_n` by the
-linear rules of Lemma 4.2 with `π₂ = (2c - τ)/v` kept fixed, then `|ΔΠ_o(iy)| ≤ 𝔥[Z](y)` and `|ΔΥ(iy)| ≤ 𝔴[Z](y)`
+linear rules of Lemma 4.2 with `π₂ = (2c - τ)/Ψ` kept fixed, then `|ΔΠ_o(iy)| ≤ 𝔥[Z](y)` and `|ΔΥ(iy)| ≤ 𝔴[Z](y)`
 (`Z` converging at `y`, with the derivative-type weights). -/
 theorem lem_4_4_i (τ : ℝ) (h1 : 9 / 20 ≤ τ) (h2 : τ ≤ 1 / 2) (y : ℝ) (hy : 0 < y) (hy0 : y ≤ y0) (c : ℂ)
     (hc : ‖c‖ ≤ 1) (dp : ℕ → ℂ) (Z : ℕ → ℝ) (hdp : ∀ n, n ≤ 2 → dp n = 0) (hmaj : Majorizes dp Z)
@@ -541,7 +618,7 @@ theorem lem_4_4_i (τ : ℝ) (h1 : 9 / 20 ≤ τ) (h2 : τ ≤ 1 / 2) (y : ℝ) 
     ‖PiOddSer dp (I * (y : ℂ))‖ ≤ hCoef Z y ∧
       ‖UpsLin τ ((2 * c - (τ : ℂ)) / (vτ τ : ℂ)) dp (I * (y : ℂ))‖ ≤ wCoef Z y := Proofs.lem_4_4_i_proved τ h1 h2 y hy hy0 c hc dp Z hdp hmaj hZs
 
-/-- Lemma 4.4(ii) (sec_04_near.tex:175): for every `f ∈ 𝒮`, `|Π_o(iy) - 1| ≤ ε(y)`. -/
+/-- Lemma 4.4(ii) (sec_04_near.tex:175): for every `f ∈ 𝒮`, `|Π_o(iy) - 1| ≤ ς(y)`. -/
 theorem lem_4_4_ii (hDB : FactDeBranges) (f : ℂ → ℂ) (hf : InS f) (τ : ℝ) (h1 : 9 / 20 ≤ τ) (h2 : τ ≤ 1 / 2)
     (y : ℝ) (hy : 0 < y) (hy0 : y ≤ y0) :
     ‖PiOddSer (coeff (PiF f τ)) (I * (y : ℂ)) - 1‖ ≤ epsOf y := Proofs.lem_4_4_ii_proved hDB f hf τ h1 h2 y hy hy0
@@ -580,8 +657,8 @@ theorem sec4_low_coeffs (f : ℂ → ℂ) (hf : InS f) (τ : ℝ) (h1 : 9 / 20 �
     (∀ n : ℕ, n ≤ 2 → coeff (PiF f τ) n = coeff (Pihat τ (cOf f τ)) n) ∧
       ∀ c : ℂ, ∀ j : ℕ, 2 ≤ j → ∀ n : ℕ, n ≤ 2 → coeff (PiJ τ c j) n = 0 := Proofs.sec4_low_coeffs_proved f hf τ h1 h2
 
-/-- sec_04_near.tex:159 and :267: the denominators of the majorants, `1 - ⅔x`, `1 - 2x`, `𝔞 = 1 - ν⁺x` (`ν⁺ ≤ 2`) and
-`𝔡 = 𝔞 - √η⁺ B₁` (`η⁺ ≤ 1`), stay positive for `|x| ≤ 1/4`, with `𝔡(1/4) ≥ 1/2 - 2/15`; `1 - 𝔡 = ν⁺x + √η⁺B₁` has
+/-- sec_04_near.tex:159 and :267: the denominators of the majorants, `1 - ⅔x`, `1 - 2x`, `1 - ν⁺x` (`ν⁺ ≤ 2`) and
+`𝒴 = 1 - ν⁺x - √η⁺ B₁` (`η⁺ ≤ 1`), stay positive for `|x| ≤ 1/4`, with `𝒴(1/4) ≥ 1/2 - 2/15`; `1 - 𝒴 = ν⁺x + √η⁺B₁` has
 nonnegative coefficients (those of `B₁`), "so they converge for `|x| ≤ 1/4`". -/
 theorem sec4_majorant_conv (νp ηp : ℝ) (hν0 : 0 ≤ νp) (hν : νp ≤ 2) (hη0 : 0 ≤ ηp) (hη : ηp ≤ 1) :
     1 / 2 - 2 / 15 ≤ fdOf νp ηp (1 / 4) ∧ (∀ n : ℕ, (coeff B1c n).im = 0 ∧ 0 ≤ (coeff B1c n).re) ∧
@@ -708,20 +785,26 @@ theorem cor_5_5 (Φ : Matrix (Fin 2) (Fin 2) ℂ → ℂ) (hhol : HolomorphicNea
     ∀ M : Matrix (Fin 2) (Fin 2) ℂ, InBall M → 0 < (Φ M).re := Proofs.cor_5_5_proved Φ hhol hsym hpos
 
 /-- Remark 5.6 (sec_05_grunsky_q.tex:102-103): at `θ = 60°` the real symmetric unitary matrix
-`M = -[[cos α, sin α], [sin α, -cos α]]` with `α = 0.535` gives `Re Q_rel(M) ≈ -0.078`
+`M = [[-cos α, -sin α], [-sin α, cos α]]` with `α = 0.535` gives `Re Q_rel(M) ≈ -0.078`
 (here: `-0.0785 < Re Q_rel(M) < -0.0775`). -/
 theorem rem_5_6 :
-    IsSymmUnitary (-!![(Real.cos 0.535 : ℂ), (Real.sin 0.535 : ℂ); (Real.sin 0.535 : ℂ), -(Real.cos 0.535 : ℂ)]) ∧
+    IsSymmUnitary (!![-(Real.cos 0.535 : ℂ), -(Real.sin 0.535 : ℂ); -(Real.sin 0.535 : ℂ), (Real.cos 0.535 : ℂ)]) ∧
       -0.0785 < (Qrel (deg 60)
-        (-!![(Real.cos 0.535 : ℂ), (Real.sin 0.535 : ℂ); (Real.sin 0.535 : ℂ), -(Real.cos 0.535 : ℂ)])).re ∧
+        (!![-(Real.cos 0.535 : ℂ), -(Real.sin 0.535 : ℂ); -(Real.sin 0.535 : ℂ), (Real.cos 0.535 : ℂ)])).re ∧
       (Qrel (deg 60)
-        (-!![(Real.cos 0.535 : ℂ), (Real.sin 0.535 : ℂ); (Real.sin 0.535 : ℂ), -(Real.cos 0.535 : ℂ)])).re < -0.0775 := Proofs.rem_5_6_proved
+        (!![-(Real.cos 0.535 : ℂ), -(Real.sin 0.535 : ℂ); -(Real.sin 0.535 : ℂ), (Real.cos 0.535 : ℂ)])).re < -0.0775 := Proofs.rem_5_6_proved
 
 /-! ## Section 6 (far pairs): the finite-dimensional rows -/
 
 /-- sec_06_far.tex:11: for `θ ∈ [135°, 180°]`, `c = cos(θ/2)` satisfies `0 ≤ c ≤ sin(π/8) < 383/1000`. -/
 theorem sec6_c_bound (θ : ℝ) (h1 : deg 135 ≤ θ) (h2 : θ ≤ deg 180) :
     0 ≤ Real.cos (θ / 2) ∧ Real.cos (θ / 2) ≤ Real.sin (Real.pi / 8) ∧ Real.sin (Real.pi / 8) < 383 / 1000 := Proofs.sec6_c_bound_proved θ h1 h2
+
+/-- sec_06_far.tex:11: "since `sin(π/8) = ½√(2 - √2) = 0.38268…`": the closed form, and `0.38268 < sin(π/8) < 0.38269`. -/
+theorem sec6_sin_pi_8 :
+    Real.sin (Real.pi / 8) = Real.sqrt (2 - Real.sqrt 2) / 2 ∧
+      (38268 / 100000 : ℝ) < Real.sin (Real.pi / 8) ∧ Real.sin (Real.pi / 8) < 38269 / 100000 :=
+  Proofs.sec6_sin_pi_8_proved
 
 /-- sec_06_far.tex:11 and :97: "`277/400 - 173/250 = 1/2000`". -/
 theorem sec6_margin_arith : (277 / 400 : ℝ) - 173 / 250 = 1 / 2000 := Proofs.sec6_margin_arith_proved
@@ -733,34 +816,36 @@ theorem sec6_L_log3 : 2 * Ao = Real.log 3 ∧ Llog3 = Real.log 3 ∧ Llog3 < Rea
 theorem sec6_ZO_re_im (θ : ℝ) (h0 : 0 ≤ θ) (hπ : θ ≤ Real.pi) :
     (Zo θ).re = uo (Real.cos (θ / 2)) ∧ (Zo θ).im = vo (Real.cos (θ / 2)) := Proofs.sec6_ZO_re_im_proved θ h0 hπ
 
-/-- sec_06_far.tex:26: "The rows of `N` have norm at most `1`, so `|N₁₁|, |N₂₂| ≤ √(1 - |N₁₂|²)`; hence `ξ₁ = X/L` and
-`ξ₂ = Y/d` satisfy `|ξ₁|² + |ξ₂|² ≤ 1`", with `X = 2(σ₊N₁₁ - σ₋N₂₂)`, `L = 2(σ₊ + σ₋)` (`σ₊ + σ₋ = A_o`, `L = 2A_o`),
-`Y = dN₁₂`. Stronger than printed: for all `σ₊, σ₋ ≥ 0` with `σ₊ + σ₋ > 0` and every `N ∈ 𝓑`, not only the numbers and
-the compression of the pair. -/
+/-- sec_06_far.tex:26: "The rows of `O'` have norm at most `1`, so `|O'₁₁|, |O'₂₂| ≤ √(1 - |O'₁₂|²)`; since
+`2(σ₊ + σ₋) = L`, this gives `|ξ₁|² + |ξ₂|² ≤ 1`", with `ξ₁ = 2(σ₊O'₁₁ - σ₋O'₂₂)/L` and `ξ₂ = O'₁₂` (sec_06_far.tex:24;
+`σ₊ + σ₋ = A_o`, `L = 2A_o`; Lean's matrix `N` is `O'`). Stronger than printed: for all `σ₊, σ₋ ≥ 0` with
+`σ₊ + σ₋ > 0` and every `O' ∈ 𝓑`, not only the numbers and the compression of the pair. -/
 theorem sec6_xi_ball (σp σm : ℝ) (hp : 0 ≤ σp) (hm : 0 ≤ σm) (hpos : 0 < σp + σm)
     (N : Matrix (Fin 2) (Fin 2) ℂ) (hN : InBall N) :
     ‖2 * ((σp : ℂ) * N 0 0 - (σm : ℂ) * N 1 1) / (2 * ((σp + σm : ℝ) : ℂ))‖ ^ 2 + ‖N 0 1‖ ^ 2 ≤ 1 := Proofs.sec6_xi_ball_proved σp σm hp hm hpos N hN
 
-/-- sec_06_far.tex:24-28: from `log p = e^{iφ}(X + iY)` and `log q = e^{-iφ}(X - iY)`,
-`(p + q)/2 = e^{U*} cos V*` with `U* = cos φ X - sin φ Y` (`= L cos φ ξ₁ - d sin φ ξ₂`) and
-`V* = sin φ X + cos φ Y` (`= L sin φ ξ₁ + d cos φ ξ₂`). Stronger than printed: an identity for every real `φ` and all
-complex `X, Y`, not only `φ = arg Z_o` and the pair's `X, Y`. -/
+/-- sec_06_far.tex:24-28: from `log p = e^{iφ}(Lξ₁ + idξ₂)` and `log q = e^{-iφ}(Lξ₁ - idξ₂)`,
+`(p + q)/2 = e^{U*} cos V*` with `U* = L cos φ ξ₁ - d sin φ ξ₂` and `V* = L sin φ ξ₁ + d cos φ ξ₂` (Lean's `X, Y` are
+`Lξ₁, dξ₂`). Stronger than printed: an identity for every real `φ` and all complex `X, Y`, not only `φ = arg Z_o`,
+`X = Lξ₁` and `Y = dξ₂`. -/
 theorem sec6_psum_cos (φ : ℝ) (X Y : ℂ) :
     (exp (exp ((φ : ℂ) * I) * (X + I * Y)) + exp (exp (-((φ : ℂ) * I)) * (X - I * Y))) / 2 =
       exp ((Real.cos φ : ℂ) * X - (Real.sin φ : ℂ) * Y) * Complex.cos ((Real.sin φ : ℂ) * X + (Real.cos φ : ℂ) * Y) := Proofs.sec6_psum_cos_proved φ X Y
 
-/-- sec_06_far.tex:30-32: "A real orthogonal change of the complex variables `(ξ₁, ξ₂)` to `(ζ₁, ζ₂)`, still with
-`|ζ₁|² + |ζ₂|² ≤ 1`, gives `V* = b₁ζ₁` and `U* = b₂ζ₁ + b₃ζ₂`", with `b₁² = L² sin²φ + d² cos²φ`,
-`b₂ = (L² - d²) sin φ cos φ / b₁`, `b₃ = Ld/b₁` (for `L, d > 0`; the change preserves `|ζ₁|² + |ζ₂|²`). Stronger than
-printed: for all `L, d > 0`, real `φ` and all `ξ₁, ξ₂ ∈ ℂ`, with `|ζ₁|² + |ζ₂|² = |ξ₁|² + |ξ₂|²` (not only `≤ 1`). -/
+/-- sec_06_far.tex:30-32: "The real orthogonal change of the complex variables `(ξ₁, ξ₂)` to
+`ζ₁ = (L sin φ ξ₁ + d cos φ ξ₂)/b₁` and `ζ₂ = (d cos φ ξ₁ - L sin φ ξ₂)/b₁`, still with `|ζ₁|² + |ζ₂|² ≤ 1`, gives
+`V* = b₁ζ₁` and `U* = b₂ζ₁ + b₃ζ₂`", with `b₁² = L² sin²φ + d² cos²φ`, `b₂ = (L² - d²) sin φ cos φ / b₁`,
+`b₃ = Ld/b₁` (for `L, d > 0`). Stronger than printed: for all `L, d > 0`, real `φ` and all `ξ₁, ξ₂ ∈ ℂ`, with
+`|ζ₁|² + |ζ₂|² = |ξ₁|² + |ξ₂|²` (not only `≤ 1`); this equality for all `ξ₁, ξ₂` says the change is real orthogonal. -/
 theorem sec6_b_change (L d φ : ℝ) (hL : 0 < L) (hd : 0 < d) (ξ₁ ξ₂ : ℂ) :
-    ∃ ζ₁ ζ₂ : ℂ, ‖ζ₁‖ ^ 2 + ‖ζ₂‖ ^ 2 = ‖ξ₁‖ ^ 2 + ‖ξ₂‖ ^ 2 ∧
-      (L * Real.sin φ : ℂ) * ξ₁ + (d * Real.cos φ : ℂ) * ξ₂ =
-        (Real.sqrt (L ^ 2 * Real.sin φ ^ 2 + d ^ 2 * Real.cos φ ^ 2) : ℂ) * ζ₁ ∧
+    let b₁ : ℝ := Real.sqrt (L ^ 2 * Real.sin φ ^ 2 + d ^ 2 * Real.cos φ ^ 2)
+    let ζ₁ : ℂ := ((L * Real.sin φ : ℂ) * ξ₁ + (d * Real.cos φ : ℂ) * ξ₂) / b₁
+    let ζ₂ : ℂ := ((d * Real.cos φ : ℂ) * ξ₁ - (L * Real.sin φ : ℂ) * ξ₂) / b₁
+    ‖ζ₁‖ ^ 2 + ‖ζ₂‖ ^ 2 = ‖ξ₁‖ ^ 2 + ‖ξ₂‖ ^ 2 ∧
+      (L * Real.sin φ : ℂ) * ξ₁ + (d * Real.cos φ : ℂ) * ξ₂ = (b₁ : ℂ) * ζ₁ ∧
       (L * Real.cos φ : ℂ) * ξ₁ - (d * Real.sin φ : ℂ) * ξ₂ =
-        (((L ^ 2 - d ^ 2) * Real.sin φ * Real.cos φ / Real.sqrt (L ^ 2 * Real.sin φ ^ 2 + d ^ 2 * Real.cos φ ^ 2) : ℝ) : ℂ)
-            * ζ₁ +
-          ((L * d / Real.sqrt (L ^ 2 * Real.sin φ ^ 2 + d ^ 2 * Real.cos φ ^ 2) : ℝ) : ℂ) * ζ₂ := Proofs.sec6_b_change_proved L d φ hL hd ξ₁ ξ₂
+        (((L ^ 2 - d ^ 2) * Real.sin φ * Real.cos φ / b₁ : ℝ) : ℂ) * ζ₁ + ((L * d / b₁ : ℝ) : ℂ) * ζ₂ :=
+  Proofs.sec6_b_change_proved L d φ hL hd ξ₁ ξ₂
 
 /-- sec_06_far.tex:16, :32-34 and :48: for `θ ∈ [135°, 180°]`, with `φ = arg Z_o`, `σ± = (A_o ± |Z_o|)/2`,
 `d = 4√(σ₊σ₋)` and `L = log 3`, the numbers `b₁, b₂, b₃` of the orthogonal change are those of Lemma 6.2 at
@@ -774,17 +859,17 @@ theorem sec6_b_values (θ : ℝ) (h1 : deg 135 ≤ θ) (h2 : θ ≤ deg 180) :
       (Llog3 ^ 2 - d ^ 2) * Real.sin φ * Real.cos φ / b1 c = b2 c ∧ Llog3 * d / b1 c = b3 c ∧
       0 ≤ b2 c ∧ 0 ≤ b3 c ∧ b1 c ≤ Llog3 ∧ Llog3 < Real.pi / 2 := Proofs.sec6_b_values_proved θ h1 h2
 
-/-- sec_06_far.tex:34, after "`b₁ ≤ L = log 3 < π/2`": "because `0 ≤ φ ≤ π/2` there (the point `z` lies in the closed
-first quadrant) and `d ≤ 2(σ₊ + σ₋) = L` (by the inequality between the arithmetic and geometric means)", for
-`θ ∈ [135°, 180°]`, with `z = z_θ`, `φ = arg Z_o`, `σ± = (A_o ± |Z_o|)/2`, `d = 4√(σ₊σ₋)` and `L = log 3` as in
-`sec6_b_values`. -/
+/-- sec_06_far.tex:34, after "`b₁ ≤ L = log 3 < π/2`": "Indeed, `d ≤ 2(σ₊ + σ₋) = L` (by the inequality between the
+arithmetic and geometric means), which gives `b₁ ≤ L` and `L² - d² ≥ 0`; and `0 ≤ φ ≤ π/2` on our range of `θ` (the point
+`z` lies in the closed first quadrant), so `b₂ ≥ 0`", for `θ ∈ [135°, 180°]`, with `z = z_θ`, `φ = arg Z_o`,
+`σ± = (A_o ± |Z_o|)/2`, `d = 4√(σ₊σ₋)` and `L = log 3` as in `sec6_b_values` (which states `b₁ ≤ L` and `b₂ ≥ 0`). -/
 theorem sec6_phi_d_range (θ : ℝ) (h1 : deg 135 ≤ θ) (h2 : θ ≤ deg 180) :
     let φ := Complex.arg (Zo θ)
     let σp := (Ao + ‖Zo θ‖) / 2
     let σm := (Ao - ‖Zo θ‖) / 2
     let d := 4 * Real.sqrt (σp * σm)
     0 ≤ (zθ θ).re ∧ 0 ≤ (zθ θ).im ∧ 0 ≤ φ ∧ φ ≤ Real.pi / 2 ∧
-      d ≤ 2 * (σp + σm) ∧ 2 * (σp + σm) = Llog3 := Proofs.sec6_phi_d_range_proved θ h1 h2
+      d ≤ 2 * (σp + σm) ∧ 2 * (σp + σm) = Llog3 ∧ 0 ≤ Llog3 ^ 2 - d ^ 2 := Proofs.sec6_phi_d_range_proved θ h1 h2
 
 /-- sec_06_far.tex:34: "The function `-log cos v` has a Taylor series with nonnegative coefficients ..., so
 `|log cos v| ≤ -log cos |v|` for `|v| < π/2`" (principal logarithm; `cos v` is never real `≤ 0` there). -/
@@ -792,8 +877,8 @@ theorem sec6_logcos (v : ℂ) (hv : ‖v‖ < Real.pi / 2) :
     ‖log (Complex.cos v)‖ ≤ -Real.log (Real.cos ‖v‖) := Proofs.sec6_logcos_proved v hv
 
 /-- sec_06_far.tex:34-36 (eq:Wbound), the finite-dimensional step: if `b₁, b₂, b₃ ≥ 0`, `b₁ < π/2` and
-`|ζ₁|² + |ζ₂|² ≤ 1`, then `W = b₂ζ₁ + b₃ζ₂ + log cos(b₁ζ₁)` (`= U* + log cos V*`) satisfies
-`|W| ≤ b₂r₁ + b₃√(1 - r₁²) - log cos(b₁r₁)`, `r₁ = |ζ₁| ∈ [0, 1]`. Stronger than printed: for all `b₁, b₂, b₃ ≥ 0`
+`|ζ₁|² + |ζ₂|² ≤ 1`, then `ℓ₊ = b₂ζ₁ + b₃ζ₂ + log cos(b₁ζ₁)` (`= U* + log cos V*`) satisfies
+`|ℓ₊| ≤ b₂r₁ + b₃√(1 - r₁²) - log cos(b₁r₁)`, `r₁ = |ζ₁| ∈ [0, 1]`. Stronger than printed: for all `b₁, b₂, b₃ ≥ 0`
 with `b₁ < π/2`, not only the numbers of our range of `θ`. -/
 theorem sec6_Wbound_finite (b₁ b₂ b₃ : ℝ) (h1 : 0 ≤ b₁) (h2 : 0 ≤ b₂) (h3 : 0 ≤ b₃) (hb : b₁ < Real.pi / 2)
     (ζ₁ ζ₂ : ℂ) (hζ : ‖ζ₁‖ ^ 2 + ‖ζ₂‖ ^ 2 ≤ 1) :
@@ -801,21 +886,22 @@ theorem sec6_Wbound_finite (b₁ b₂ b₃ : ℝ) (h1 : 0 ≤ b₁) (h2 : 0 ≤ 
       ‖(b₂ : ℂ) * ζ₁ + (b₃ : ℂ) * ζ₂ + log (Complex.cos ((b₁ : ℂ) * ζ₁))‖ ≤
         b₂ * ‖ζ₁‖ + b₃ * Real.sqrt (1 - ‖ζ₁‖ ^ 2) - Real.log (Real.cos (b₁ * ‖ζ₁‖)) := Proofs.sec6_Wbound_finite_proved b₁ b₂ b₃ h1 h2 h3 hb ζ₁ ζ₂ hζ
 
-/-- sec_06_far.tex:51-53 (eq:psum), the real-analysis step: on the disc `|W| ≤ T = 211/200`, `Re e^W > 277/800`
-(via `T sin(57/100) < 57/100`, `cos(57/100) > 21/25`, `e^{21T/25} < 672/277`, `e^T < 800/277`; the proof's step
-"Since `g` is even, it suffices to take `0 ≤ γ ≤ π`", sec_06_far.tex:51, with `g(γ) = e^{-T cos γ} cos(T sin γ)`). -/
+/-- sec_06_far.tex:51-53 (eq:psum), the real-analysis step: on the disc `|ℓ₊| ≤ ϖ = 211/200`, `Re e^{ℓ₊} > 277/800`
+(via `ϖ sin(57/100) < 57/100`, `cos(57/100) > 21/25`, `e^{21ϖ/25} < 672/277`, `e^ϖ < 800/277`; the proof's step
+"Since `g` is even, it suffices to take `0 ≤ γ ≤ π`", sec_06_far.tex:51, with `g(γ) = e^{-ϖ cos γ} cos(ϖ sin γ)`). -/
 theorem sec6_expW_bound (W : ℂ) (hW : ‖W‖ ≤ Tfar) : 277 / 800 < (exp W).re := Proofs.sec6_expW_bound_proved W hW
 
-/-- sec_06_far.tex:51, with `T = 211/200` (sec_06_far.tex:44): "the root `γ_* ∈ (0, π)` of `γ = T sin γ` (there is
-only one, since `γ - T sin γ` is strictly convex on `[0, π]` and vanishes at `0`)". -/
+/-- sec_06_far.tex:51, with `ϖ = 211/200` (sec_06_far.tex:44): "the root `γ_* ∈ (0, π)` of `γ = ϖ sin γ` (there
+is only one, since `γ - ϖ sin γ` is strictly convex on `[0, π]` and vanishes at `0`)". -/
 theorem sec6_gamma_unique :
     StrictConvexOn ℝ (Set.Icc (0 : ℝ) Real.pi) (fun γ : ℝ => γ - Tfar * Real.sin γ) ∧
     (0 : ℝ) - Tfar * Real.sin 0 = 0 ∧
     ∃! γ : ℝ, γ ∈ Set.Ioo (0 : ℝ) Real.pi ∧ γ = Tfar * Real.sin γ := Proofs.sec6_gamma_unique_proved
 
 /-- sec_06_far.tex:74-82 with Lemma 6.4's parametrization (sec_06_far.tex:85-87): for `θ ∈ [135°, 180°]`,
-`c = cos(θ/2)`, `ε = π - θ` and `z = z_θ`: `e^{-iε} = 1 - 2c² - 2ic√(1 - c²)` ("`cos ε = 1 - 2c²`,
-`sin ε = 2c√(1 - c²)`"), `z² = -x e^{-iε}` with `x = ¼`, and `A_R = Re(e^{iε} z²/(1 - z²)²)`,
+`c = c_θ = cos(θ/2)`, `ε = π - θ` and `z = z_θ`: `e^{-iε} = 1 - 2c² - 2ic√(1 - c²)`
+("`cos ε = 1 - 2c_θ²` and `sin ε = 2c_θ√(1 - c_θ²)`"), `z² = -¼e^{-iε}` (Lean's `xfar` is `¼`), and
+`A_R = Re(e^{iε} z²/(1 - z²)²)`,
 `B_R = Re(-e^{iε} log(1 - z²))`. -/
 theorem sec6_A0B0_closed (θ : ℝ) (h1 : deg 135 ≤ θ) (h2 : θ ≤ deg 180) :
     emeps (Real.cos (θ / 2)) = exp (-(((Real.pi - θ : ℝ) : ℂ) * I)) ∧
@@ -823,19 +909,28 @@ theorem sec6_A0B0_closed (θ : ℝ) (h1 : deg 135 ≤ θ) (h2 : θ ≤ deg 180) 
       A0 (Real.cos (θ / 2)) = (exp (((Real.pi - θ : ℝ) : ℂ) * I) * (zθ θ ^ 2 / (1 - zθ θ ^ 2) ^ 2)).re ∧
       B0 (Real.cos (θ / 2)) = (exp (((Real.pi - θ : ℝ) : ℂ) * I) * (-log (1 - zθ θ ^ 2))).re := Proofs.sec6_A0B0_closed_proved θ h1 h2
 
-/-- sec_06_far.tex:100: "At `c = 0` (`θ = 180°`) the function in Lemma 6.4 is about `0.6912`": its value at `c = 0`
-is in `(0.69115, 0.69125)`. -/
+/-- sec_06_far.tex:80 and :87: "`A_R = Re(-4/(4 + e^{-iε})²)`", for every `c` (Lean's `A0` is
+`Re(-x/(1 + x e^{-iε})²)` with `x = ¼`; `emeps c` is `e^{-iε}`). -/
+theorem sec6_A0_printed (c : ℝ) : A0 c = (-4 / (4 + emeps c) ^ 2).re := Proofs.sec6_A0_printed_proved c
+
+/-- sec_06_far.tex:100: "At `c_θ = 0` (`θ = 180°`) the left side in Lemma 6.4 is about `0.6912`, close to the bound
+`173/250 = 0.692`": its value there is in `(0.69115, 0.69125)`. -/
 theorem sec6_value_180 : 0.69115 < Rbound 0 ∧ Rbound 0 < 0.69125 := Proofs.sec6_value_180_proved
 
 /-- sec_06_far.tex:93: each cell's upper bound is "below `173/250`", and "The largest of these upper bounds is
-`3459999249/(5·10⁹)`"; so the largest one is below `173/250`. -/
-theorem sec6_cover_bound_arith : (3459999249 : ℝ) / (5 * 10 ^ 9) < 173 / 250 := Proofs.sec6_cover_bound_arith_proved
+`3459999249/(5·10⁹) = 0.69199984…`, below `173/250 = 0.692`": `3459999249/(5·10⁹)` is below `173/250` (that it is
+the largest bound is the program's, NOT COUNTED),
+`0.69199984 < 3459999249/(5·10⁹) < 0.69199985` (the printed digits) and `173/250 = 0.692`. -/
+theorem sec6_cover_bound_arith :
+    (3459999249 : ℝ) / (5 * 10 ^ 9) < 173 / 250 ∧
+      (0.69199984 : ℝ) < 3459999249 / (5 * 10 ^ 9) ∧ (3459999249 : ℝ) / (5 * 10 ^ 9) < 0.69199985 ∧
+      (173 / 250 : ℝ) = 0.692 := Proofs.sec6_cover_bound_arith_proved
 
 /-! ## Section 7 (middle angles): the finite-dimensional rows -/
 
 /-- Lemma 7.2 (sec_07_middle.tex:23-25): for `θ ∈ (0, π]`, the functions `Δ`, `U` and `R` are holomorphic on the
 neighbourhood `{‖M‖ < π/log 9}` of `𝓑` (an open set of `ℂ³` containing `𝓑`), and `iU(M̄) = \overline{iU(M)}`,
-`R(M̄) = \overline{R(M)}` there (the proof uses that "`A`, `B` and `C` are conjugated when `M` is",
+`R(M̄) = \overline{R(M)}` there (the proof uses that "`m_uu`, `m_vv` and `m_uv` are conjugated when `M` is",
 sec_07_middle.tex:28). -/
 theorem lem_7_2 (θ : ℝ) (h0 : 0 < θ) (hπ : θ ≤ Real.pi) :
     1 < Real.pi / Real.log 9 ∧ IsOpen {p : ℂ × ℂ × ℂ | opNorm (symMat p) < Real.pi / Real.log 9} ∧
@@ -844,10 +939,6 @@ theorem lem_7_2 (θ : ℝ) (h0 : 0 < θ) (hπ : θ ≤ Real.pi) :
       DifferentiableOn ℂ (fun p => Rfun θ (symMat p)) {p | opNorm (symMat p) < Real.pi / Real.log 9} ∧
       ∀ M : Matrix (Fin 2) (Fin 2) ℂ, Mᵀ = M → opNorm M < Real.pi / Real.log 9 →
         I * Ufun θ (mconj M) = conj (I * Ufun θ M) ∧ Rfun θ (mconj M) = conj (Rfun θ M) := Proofs.lem_7_2_proved θ h0 hπ
-
-/-- sec_07_middle.tex:117 (the finite-dimensional half): "`iU` and `R` vanish" at `M = 0` (the matrix `O₂` of the
-identity function `f(z) = z`), for `θ ∈ (0, π]`. -/
-theorem sec7_UR_zero (θ : ℝ) (h0 : 0 < θ) (hπ : θ ≤ Real.pi) : I * Ufun θ 0 = 0 ∧ Rfun θ 0 = 0 := Proofs.sec7_UR_zero_proved θ h0 hπ
 
 /-- The finite-dimensional core of Lemma 7.4 (sec_07_middle.tex:81-86): if `E` is a complex `N x N` matrix with
 `|yᵀ E x| ≤ ‖x‖ ‖y‖` for all real `x, y`, `𝒲` is a real `N x 4` matrix, `J = λJ₁ + μJ₂` and `P` is real symmetric
@@ -870,13 +961,24 @@ theorem sec7_P_minors :
         1317395036843 / 10 ^ 12 ∧
       Pmat.det = 125044355055249 / (2 * 10 ^ 15) ∧ Pmat.PosDef := Proofs.sec7_P_minors_proved
 
-/-- sec_07_middle.tex:97: "The matrix `K` is then an explicit rational matrix, and `C_P(θ)` is a linear combination
+/-- sec_07_middle.tex:97: "The matrix `K` is then an explicit rational matrix, and `C_P(θ)` is the following linear combination
 with rational coefficients of the nine numbers `A_e, Re Z_e, Im Z_e, L_e, Re L_z, Im L_z, M_e, Re M_z, Im M_z`". -/
 theorem sec7_CP_linear :
     (∃ Kq : Matrix (Fin 4) (Fin 4) ℚ, Kmat (4 / 5) (1 / 2) Pmat = Kq.map (↑)) ∧
       ∃ q : Fin 9 → ℚ, ∀ θ : ℝ, CP θ (4 / 5) (1 / 2) Pmat =
         q 0 * Ae + q 1 * (Ze θ).re + q 2 * (Ze θ).im + q 3 * Le + q 4 * (Lz θ).re + q 5 * (Lz θ).im +
           q 6 * Me + q 7 * (Mz θ).re + q 8 * (Mz θ).im := Proofs.sec7_CP_linear_proved
+
+/-- sec_07_middle.tex:97: "`C_P(θ)` is the following linear combination with rational coefficients of the nine numbers
+`A_e, Re Z_e, Im Z_e, L_e, Re L_z, Im L_z, M_e, Re M_z, Im M_z`": the nine printed rationals (`λ = 4/5`, `μ = ½`, the
+printed `P`). -/
+theorem sec7_CP_explicit (θ : ℝ) :
+    CP θ (4 / 5) (1 / 2) Pmat =
+      130963453301025393 / 55575268913444000 * Ae - 183920349380321459 / 277876344567220000 * (Ze θ).re +
+        95947301639073811 / 277876344567220000 * (Ze θ).im - 917139083085913 / 8336290337016600 * Le -
+        6145773526217781 / 69469086141805000 * (Lz θ).re + 282896396731486619 / 833629033701660000 * (Lz θ).im +
+        225798938136139847 / 1250443550552490000 * Me + 3679103289741521 / 39696620652460000 * (Mz θ).re -
+        10747725795500707 / 312610887638122500 * (Mz θ).im := Proofs.sec7_CP_explicit_proved θ
 
 /-- Proposition 7.5(i) (sec_07_middle.tex:108): for `θ ∈ (0, π]`, `F` is holomorphic on a neighbourhood of `𝓑`, and
 `F(M̄) = \overline{F(M)}` on `𝓑`. -/
@@ -894,11 +996,9 @@ theorem lem_7_6_ii (h6 : Check_7_6_band06) (h7 : Check_7_6_band07) (h8 : Check_7
     (h9 : Check_7_6_band09) (h10 : Check_7_6_band10) (h11 : Check_7_6_band11) :
     ∀ θ : ℝ, 90 ≤ θ → θ ≤ 135 → ∀ α ψ ω : ℝ, InX α ψ ω → 0 < PhiP θ α ψ ω := Proofs.lem_7_6_ii_proved h6 h7 h8 h9 h10 h11
 
-/-- Table 3 (sec_07_middle.tex:147-159): the column totals `304,664` (leaves, first program) and `311,506` (boxes,
-second program). -/
+/-- Table 3 (sec_07_middle.tex:147-159): the column total `311,506` (boxes checked). -/
 theorem tab3_totals :
-    35420 + 40243 + 42849 + 61750 + 62390 + 8778 + 7946 + 7418 + 13431 + 12459 + 11980 = 304664 ∧
-      36762 + 42121 + 43457 + 63128 + 63302 + 8986 + 8128 + 7562 + 13517 + 12519 + 12024 = 311506 := Proofs.tab3_totals_proved
+    36762 + 42121 + 43457 + 63128 + 63302 + 8986 + 8128 + 7562 + 13517 + 12519 + 12024 = 311506 := Proofs.tab3_totals_proved
 
 /-! ## Sections 5-7: the Grunsky-layer rows -/
 
@@ -922,7 +1022,7 @@ theorem sec5_O2_contraction (hG : FactGrunsky) (f h : ℂ → ℂ) (hf : InS f) 
       InBall (O2 γ θ) := Proofs.sec5_O2_contraction_proved_from sec3_grunsky_unique sec3_blocks_compressions sec5_uv_gram sec5_coords hG f h hf hh γ hγ θ h0 hπ
 
 /-- sec_05_grunsky_q.tex:17: "and `uᵀOu = ũᵀO₂ũ`; similarly `vᵀOv = ṽᵀO₂ṽ` and `uᵀOv = ũᵀO₂ṽ`": `uᵀOu`, `vᵀOv`,
-`uᵀOv` are `A`, `B`, `C` of `M = O₂`. -/
+`uᵀOv` are `m_uu`, `m_vv`, `m_uv` of `M = O₂`. -/
 theorem sec5_O2_entries (f h : ℂ → ℂ) (hf : InS f) (hh : IsOddRoot f h) (γ : ℕ → ℕ → ℂ) (hγ : IsGrunskyCoeff h γ)
     (θ : ℝ) (h0 : 0 < θ) (hπ : θ ≤ Real.pi) :
     bilinf (fun n => (uvec θ n : ℂ)) (Oblock γ) (fun n => (uvec θ n : ℂ)) = cA θ (O2 γ θ) ∧
@@ -934,8 +1034,8 @@ theorem sec5_O2_entries (f h : ℂ → ℂ) (hf : InS f) (hh : IsOddRoot f h) (�
 theorem prop_5_1 (f h : ℂ → ℂ) (hf : InS f) (hh : IsOddRoot f h) (γ : ℕ → ℕ → ℂ) (hγ : IsGrunskyCoeff h γ)
     (θ : ℝ) (h0 : 0 < θ) (hπ : θ ≤ Real.pi) : Q f (zθ θ) (conj (zθ θ)) = Qrel θ (O2 γ θ) := Proofs.prop_5_1_proved_from lem_3_1_i sec3_grunsky_unique sec5_coords f h hf hh γ hγ θ h0 hπ
 
-/-- sec_05_grunsky_q.tex:54: "If `Re Q_rel > 0` on `𝓑` for some `θ`, then `Re Q_f(z_θ, \overline{z_θ}) > 0` for every
-`f ∈ 𝒮`." PROVED GIVEN the bidisc power series and the strong Grunsky inequality. -/
+/-- sec_05_grunsky_q.tex:54: "If, for a given `θ`, `Re Q_rel > 0` on `𝓑`, then `Re Q_f(z_θ, \overline{z_θ}) > 0` for
+every `f ∈ 𝒮`." PROVED GIVEN the bidisc power series and the strong Grunsky inequality. -/
 theorem sec5_relaxation (hB : FactBidiscPowerSeries) (hG : FactGrunsky) (θ : ℝ) (h0 : 0 < θ) (hπ : θ ≤ Real.pi)
     (hpos : ∀ M, InBall M → 0 < (Qrel θ M).re) : ∀ f : ℂ → ℂ, InS f → 0 < (Q f (zθ θ) (conj (zθ θ))).re := Proofs.sec5_relaxation_proved_from sec3_oddroot_exists sec3_grunsky_exists lem_3_1_i sec3_blocks_compressions sec5_uv_gram sec5_coords hB hG θ h0 hπ hpos
 
@@ -974,9 +1074,9 @@ Section 5)": `σ₊ > 0` and `σ₋ > 0` for `θ ∈ (0, π]` (stated as positiv
 theorem sec6_sigma_pos : ∀ θ : ℝ, 0 < θ → θ ≤ Real.pi → 0 < sigM θ ∧ 0 < sigP θ := Proofs.sec6_sigma_pos_proved
 
 /-- sec_06_far.tex:14-28: for `f ∈ 𝒮` and `θ ∈ [135°, 180°]`, in the rotated real orthonormal basis
-(`a(s) = e^{iφ/2}(√σ₊, i√σ₋)`) the odd block compresses to a complex symmetric `N` with `‖N‖ ≤ 1`, and
-`log p = e^{iφ}(X + iY)`, `log q = e^{-iφ}(X - iY)`, `X = 2(σ₊N₁₁ - σ₋N₂₂)`, `Y = dN₁₂` (stated for `p = exp(log p)`,
-`q = exp(log q)`). PROVED GIVEN the bidisc power series and the strong Grunsky inequality. -/
+(`a(s) = e^{iφ/2}(√σ₊, i√σ₋)`) the odd block compresses to a complex symmetric `O'` with `‖O'‖ ≤ 1`, and
+`log p = e^{iφ}(Lξ₁ + idξ₂)`, `log q = e^{-iφ}(Lξ₁ - idξ₂)`, `ξ₁ = 2(σ₊O'₁₁ - σ₋O'₂₂)/L`, `ξ₂ = O'₁₂`; Lean states it
+with `X = Lξ₁ = 2(σ₊O'₁₁ - σ₋O'₂₂)` and `Y = dξ₂ = dO'₁₂` (and for `p = exp(log p)`, `q = exp(log q)`). PROVED GIVEN the bidisc power series and the strong Grunsky inequality. -/
 theorem sec6_logp_logq (hB : FactBidiscPowerSeries) (hG : FactGrunsky) (f : ℂ → ℂ) (hf : InS f) (θ : ℝ)
     (h1 : deg 135 ≤ θ) (h2 : θ ≤ deg 180) :
     ∃ N : Matrix (Fin 2) (Fin 2) ℂ, InBall N ∧
@@ -985,7 +1085,7 @@ theorem sec6_logp_logq (hB : FactBidiscPowerSeries) (hG : FactGrunsky) (f : ℂ 
       pfun f (conj (zθ θ)) = exp (exp (-((phiFar θ : ℂ) * I)) *
         (2 * ((sigP θ : ℂ) * N 0 0 - (sigM θ : ℂ) * N 1 1) - I * ((dFar θ : ℂ) * N 0 1))) := Proofs.sec6_logp_logq_proved_from sec3_oddroot_exists sec3_oddroot_mem_S sec3_grunsky_exists sec3_cauchy sec3_blocks_compressions lem_3_1_iii eq_gram hB hG f hf θ h1 h2
 
-/-- sec_06_far.tex:51-53 (eq:psum): for `f ∈ 𝒮` and `θ ∈ [135°, 180°]`, `Re(p + q) = 2 Re e^W > 277/400`.
+/-- sec_06_far.tex:51-53 (eq:psum): for `f ∈ 𝒮` and `θ ∈ [135°, 180°]`, `Re(p + q) = 2 Re e^{ℓ₊} > 277/400`.
 PROVED GIVEN the bidisc power series, the strong Grunsky inequality and Lemma 6.2's check. -/
 theorem eq_psum (hB : FactBidiscPowerSeries) (hG : FactGrunsky) (h62 : Check_6_2) (f : ℂ → ℂ) (hf : InS f)
     (θ : ℝ) (h1 : deg 135 ≤ θ) (h2 : θ ≤ deg 180) :
@@ -1047,11 +1147,6 @@ used at `θ = 60°`. (Placed after Proposition 7.5(ii), which its proof uses.) -
 theorem sec5_not_all_from_S (hB : FactBidiscPowerSeries) (hG : FactGrunsky) (h2 : Check_7_6_band02) :
     ∃ M, InBall M ∧ ∀ f h : ℂ → ℂ, InS f → IsOddRoot f h → ∀ γ : ℕ → ℕ → ℂ, IsGrunskyCoeff h γ →
       O2 γ (deg 60) ≠ M := Proofs.sec5_not_all_from_S_proved_from rem_5_6 prop_7_5_ii lem_3_1_i sec3_grunsky_unique sec5_coords hB hG h2
-
-/-- sec_07_middle.tex:117 (the Grunsky half): for the identity function `f(z) = z` the odd root is `h(s) = s`, and for
-its Grunsky coefficients `O₂ = 0` (where `iU` and `R` vanish, `sec7_UR_zero`). -/
-theorem sec7_identity_O2 :
-    IsOddRoot (fun z => z) (fun s => s) ∧ ∀ γ : ℕ → ℕ → ℂ, IsGrunskyCoeff (fun s => s) γ → ∀ θ : ℝ, O2 γ θ = 0 := Proofs.sec7_identity_O2_proved
 
 /-- The proof of Proposition 7.1 (sec_07_middle.tex:167-169): if every `Q_f(z_θ, \overline{z_θ})` (`f ∈ 𝒮`,
 `θ ∈ (0, π]`) is `Q_rel(M)` for some `M ∈ 𝓑` with `Re F(M) ≤ Re Q_f(z_θ, \overline{z_θ})` (Propositions 5.1, 7.5),

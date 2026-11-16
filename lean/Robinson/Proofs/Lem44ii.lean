@@ -346,7 +346,7 @@ private lemma l44_gam_odd (m : ℕ) : gam (2 * m + 1) = 4 ^ m * (1 + 4 / 3 * (m 
 
 /-! ### Row: lem_4_4_ii -/
 
-/-- Lemma 4.4(ii) (sec_04_near.tex:175): for every `f ∈ 𝒮`, `|Π_o(iy) - 1| ≤ ε(y)`. -/
+/-- Lemma 4.4(ii) (sec_04_near.tex:175): for every `f ∈ 𝒮`, `|Π_o(iy) - 1| ≤ ς(y)`. -/
 theorem lem_4_4_ii_proved (hDB : FactDeBranges) (f : ℂ → ℂ) (hf : InS f) (τ : ℝ) (h1 : 9 / 20 ≤ τ)
     (h2 : τ ≤ 1 / 2) (y : ℝ) (hy : 0 < y) (hy0 : y ≤ y0) :
     ‖PiOddSer (coeff (PiF f τ)) (I * (y : ℂ)) - 1‖ ≤ epsOf y := by

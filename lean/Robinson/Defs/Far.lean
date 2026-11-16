@@ -27,7 +27,7 @@ noncomputable def b2 (c : ℝ) : ℝ := 4 * uo c * vo c / b1 c
 /-- `b₃ = L √(L² - 4u_o² - 4v_o²) / b₁` (sec_06_far.tex:42). -/
 noncomputable def b3 (c : ℝ) : ℝ := Llog3 * Real.sqrt (Llog3 ^ 2 - 4 * uo c ^ 2 - 4 * vo c ^ 2) / b1 c
 
-/-- `T = 211/200` (sec_06_far.tex:44). -/
+/-- `ϖ = 211/200` (sec_06_far.tex:44; Lean's name `Tfar`). -/
 noncomputable def Tfar : ℝ := 211 / 200
 
 /-- `U_R = 4/9` (sec_06_far.tex:85). -/
@@ -36,16 +36,19 @@ noncomputable def U0 : ℝ := 4 / 9
 /-- `V_R = log(4/3)` (sec_06_far.tex:85). -/
 noncomputable def V0 : ℝ := Real.log (4 / 3)
 
-/-- `x = ¼` (sec_06_far.tex:85). -/
+/-- The number `¼` of `z² = -¼e^{-iε}` (sec_06_far.tex:78) and of `A_R`, `B_R` (sec_06_far.tex:87); the text writes
+the number, Lean names it `xfar`. -/
 noncomputable def xfar : ℝ := 1 / 4
 
 /-- `e^{-iε} = 1 - 2c² - 2ic√(1 - c²)` (sec_06_far.tex:85); `e^{iε}` is its inverse. -/
 noncomputable def emeps (c : ℝ) : ℂ := ((1 - 2 * c ^ 2 : ℝ) : ℂ) - 2 * I * ((c * Real.sqrt (1 - c ^ 2) : ℝ) : ℂ)
 
-/-- `A_R = Re(-x / (1 + x e^{-iε})²)` (sec_06_far.tex:87). -/
+/-- `A_R = Re(-x / (1 + x e^{-iε})²)` with `x = ¼`, that is the printed `Re(-4/(4 + e^{-iε})²)` (sec_06_far.tex:87;
+the row `sec6_A0_printed` states the equality). -/
 noncomputable def A0 (c : ℝ) : ℝ := (-(xfar : ℂ) / (1 + (xfar : ℂ) * emeps c) ^ 2).re
 
-/-- `B_R = Re(-e^{iε} log(1 + x e^{-iε}))`, principal logarithm (sec_06_far.tex:87). -/
+/-- `B_R = Re(-e^{iε} log(1 + ¼e^{-iε}))` (Lean: `x e^{-iε}` with `x = ¼`), principal logarithm
+(sec_06_far.tex:87). -/
 noncomputable def B0 (c : ℝ) : ℝ := (-(emeps c)⁻¹ * log (1 + (xfar : ℂ) * emeps c)).re
 
 /-- The left side of Lemma 6.4: `√((U_R + A_R)(V_R + B_R)) + √((U_R - A_R)(V_R - B_R))` (sec_06_far.tex:89). -/

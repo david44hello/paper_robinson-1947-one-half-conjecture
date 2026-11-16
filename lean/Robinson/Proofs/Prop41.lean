@@ -166,7 +166,7 @@ private lemma p41_f_eq_koebe (f : ℂ → ℂ) (hf : InS f) (τ : ℝ) (h1 : 9 /
 /-! ### (A) The hypothesis `hzero` of `prop_4_1_from_layer` -/
 
 set_option linter.unusedVariables false in
-/-- sec_04_near.tex:337 (proof of Proposition 4.1): "If `e = 0`, then `f_{-τ} = k`, so
+/-- sec_04_near.tex:337 (proof of Proposition 4.1): "If `ϰ = 0`, then `f_{-τ} = k`, so
 `Q_f(-τ + iy, -τ - iy) = Q_k`" (eq:Qk). Assumes the rows `sec4_e_zero` and `sec4_Gtau`. -/
 theorem prop_4_1_hzero_from
     (h_e_zero : ∀ (hArea : FactArea) (f : ℂ → ℂ) (hf : InS f) (τ : ℝ) (h1 : 9 / 20 ≤ τ) (h2 : τ < 1 / 2)

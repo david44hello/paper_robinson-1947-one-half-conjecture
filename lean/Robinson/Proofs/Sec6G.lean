@@ -848,6 +848,26 @@ private lemma ccos_ne_zero {v : ℂ} (hv : ‖v‖ < Real.pi / 2) : Complex.cos 
       rw [abs_of_neg (by linarith)]; linarith
   nlinarith [Real.pi_pos]
 
+/-- The change of variables of `sec6_b_change` (explicit `ζ₁`, `ζ₂`), in the form `∃ ζ₁ ζ₂` that `eq_psum_proved_from`
+uses. -/
+private lemma bchange_exists (hBchange : ∀ (L d φ : ℝ), 0 < L → 0 < d → ∀ (ξ₁ ξ₂ : ℂ),
+      let b₁ : ℝ := Real.sqrt (L ^ 2 * Real.sin φ ^ 2 + d ^ 2 * Real.cos φ ^ 2)
+      let ζ₁ : ℂ := ((L * Real.sin φ : ℂ) * ξ₁ + (d * Real.cos φ : ℂ) * ξ₂) / b₁
+      let ζ₂ : ℂ := ((d * Real.cos φ : ℂ) * ξ₁ - (L * Real.sin φ : ℂ) * ξ₂) / b₁
+      ‖ζ₁‖ ^ 2 + ‖ζ₂‖ ^ 2 = ‖ξ₁‖ ^ 2 + ‖ξ₂‖ ^ 2 ∧
+        (L * Real.sin φ : ℂ) * ξ₁ + (d * Real.cos φ : ℂ) * ξ₂ = (b₁ : ℂ) * ζ₁ ∧
+        (L * Real.cos φ : ℂ) * ξ₁ - (d * Real.sin φ : ℂ) * ξ₂ =
+          (((L ^ 2 - d ^ 2) * Real.sin φ * Real.cos φ / b₁ : ℝ) : ℂ) * ζ₁ + ((L * d / b₁ : ℝ) : ℂ) * ζ₂)
+    (L d φ : ℝ) (hL : 0 < L) (hd : 0 < d) (ξ₁ ξ₂ : ℂ) :
+    ∃ ζ₁ ζ₂ : ℂ, ‖ζ₁‖ ^ 2 + ‖ζ₂‖ ^ 2 = ‖ξ₁‖ ^ 2 + ‖ξ₂‖ ^ 2 ∧
+      (L * Real.sin φ : ℂ) * ξ₁ + (d * Real.cos φ : ℂ) * ξ₂ =
+        (Real.sqrt (L ^ 2 * Real.sin φ ^ 2 + d ^ 2 * Real.cos φ ^ 2) : ℂ) * ζ₁ ∧
+      (L * Real.cos φ : ℂ) * ξ₁ - (d * Real.sin φ : ℂ) * ξ₂ =
+        (((L ^ 2 - d ^ 2) * Real.sin φ * Real.cos φ / Real.sqrt (L ^ 2 * Real.sin φ ^ 2 + d ^ 2 * Real.cos φ ^ 2) : ℝ) : ℂ)
+            * ζ₁ +
+          ((L * d / Real.sqrt (L ^ 2 * Real.sin φ ^ 2 + d ^ 2 * Real.cos φ ^ 2) : ℝ) : ℂ) * ζ₂ :=
+  ⟨_, _, hBchange L d φ hL hd ξ₁ ξ₂⟩
+
 open Classical in
 /-- (eq:psum), given Lemma 6.2's check and the rows used by `sec6_logp_logq_proved_from`, together with
 `sec6_psum_cos`, `sec6_xi_ball`, `sec6_b_change`, `sec6_b_values`, `sec6_Wbound_finite` and `sec6_expW_bound`. -/
@@ -884,13 +904,13 @@ theorem eq_psum_proved_from
       ∀ (N : Matrix (Fin 2) (Fin 2) ℂ), InBall N →
         ‖2 * ((σp : ℂ) * N 0 0 - (σm : ℂ) * N 1 1) / (2 * ((σp + σm : ℝ) : ℂ))‖ ^ 2 + ‖N 0 1‖ ^ 2 ≤ 1)
     (hBchange : ∀ (L d φ : ℝ), 0 < L → 0 < d → ∀ (ξ₁ ξ₂ : ℂ),
-      ∃ ζ₁ ζ₂ : ℂ, ‖ζ₁‖ ^ 2 + ‖ζ₂‖ ^ 2 = ‖ξ₁‖ ^ 2 + ‖ξ₂‖ ^ 2 ∧
-        (L * Real.sin φ : ℂ) * ξ₁ + (d * Real.cos φ : ℂ) * ξ₂ =
-          (Real.sqrt (L ^ 2 * Real.sin φ ^ 2 + d ^ 2 * Real.cos φ ^ 2) : ℂ) * ζ₁ ∧
+      let b₁ : ℝ := Real.sqrt (L ^ 2 * Real.sin φ ^ 2 + d ^ 2 * Real.cos φ ^ 2)
+      let ζ₁ : ℂ := ((L * Real.sin φ : ℂ) * ξ₁ + (d * Real.cos φ : ℂ) * ξ₂) / b₁
+      let ζ₂ : ℂ := ((d * Real.cos φ : ℂ) * ξ₁ - (L * Real.sin φ : ℂ) * ξ₂) / b₁
+      ‖ζ₁‖ ^ 2 + ‖ζ₂‖ ^ 2 = ‖ξ₁‖ ^ 2 + ‖ξ₂‖ ^ 2 ∧
+        (L * Real.sin φ : ℂ) * ξ₁ + (d * Real.cos φ : ℂ) * ξ₂ = (b₁ : ℂ) * ζ₁ ∧
         (L * Real.cos φ : ℂ) * ξ₁ - (d * Real.sin φ : ℂ) * ξ₂ =
-          (((L ^ 2 - d ^ 2) * Real.sin φ * Real.cos φ / Real.sqrt (L ^ 2 * Real.sin φ ^ 2 + d ^ 2 * Real.cos φ ^ 2) : ℝ) : ℂ)
-              * ζ₁ +
-            ((L * d / Real.sqrt (L ^ 2 * Real.sin φ ^ 2 + d ^ 2 * Real.cos φ ^ 2) : ℝ) : ℂ) * ζ₂)
+          (((L ^ 2 - d ^ 2) * Real.sin φ * Real.cos φ / b₁ : ℝ) : ℂ) * ζ₁ + ((L * d / b₁ : ℝ) : ℂ) * ζ₂)
     (hBvalues : ∀ (θ : ℝ), deg 135 ≤ θ → θ ≤ deg 180 →
       let φ := Complex.arg (Zo θ)
       let d := 4 * Real.sqrt ((Ao + ‖Zo θ‖) / 2 * ((Ao - ‖Zo θ‖) / 2))
@@ -935,7 +955,7 @@ theorem eq_psum_proved_from
     rw [hξ₁, hL]
     push_cast
     field_simp
-  obtain ⟨ζ₁, ζ₂, hζn, hVs, hUs⟩ := hBchange Llog3 (dFar θ) (phiFar θ) hLpos hdpos ξ₁ (N 0 1)
+  obtain ⟨ζ₁, ζ₂, hζn, hVs, hUs⟩ := bchange_exists hBchange Llog3 (dFar θ) (phiFar θ) hLpos hdpos ξ₁ (N 0 1)
   have hbv := hBvalues θ h1 h2
   dsimp only at hbv
   obtain ⟨hb1pos, hb1, hb2, hb3, hb2nn, hb3nn, hb1L, hLpi⟩ := hbv

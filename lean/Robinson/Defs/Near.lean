@@ -14,10 +14,10 @@ open Complex
 /-- `y₀ = 17/80` (sec_04_near.tex:46). -/
 noncomputable def y0 : ℝ := 17 / 80
 
-/-- `v = 1 - τ²` (sec_04_near.tex:50; Lemma 4.3, sec_04_near.tex:127). -/
+/-- `Ψ = 1 - τ²` (sec_04_near.tex:50; Lemma 4.3, sec_04_near.tex:127). -/
 noncomputable def vτ (τ : ℝ) : ℝ := 1 - τ ^ 2
 
-/-- `β = τ / v` (sec_04_near.tex:50). -/
+/-- `τ₁ = τ / Ψ` (sec_04_near.tex:50). -/
 noncomputable def βτ (τ : ℝ) : ℝ := τ / vτ τ
 
 /-- `y² = ¼ - τ²` (sec_04_near.tex:38, 127). -/
@@ -26,13 +26,13 @@ noncomputable def ysq (τ : ℝ) : ℝ := 1 / 4 - τ ^ 2
 /-- `y = √(¼ - τ²)` (sec_04_near.tex:38). -/
 noncomputable def yτ (τ : ℝ) : ℝ := Real.sqrt (ysq τ)
 
-/-- `ν = (c - τ)/v` (sec_04_near.tex:83, 127). -/
+/-- `ν = (c - τ)/Ψ` (sec_04_near.tex:83, 127). -/
 noncomputable def nuτ (τ : ℝ) (c : ℂ) : ℂ := (c - τ) / (vτ τ : ℂ)
 
-/-- `D = 2(1 - 2τc)/v` (sec_04_near.tex:86, 127). -/
+/-- `D = 2(1 - 2τc)/Ψ` (sec_04_near.tex:86, 127). -/
 noncomputable def Dτ (τ : ℝ) (c : ℂ) : ℂ := 2 * (1 - 2 * τ * c) / (vτ τ : ℂ)
 
-/-- `Q̂(τ, c) = (D - y²(6ν² + 8βν - 4τν³ - 6τβν²)) / ((1 + ν²y²)(1 - ν(ν + 2β)y²))` (sec_04_near.tex:116, 129). -/
+/-- `Q̂(τ, c) = (Q_0 - y²(6ν² + 8τ₁ν - 4τν³ - 6ττ₁ν²)) / ((1 + ν²y²)(1 - ν(ν + 2τ₁)y²))` (sec_04_near.tex:116, 129). -/
 noncomputable def Qhat (τ : ℝ) (c : ℂ) : ℂ :=
   let ν := nuτ τ c
   let β : ℂ := βτ τ
@@ -40,12 +40,12 @@ noncomputable def Qhat (τ : ℝ) (c : ℂ) : ℂ :=
   (Dτ τ c - y2 * (6 * ν ^ 2 + 8 * β * ν - 4 * τ * ν ^ 3 - 6 * τ * β * ν ^ 2)) /
     ((1 + ν ^ 2 * y2) * (1 - ν * (ν + 2 * β) * y2))
 
-/-- `Π̂_o(iy) = (1 - ν(ν + 2β)y²) / (1 + ν²y²)²` (sec_04_near.tex:115). -/
+/-- `Π̂_o(iy) = (1 - ν(ν + 2τ₁)y²) / (1 + ν²y²)²` (sec_04_near.tex:115). -/
 noncomputable def PihatO (τ : ℝ) (c : ℂ) : ℂ :=
   let ν := nuτ τ c
   (1 - ν * (ν + 2 * (βτ τ : ℂ)) * (ysq τ : ℂ)) / (1 + ν ^ 2 * (ysq τ : ℂ)) ^ 2
 
-/-- `T̂ = (-4τν³ + (6 + 2τ²/v)ν² + (4τ/v²)ν - D(ν⁴ + 2βν³)y²) / (1 - 2βνy² - (ν⁴ + 2βν³)y⁴)` (sec_04_near.tex:117). -/
+/-- `T̂ = (-4τν³ + (6 + 2τ²/Ψ)ν² + (4τ/Ψ²)ν - Q_0(ν⁴ + 2τ₁ν³)y²) / (1 - 2τ₁νy² - (ν⁴ + 2τ₁ν³)y⁴)` (sec_04_near.tex:117). -/
 noncomputable def That (τ : ℝ) (c : ℂ) : ℂ :=
   let ν := nuτ τ c
   let β : ℂ := βτ τ
@@ -69,10 +69,10 @@ noncomputable def etadef (c : ℂ) : ℝ := 1 - ‖c‖ ^ 2
 /-- `ξ = iy` (Lemma 4.5(i), sec_04_near.tex:220). -/
 noncomputable def xiτ (τ : ℝ) : ℂ := I * (yτ τ : ℂ)
 
-/-- `Π̂(ξ) = ξ(1 + βξ)/(1 - νξ)²` (Lemma 4.5(i), sec_04_near.tex:220). -/
+/-- `Π̂(ξ) = ξ(1 + τ₁ξ)/(1 - νξ)²` (Lemma 4.5(i), sec_04_near.tex:220). -/
 noncomputable def Pihat (τ : ℝ) (c : ℂ) (ξ : ℂ) : ℂ := ξ * (1 + (βτ τ : ℂ) * ξ) / (1 - nuτ τ c * ξ) ^ 2
 
-/-- `Π_j(ξ) = -2 ξ^{j+1} (1 + βξ)^{2-j} / (v^j (1 - νξ)³)` (Lemma 4.5(i), sec_04_near.tex:222). -/
+/-- `Π_j(ξ) = -2 ξ^{j+1} (1 + τ₁ξ)^{2-j} / (Ψ^j (1 - νξ)³)` (Lemma 4.5(i), sec_04_near.tex:222). -/
 noncomputable def PiJ (τ : ℝ) (c : ℂ) (j : ℕ) (ξ : ℂ) : ℂ :=
   -2 * ξ ^ (j + 1) * (1 + (βτ τ : ℂ) * ξ) ^ ((2 : ℤ) - j) / ((vτ τ : ℂ) ^ j * (1 - nuτ τ c * ξ) ^ 3)
 
@@ -96,22 +96,22 @@ noncomputable def B1 (x : ℝ) : ℝ := 16 / 15 * (x ^ 2 / (1 - 2 * x))
 noncomputable def B2 (x : ℝ) : ℝ :=
   256 / 243 * (x ^ 4 / (1 - 2 / 3 * x) ^ 2) + 4096 / 3645 * (x ^ 5 / ((1 - 2 / 3 * x) ^ 2 * (1 - 2 * x)))
 
-/-- `ε(y) = 16y²/(3(1 - 4y²)²) + 4y²/(1 - 4y²)` (Lemma 4.4(ii), sec_04_near.tex:175). -/
+/-- `ς(y) = 16y²/(3(1 - 4y²)²) + 4y²/(1 - 4y²)` (Lemma 4.4(ii), sec_04_near.tex:175). -/
 noncomputable def epsOf (y : ℝ) : ℝ := 16 * y ^ 2 / (3 * (1 - 4 * y ^ 2) ^ 2) + 4 * y ^ 2 / (1 - 4 * y ^ 2)
 
-/-- `ε = ε(y₀)` (sec_04_near.tex:302). -/
+/-- `ς = ς(y₀)` (sec_04_near.tex:302). -/
 noncomputable def epsY0 : ℝ := epsOf y0
 
-/-- The odd part `Z_o(x) = ½(Z(x) - Z(-x))` (sec_04_near.tex:302). -/
+/-- The odd part `Z_odd(x) = ½(Z(x) - Z(-x))` (sec_04_near.tex:302). -/
 noncomputable def oddPart (Z : ℝ → ℝ) (x : ℝ) : ℝ := (Z x - Z (-x)) / 2
 
-/-- The even part `Z_e(x) = ½(Z(x) + Z(-x))` (sec_04_near.tex:302). -/
+/-- The even part `Z_even(x) = ½(Z(x) + Z(-x))` (sec_04_near.tex:302). -/
 noncomputable def evenPart (Z : ℝ → ℝ) (x : ℝ) : ℝ := (Z x + Z (-x)) / 2
 
-/-- `𝔥[Z] = Z_o(y₀)/y₀` (sec_04_near.tex:304). -/
+/-- `𝔥[Z] = Z_odd(y₀)/y₀` (sec_04_near.tex:304). -/
 noncomputable def frakH (Z : ℝ → ℝ) : ℝ := oddPart Z y0 / y0
 
-/-- `𝔴[Z] = (y₀ Z_o'(y₀) + (7/3) Z_o(y₀))/y₀³ + Z_e'(y₀)/(2y₀³)` (sec_04_near.tex:305). -/
+/-- `𝔴[Z] = (y₀ Z_odd'(y₀) + (7/3) Z_odd(y₀))/y₀³ + Z_even'(y₀)/(2y₀³)` (sec_04_near.tex:305). -/
 noncomputable def frakW (Z : ℝ → ℝ) : ℝ :=
   (y0 * deriv (oddPart Z) y0 + 7 / 3 * oddPart Z y0) / y0 ^ 3 + deriv (evenPart Z) y0 / (2 * y0 ^ 3)
 
@@ -124,7 +124,8 @@ noncomputable def etaPlus (ρm ρp : ℝ) : ℝ := min 1 (4 * sSup ((fun ρ => �
 /-- `e⁺ = 4(1 - ρ₋)` (sec_04_near.tex:311). -/
 noncomputable def ePlus (ρm : ℝ) : ℝ := 4 * (1 - ρm)
 
-/-- `𝒱 = (ν⁺)⁴ + (4/3)(ν⁺)³`, as a function of the cap `ν⁺` (sec_04_near.tex:181, 312). -/
+/-- The sum `(ν⁺)⁴ + (4/3)(ν⁺)³`, as a function of the cap `ν⁺`; the text writes it out where it occurs
+(sec_04_near.tex:183, 208, 313). -/
 noncomputable def calVOf (νp : ℝ) : ℝ := νp ^ 4 + 4 / 3 * νp ^ 3
 
 /-- `T⁺` as a function of the cap `ν⁺` (Lemma 4.4(iv), sec_04_near.tex:183; sec_04_near.tex:313). -/
@@ -145,7 +146,7 @@ noncomputable def Z6Of (νp : ℝ) (x : ℝ) : ℝ :=
 /-- `N₆ = (𝔴[Z₆] + T⁺ 𝔥[Z₆]) / Π̂₋` as a function of the cap `ν⁺` (Lemma 4.5(ii), sec_04_near.tex:231). -/
 noncomputable def N6Of (νp : ℝ) : ℝ := (frakW (Z6Of νp) + TPlusOf νp * frakH (Z6Of νp)) / PihatLowOf νp
 
-/-- `𝒱` of Lemma 4.8, with `ν⁺ = ν⁺(ρ₋)` (sec_04_near.tex:312). -/
+/-- The sum `(ν⁺)⁴ + (4/3)(ν⁺)³` of Lemma 4.8, with `ν⁺ = ν⁺(ρ₋)` (written out in `T⁺`, sec_04_near.tex:313). -/
 noncomputable def calV (ρm : ℝ) : ℝ := calVOf (nuPlus ρm)
 
 /-- `T⁺` of Lemma 4.8 (sec_04_near.tex:313). -/
@@ -163,21 +164,21 @@ noncomputable def N6 (ρm : ℝ) : ℝ := N6Of (nuPlus ρm)
 /-- `M = 20 + N₆²` (sec_04_near.tex:316). -/
 noncomputable def Mcap (ρm : ℝ) : ℝ := 20 + N6 ρm ^ 2
 
-/-- `𝔞(x) = 1 - ν⁺x` for a cap `ν⁺` (Lemma 4.6, sec_04_near.tex:254). -/
+/-- `1 - ν⁺x` for a cap `ν⁺` (Lemma 4.6, sec_04_near.tex:254; the text writes it out). -/
 noncomputable def faOf (νp : ℝ) (x : ℝ) : ℝ := 1 - νp * x
 
-/-- `𝔡(x) = 𝔞(x) - √η⁺ B₁(x)` for caps `ν⁺, η⁺` (Lemma 4.6, sec_04_near.tex:254). -/
+/-- `𝒴(x) = 1 - ν⁺x - √η⁺ B₁(x)` for caps `ν⁺, η⁺` (Lemma 4.6, sec_04_near.tex:254). -/
 noncomputable def fdOf (νp ηp : ℝ) (x : ℝ) : ℝ := faOf νp x - Real.sqrt ηp * B1 x
 
-/-- `Z₁ = N₊ B₁ [1/(𝔞²𝔡) + 1/(𝔞𝔡²)]` for caps `ν⁺, η⁺` (Lemma 4.6, sec_04_near.tex:256). -/
+/-- `Z₁ = N₊ B₁ [1/((1 - ν⁺x)²𝒴) + 1/((1 - ν⁺x)𝒴²)]` for caps `ν⁺, η⁺` (Lemma 4.6, sec_04_near.tex:256). -/
 noncomputable def Z1Of (νp ηp : ℝ) (x : ℝ) : ℝ :=
   Nplus x * B1 x * (1 / (faOf νp x ^ 2 * fdOf νp ηp x) + 1 / (faOf νp x * fdOf νp ηp x ^ 2))
 
-/-- `Z₂ = N₊ B₂ [2/(𝔞³𝔡) + 1/(𝔞²𝔡²)]` for caps `ν⁺, η⁺` (Lemma 4.6, sec_04_near.tex:257). -/
+/-- `Z₂ = N₊ B₂ [2/((1 - ν⁺x)³𝒴) + 1/((1 - ν⁺x)²𝒴²)]` for caps `ν⁺, η⁺` (Lemma 4.6, sec_04_near.tex:257). -/
 noncomputable def Z2Of (νp ηp : ℝ) (x : ℝ) : ℝ :=
   Nplus x * B2 x * (2 / (faOf νp x ^ 3 * fdOf νp ηp x) + 1 / (faOf νp x ^ 2 * fdOf νp ηp x ^ 2))
 
-/-- `Π₋ = max(1 - ε(y₀), Π̂₋ - √η⁺ 𝔥[Z₁])` for caps `ν⁺, η⁺` (Lemma 4.6,
+/-- `Π₋ = max(1 - ς(y₀), Π̂₋ - √η⁺ 𝔥[Z₁])` for caps `ν⁺, η⁺` (Lemma 4.6,
 sec_04_near.tex:259). -/
 noncomputable def PiLowOf (νp ηp : ℝ) : ℝ :=
   max (1 - epsY0) (PihatLowOf νp - Real.sqrt ηp * frakH (Z1Of νp ηp))
@@ -186,19 +187,19 @@ noncomputable def PiLowOf (νp ηp : ℝ) : ℝ :=
 noncomputable def LamOf (νp ηp np : ℝ) : ℝ :=
   (frakW (Z2Of νp ηp) + TPlusOf νp * frakH (Z2Of νp ηp) + np * frakH (Z1Of νp ηp)) / PiLowOf νp ηp
 
-/-- `𝔞(x) = 1 - ν⁺x` (sec_04_near.tex:317). -/
+/-- `1 - ν⁺x` (sec_04_near.tex:317; the text writes it out). -/
 noncomputable def fa (ρm : ℝ) (x : ℝ) : ℝ := faOf (nuPlus ρm) x
 
-/-- `𝔡(x) = 𝔞(x) - √η⁺ B₁(x)` (sec_04_near.tex:317). -/
+/-- `𝒴(x) = 1 - ν⁺x - √η⁺ B₁(x)` (sec_04_near.tex:317). -/
 noncomputable def fd (ρm ρp : ℝ) (x : ℝ) : ℝ := fdOf (nuPlus ρm) (etaPlus ρm ρp) x
 
-/-- `Z₁ = N₊ B₁ [1/(𝔞²𝔡) + 1/(𝔞𝔡²)]` (sec_04_near.tex:318). -/
+/-- `Z₁ = N₊ B₁ [1/((1 - ν⁺x)²𝒴) + 1/((1 - ν⁺x)𝒴²)]` (sec_04_near.tex:318). -/
 noncomputable def Z1 (ρm ρp : ℝ) (x : ℝ) : ℝ := Z1Of (nuPlus ρm) (etaPlus ρm ρp) x
 
-/-- `Z₂ = N₊ B₂ [2/(𝔞³𝔡) + 1/(𝔞²𝔡²)]` (sec_04_near.tex:319). -/
+/-- `Z₂ = N₊ B₂ [2/((1 - ν⁺x)³𝒴) + 1/((1 - ν⁺x)²𝒴²)]` (sec_04_near.tex:319). -/
 noncomputable def Z2 (ρm ρp : ℝ) (x : ℝ) : ℝ := Z2Of (nuPlus ρm) (etaPlus ρm ρp) x
 
-/-- `Π₋ = max(1 - ε, Π̂₋ - √η⁺ 𝔥[Z₁])` (sec_04_near.tex:320). -/
+/-- `Π₋ = max(1 - ς, Π̂₋ - √η⁺ 𝔥[Z₁])` (sec_04_near.tex:320). -/
 noncomputable def PiLow (ρm ρp : ℝ) : ℝ := PiLowOf (nuPlus ρm) (etaPlus ρm ρp)
 
 /-- `n⁺ = (M + 130e⁺)^{1/2}` (sec_04_near.tex:320). -/
@@ -212,7 +213,7 @@ noncomputable def dcap (ρm ρp : ℝ) : ℝ := 1 / y0 ^ 2 * (22 / 25 + 21 / 100
 
 /-- The quadratic left side of Lemma 4.8 for the cell `[i/256, (i+1)/256]` at `e`:
 `(293/540 + δ e)² - ρ₊ e (M + 130 e)` (sec_04_near.tex:326). The value about 0.1557 at sec_04_near.tex:333 is a run
-description: the smallest value the first program finds for this quadratic with its upper bounds for `𝔥[Z]`, `𝔴[Z]`,
+description: the smallest value of this quadratic computed with the upper bounds for `𝔥[Z]`, `𝔴[Z]`,
 not the minimum of `cellQuad`. -/
 noncomputable def cellQuad (i : ℕ) (e : ℝ) : ℝ :=
   (293 / 540 + dcap ((i : ℝ) / 256) (((i : ℝ) + 1) / 256) * e) ^ 2 -

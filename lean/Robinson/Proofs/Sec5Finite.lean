@@ -850,7 +850,7 @@ private lemma final_ineq {A B C r : ℝ} (hr : r ^ 2 = 3) (hr1 : 17320508 / 10 ^
   · linarith [huvk.1]
   · linarith [huvk.2]
 
-theorem rem_5_6_proved :
+private theorem rem_5_6_neg_form :
     IsSymmUnitary (-!![(Real.cos 0.535 : ℂ), (Real.sin 0.535 : ℂ); (Real.sin 0.535 : ℂ), -(Real.cos 0.535 : ℂ)]) ∧
       -0.0785 < (Qrel (deg 60)
         (-!![(Real.cos 0.535 : ℂ), (Real.sin 0.535 : ℂ); (Real.sin 0.535 : ℂ), -(Real.cos 0.535 : ℂ)])).re ∧
@@ -870,5 +870,22 @@ theorem rem_5_6_proved :
   rw [Qrel_of_real _ _ _ _ _ (cA_rem _ _ _) (cB_rem _ _ _) (cC_rem _ _ _), Complex.ofReal_re,
     tan_deg60_quarter]
   exact final_ineq hr hr1 hr2 hA1 hA2 hB1 hB2 hC1 hC2
+
+/-- `-[[cos a, sin a], [sin a, -cos a]]` has the entries `[[-cos a, -sin a], [-sin a, cos a]]`. -/
+theorem rem_matrix_eq (a : ℝ) :
+    (-!![(Real.cos a : ℂ), (Real.sin a : ℂ); (Real.sin a : ℂ), -(Real.cos a : ℂ)]) =
+      !![-(Real.cos a : ℂ), -(Real.sin a : ℂ); -(Real.sin a : ℂ), (Real.cos a : ℂ)] := by
+  ext i j
+  fin_cases i <;> fin_cases j <;> simp
+
+theorem rem_5_6_proved :
+    IsSymmUnitary (!![-(Real.cos 0.535 : ℂ), -(Real.sin 0.535 : ℂ); -(Real.sin 0.535 : ℂ), (Real.cos 0.535 : ℂ)]) ∧
+      -0.0785 < (Qrel (deg 60)
+        (!![-(Real.cos 0.535 : ℂ), -(Real.sin 0.535 : ℂ); -(Real.sin 0.535 : ℂ), (Real.cos 0.535 : ℂ)])).re ∧
+      (Qrel (deg 60)
+        (!![-(Real.cos 0.535 : ℂ), -(Real.sin 0.535 : ℂ); -(Real.sin 0.535 : ℂ), (Real.cos 0.535 : ℂ)])).re < -0.0775 := by
+  have h := rem_5_6_neg_form
+  rw [rem_matrix_eq] at h
+  exact h
 
 end Robinson.Proofs

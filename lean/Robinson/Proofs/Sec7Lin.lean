@@ -1,5 +1,5 @@
 /-
-Robinson/Proofs/Sec7Lin.lean — proofs of sec7_CP_linear, sec7_trace_bound.
+Robinson/Proofs/Sec7Lin.lean — proofs of sec7_CP_linear, sec7_CP_explicit, sec7_trace_bound.
 Paper author: Dave Goel. Copyright (C) Dave Goel 2026--now. All rights reserved.
 -/
 import Robinson.Defs.Matrix2
@@ -80,6 +80,48 @@ theorem sec7_CP_linear_proved :
   refine ⟨⟨Kq, Kq_map⟩, qCoef, fun θ => ?_⟩
   rw [CP, Kq_map]
   simp [qCoef, Gram, Matrix.trace, Matrix.vecMul, dotProduct, Fin.sum_univ_four]
+  ring
+
+/-! ## `C_P(θ)` with its nine printed rational coefficients -/
+
+/-- `P⁻¹`, exactly (`Pq * PqInv = 1`). -/
+private def PqInv : Matrix (Fin 4) (Fin 4) ℚ :=
+  (1 / 125044355055249 : ℚ) •
+    !![136654064464000, -17186619290000, 5336867440000, -394438719032000;
+       -17186619290000, 43960152370000, -13761297440000, 49620322270000;
+       5336867440000, -13761297440000, 485548588690000, 172927032640000;
+       -394438719032000, 49620322270000, 172927032640000, 2634790073686000]
+
+private lemma Pq_mul_PqInv : Pq * PqInv = 1 := by
+  ext i j
+  fin_cases i <;> fin_cases j <;> simp [Pq, PqInv, Matrix.mul_apply, Fin.sum_univ_four] <;> norm_num
+
+private lemma Pq_inv_eq : Pq⁻¹ = PqInv := Matrix.inv_eq_right_inv Pq_mul_PqInv
+
+/-- The entries of `K = ½ (P + J P⁻¹ J)`, exactly. -/
+private lemma Kq_eq : Kq =
+    !![235448458562402753 / 138938172283610000, 95947301639073811 / 277876344567220000,
+        -2585362353487573 / 26050907303176875, 211505168045055571 / 833629033701660000;
+       95947301639073811 / 277876344567220000, 104842201985681053 / 34734543070902500,
+        8923903585803881 / 104203629212707500, -2245578249247241 / 208407258425415000;
+       -2585362353487573 / 26050907303176875, 8923903585803881 / 104203629212707500,
+        683381383525995517 / 2500887101104980000, -10747725795500707 / 312610887638122500;
+       211505168045055571 / 833629033701660000, -2245578249247241 / 208407258425415000,
+        -10747725795500707 / 312610887638122500, 219814369018563871 / 2500887101104980000] := by
+  rw [Kq, Pq_inv_eq]
+  ext i j
+  fin_cases i <;> fin_cases j <;> simp [Pq, PqInv, Jq, Matrix.mul_apply, Fin.sum_univ_four] <;> norm_num
+
+/-- `C_P(θ)` for `λ = 4/5`, `μ = ½` and the fixed `P`, with the nine rational coefficients as printed. -/
+theorem sec7_CP_explicit_proved (θ : ℝ) :
+    CP θ (4 / 5) (1 / 2) Pmat =
+      130963453301025393 / 55575268913444000 * Ae - 183920349380321459 / 277876344567220000 * (Ze θ).re +
+        95947301639073811 / 277876344567220000 * (Ze θ).im - 917139083085913 / 8336290337016600 * Le -
+        6145773526217781 / 69469086141805000 * (Lz θ).re + 282896396731486619 / 833629033701660000 * (Lz θ).im +
+        225798938136139847 / 1250443550552490000 * Me + 3679103289741521 / 39696620652460000 * (Mz θ).re -
+        10747725795500707 / 312610887638122500 * (Mz θ).im := by
+  rw [CP, Kq_map, Kq_eq]
+  simp [Gram, Matrix.trace, Matrix.mul_apply, Matrix.vecMul, dotProduct, Fin.sum_univ_four]
   ring
 
 /-! ## The trace bound -/

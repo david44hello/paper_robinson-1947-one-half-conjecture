@@ -1,5 +1,6 @@
 /-
-Robinson/Proofs/Sec4Hat.lean — proofs of sec4_hat_bounds, eq_Qk, sec4_no_constant, lem_4_4_iv.
+Robinson/Proofs/Sec4Hat.lean — proofs of sec4_hat_bounds, eq_Qk, sec4_no_constant, lem_4_4_iv,
+sec4_That_num, sec4_That_den, sec4_hat_elem_bounds, sec4_PihatO_num, sec4_PihatO_den, sec4_hat_quotients.
 Paper author: Dave Goel. Copyright (C) Dave Goel 2026--now. All rights reserved.
 -/
 import Robinson.Defs.Near
@@ -578,7 +579,106 @@ private lemma PihatO_ge (h1 : 9 / 20 ≤ τ) (h2 : τ ≤ 1 / 2) (hy0 : yτ τ �
   unfold PihatLowOf
   exact key
 
+/-- `|1 - ν(ν + 2β)y²| ≥ 1 - min(20/9, (ν⁺)² + (4/3)ν⁺) y₀²`: the numerator step of `PihatO_ge_aux`. -/
+private lemma PihatO_num_ge (h1 : 9 / 20 ≤ τ) (h2 : τ ≤ 1 / 2) (hy0 : yτ τ ≤ y0) {ν : ℂ} {νp : ℝ}
+    (hν : ‖ν‖ ≤ νp) (hprod : ‖ν * (ν + 2 * (βτ τ : ℂ))‖ ≤ min (20 / 9) (νp ^ 2 + 4 / 3 * νp)) :
+    1 - min (20 / 9) (νp ^ 2 + 4 / 3 * νp) * y0 ^ 2 ≤ ‖1 - ν * (ν + 2 * (βτ τ : ℂ)) * (ysq τ : ℂ)‖ := by
+  have hp0 : 0 ≤ νp := (norm_nonneg ν).trans hν
+  have hY0 := ysq_nonneg h1 h2
+  have hY := ysq_le_y0 h1 h2 hy0
+  have hnY := norm_ysq h1 h2
+  have hm0 : 0 ≤ min (20 / 9) (νp ^ 2 + 4 / 3 * νp) :=
+    le_min (by norm_num) (add_nonneg (sq_nonneg _) (by linarith))
+  have hsub := norm_sub_norm_le (1 : ℂ) (ν * (ν + 2 * (βτ τ : ℂ)) * (ysq τ : ℂ))
+  rw [norm_one, norm_mul, hnY] at hsub
+  have := mul_le_mul hprod hY hY0 hm0
+  linarith
+
+/-- `|1 + ν²y²| ≤ 1 + (ν⁺)² y₀²`: the denominator step of `PihatO_ge_aux` (before squaring). -/
+private lemma PihatO_den_le (h1 : 9 / 20 ≤ τ) (h2 : τ ≤ 1 / 2) (hy0 : yτ τ ≤ y0) {ν : ℂ} {νp : ℝ}
+    (hν : ‖ν‖ ≤ νp) : ‖1 + ν ^ 2 * (ysq τ : ℂ)‖ ≤ 1 + νp ^ 2 * y0 ^ 2 := by
+  have hn0 := norm_nonneg ν
+  have hY0 := ysq_nonneg h1 h2
+  have hY := ysq_le_y0 h1 h2 hy0
+  have hnY := norm_ysq h1 h2
+  calc ‖1 + ν ^ 2 * (ysq τ : ℂ)‖ ≤ ‖(1 : ℂ)‖ + ‖ν ^ 2 * (ysq τ : ℂ)‖ := norm_add_le _ _
+    _ = 1 + ‖ν‖ ^ 2 * ysq τ := by rw [norm_one, norm_mul, norm_pow, hnY]
+    _ ≤ 1 + νp ^ 2 * y0 ^ 2 := by
+      have := mul_le_mul (pow_le_pow_left₀ hn0 hν 2) hY hY0 (sq_nonneg _)
+      linarith
+
 end caps
+
+/-! ## The four intermediate bounds of Lemma 4.4(iv) (rows; the late-edit rule) -/
+
+/-- The numerator of `T̂`: `≤ 2(ν⁺)³ + (20/3)(ν⁺)² + (32/9)ν⁺ + (16/3)((ν⁺)⁴ + (4/3)(ν⁺)³)y₀²`
+(`τ₁` of the text is Lean's `βτ`; `(ν⁺)⁴ + (4/3)(ν⁺)³` is Lean's `calVOf ν⁺`, written out). -/
+theorem sec4_That_num_proved (τ : ℝ) (h1 : 9 / 20 ≤ τ) (h2 : τ ≤ 1 / 2) (hy0 : yτ τ ≤ y0) (c : ℂ) (hc : ‖c‖ ≤ 1)
+    (νp : ℝ) (hν : ‖nuτ τ c‖ ≤ νp) :
+    ‖-4 * τ * nuτ τ c ^ 3 + (6 + 2 * τ ^ 2 / (vτ τ : ℂ)) * nuτ τ c ^ 2 + 4 * τ / (vτ τ : ℂ) ^ 2 * nuτ τ c -
+        Dτ τ c * (nuτ τ c ^ 4 + 2 * (βτ τ : ℂ) * nuτ τ c ^ 3) * (ysq τ : ℂ)‖ ≤
+      2 * νp ^ 3 + 20 / 3 * νp ^ 2 + 32 / 9 * νp + 16 / 3 * (νp ^ 4 + 4 / 3 * νp ^ 3) * y0 ^ 2 := by
+  have h := That_num_le h1 h2 hy0 hν (norm_D_le h1 h2 hc) (norm_quartic_le h1 h2 hν)
+  unfold calVOf at h
+  exact h
+
+/-- The denominator of `T̂`: `≥ 1 - (4/3)ν⁺y₀² - ((ν⁺)⁴ + (4/3)(ν⁺)³)y₀⁴`, and for `ν⁺ ≤ 2` this is at least
+`1 - (8/3)y₀² - (80/3)y₀⁴ > 4/5`. -/
+theorem sec4_That_den_proved (τ : ℝ) (h1 : 9 / 20 ≤ τ) (h2 : τ ≤ 1 / 2) (hy0 : yτ τ ≤ y0) (c : ℂ)
+    (νp : ℝ) (hν : ‖nuτ τ c‖ ≤ νp) (hνp : νp ≤ 2) :
+    1 - 4 / 3 * νp * y0 ^ 2 - (νp ^ 4 + 4 / 3 * νp ^ 3) * y0 ^ 4 ≤
+        ‖1 - 2 * (βτ τ : ℂ) * nuτ τ c * (ysq τ : ℂ) - (nuτ τ c ^ 4 + 2 * (βτ τ : ℂ) * nuτ τ c ^ 3) * (ysq τ : ℂ) ^ 2‖ ∧
+      1 - 8 / 3 * y0 ^ 2 - 80 / 3 * y0 ^ 4 ≤ 1 - 4 / 3 * νp * y0 ^ 2 - (νp ^ 4 + 4 / 3 * νp ^ 3) * y0 ^ 4 ∧
+      (4 / 5 : ℝ) < 1 - 8 / 3 * y0 ^ 2 - 80 / 3 * y0 ^ 4 := by
+  have hp0 : 0 ≤ νp := (norm_nonneg _).trans hν
+  have hA := That_den_ge h1 h2 hy0 hν (norm_quartic_le h1 h2 hν)
+  have hV := calV_le hp0 hνp
+  unfold calVOf at hA hV
+  have hy2 : (0 : ℝ) ≤ y0 ^ 2 := sq_nonneg _
+  have hy4 : y0 ^ 4 = (289 / 6400) ^ 2 := by rw [show y0 ^ 4 = (y0 ^ 2) ^ 2 by ring, y0_sq]
+  refine ⟨hA, ?_, ?_⟩
+  · have h4 : (0 : ℝ) ≤ y0 ^ 4 := by positivity
+    nlinarith [mul_le_mul_of_nonneg_right hV h4, mul_le_mul_of_nonneg_right hνp hy2]
+  · rw [y0_sq, hy4]; norm_num
+
+/-- The bounds used term by term in `(sec4:hat)` for Lemma 4.4(iv): `τ²/Ψ ≤ 1/3`, `τ/Ψ² ≤ 8/9`, `|Q_0| ≤ 16/3`
+(Lean's `Dτ`) and `|2τ₁ν| ≤ (4/3)ν⁺` (`τ₁` = Lean's `βτ`; with `2τ ≤ 1`, `|ν| ≤ ν⁺`, `y ≤ y₀` as hypotheses). -/
+theorem sec4_hat_elem_bounds_proved (τ : ℝ) (h1 : 9 / 20 ≤ τ) (h2 : τ ≤ 1 / 2) (c : ℂ) (hc : ‖c‖ ≤ 1)
+    (νp : ℝ) (hν : ‖nuτ τ c‖ ≤ νp) :
+    τ ^ 2 / vτ τ ≤ 1 / 3 ∧ τ / vτ τ ^ 2 ≤ 8 / 9 ∧ ‖Dτ τ c‖ ≤ 16 / 3 ∧
+      ‖2 * (βτ τ : ℂ) * nuτ τ c‖ ≤ 4 / 3 * νp := by
+  have hv : 3 / 4 ≤ vτ τ := by unfold vτ; nlinarith
+  have hv0 : 0 < vτ τ := by linarith
+  have hb0 := beta_nonneg h1 h2
+  have hb := beta_le h1 h2
+  refine ⟨?_, ?_, norm_D_le h1 h2 hc, ?_⟩
+  · rw [div_le_iff₀ hv0]; nlinarith
+  · rw [div_le_iff₀ (by positivity)]; nlinarith [mul_le_mul hv hv (by norm_num) hv0.le]
+  · rw [norm_mul, norm_mul, Complex.norm_ofNat, Complex.norm_of_nonneg hb0]
+    nlinarith [mul_le_mul hb hν (norm_nonneg _) (by norm_num : (0 : ℝ) ≤ 2 / 3), norm_nonneg (nuτ τ c)]
+
+/-- The numerator of `Π̂_o(iy)`: `|ν(ν + 2τ₁)| ≤ min(20/9, (ν⁺)² + (4/3)ν⁺)`, so
+`|1 - ν(ν + 2τ₁)y²| ≥ 1 - min(20/9, (ν⁺)² + (4/3)ν⁺)y₀²`. -/
+theorem sec4_PihatO_num_proved (τ : ℝ) (h1 : 9 / 20 ≤ τ) (h2 : τ ≤ 1 / 2) (hy0 : yτ τ ≤ y0) (c : ℂ)
+    (hc : ‖c‖ ≤ 1) (νp : ℝ) (hν : ‖nuτ τ c‖ ≤ νp) :
+    ‖nuτ τ c * (nuτ τ c + 2 * (βτ τ : ℂ))‖ ≤ min (20 / 9) (νp ^ 2 + 4 / 3 * νp) ∧
+      1 - min (20 / 9) (νp ^ 2 + 4 / 3 * νp) * y0 ^ 2 ≤
+        ‖1 - nuτ τ c * (nuτ τ c + 2 * (βτ τ : ℂ)) * (ysq τ : ℂ)‖ :=
+  ⟨norm_nu_mul_le_min h1 h2 hc hν, PihatO_num_ge h1 h2 hy0 hν (norm_nu_mul_le_min h1 h2 hc hν)⟩
+
+/-- The denominator of `Π̂_o(iy)`: `|1 + ν²y²|² ≤ (1 + (ν⁺)²y₀²)²`. -/
+theorem sec4_PihatO_den_proved (τ : ℝ) (h1 : 9 / 20 ≤ τ) (h2 : τ ≤ 1 / 2) (hy0 : yτ τ ≤ y0) (c : ℂ)
+    (νp : ℝ) (hν : ‖nuτ τ c‖ ≤ νp) :
+    ‖1 + nuτ τ c ^ 2 * (ysq τ : ℂ)‖ ^ 2 ≤ (1 + νp ^ 2 * y0 ^ 2) ^ 2 :=
+  pow_le_pow_left₀ (norm_nonneg _) (PihatO_den_le h1 h2 hy0 hν) 2
+
+/-- `T⁺` and `Π̂₋` are the quotients of the right-hand sides of the display (the sum `(ν⁺)⁴ + (4/3)(ν⁺)³` written
+out; Lean's `calVOf`). -/
+theorem sec4_hat_quotients_proved (νp : ℝ) :
+    TPlusOf νp = (2 * νp ^ 3 + 20 / 3 * νp ^ 2 + 32 / 9 * νp + 16 / 3 * (νp ^ 4 + 4 / 3 * νp ^ 3) * y0 ^ 2) /
+        (1 - 4 / 3 * νp * y0 ^ 2 - (νp ^ 4 + 4 / 3 * νp ^ 3) * y0 ^ 4) ∧
+      PihatLowOf νp = (1 - min (20 / 9) (νp ^ 2 + 4 / 3 * νp) * y0 ^ 2) / (1 + νp ^ 2 * y0 ^ 2) ^ 2 :=
+  ⟨by unfold TPlusOf calVOf; rfl, by unfold PihatLowOf; rfl⟩
 
 theorem lem_4_4_iv_proved (τ : ℝ) (h1 : 9 / 20 ≤ τ) (h2 : τ ≤ 1 / 2) (hy : 0 < yτ τ) (hy0 : yτ τ ≤ y0) (c : ℂ)
     (hc : ‖c‖ ≤ 1) (νp : ℝ) (hν : ‖nuτ τ c‖ ≤ νp) (hνp : νp ≤ 2) :

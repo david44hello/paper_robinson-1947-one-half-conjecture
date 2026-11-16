@@ -1,5 +1,5 @@
 /-
-Robinson/Proofs/Lem43.lean — proofs of sec4_circle, lem_4_3 and lem_4_5_i.
+Robinson/Proofs/Lem43.lean — proofs of sec4_circle, lem_4_3, lem_4_5_i and sec4_TJ_holo.
 Paper author: Dave Goel. Copyright (C) Dave Goel 2026--now. All rights reserved.
 -/
 import Robinson.Defs.Near
@@ -646,6 +646,94 @@ private lemma TJ_diffOn (τ : ℝ) (h1 : 9 / 20 ≤ τ) (h2 : τ < 1 / 2) (j : �
   have hf : DifferentiableOn ℂ (fun c => TJf τ c j) (closedBall (0 : ℂ) 1) := fun c hc =>
     (TJf_diffAt τ h1 h2 j c (mem_closedBall_zero_iff.mp hc)).differentiableWithinAt
   exact hf.congr (fun c hc => TJ_eq τ h1 h2 j c (mem_closedBall_zero_iff.mp hc))
+
+/-- `TJ = TJf` wherever `1 - νξ ≠ 0` and `1 + νξ ≠ 0` (the proof of `TJ_eq`, without `‖c‖ ≤ 1`). -/
+private lemma TJ_eq_of_ne (τ : ℝ) (h1 : 9 / 20 ≤ τ) (h2 : τ < 1 / 2) (j : ℕ) (c : ℂ)
+    (hn1 : 1 - nuτ τ c * xiτ τ ≠ 0) (hn2 : 1 - nuτ τ c * -xiτ τ ≠ 0) : TJ τ c j = TJf τ c j := by
+  have hxi := norm_xi_lt τ h1 h2
+  have hxi' : ‖-xiτ τ‖ < 1 / 2 := by rwa [norm_neg]
+  unfold TJ TJf
+  rw [deriv_PiJ τ c j _ (one_add_beta_ne τ h1 h2 _ hxi) hn1, deriv_PiJ τ c j _ (one_add_beta_ne τ h1 h2 _ hxi') hn2,
+    qhat_eq τ (v_pos τ h1 h2.le).ne' c]
+
+/-- `TJf` is differentiable at `c` wherever its four denominators do not vanish (the proof of `TJf_diffAt`). -/
+private lemma TJf_diffAt_of_ne (τ : ℝ) (j : ℕ) (c : ℂ) (hn1 : 1 - nuτ τ c * xiτ τ ≠ 0)
+    (hn2 : 1 - nuτ τ c * -xiτ τ ≠ 0) (hQ : Qc τ c ≠ 0) (hden : Pihat τ c (xiτ τ) - Pihat τ c (-xiτ τ) ≠ 0) :
+    DifferentiableAt ℂ (fun c => TJf τ c j) c := by
+  have hν : Differentiable ℂ (fun c => nuτ τ c) := by unfold nuτ; fun_prop
+  have hPd : Differentiable ℂ (Pc τ) := by unfold Pc; fun_prop
+  have hQd : Differentiable ℂ (Qc τ) := by unfold Qc; fun_prop
+  have hq : DifferentiableAt ℂ (fun c => Pc τ c / Qc τ c) c := (hPd c).div (hQd c) hQ
+  have hdP : ∀ ζ : ℂ, 1 - nuτ τ c * ζ ≠ 0 → DifferentiableAt ℂ (fun c => dPiJf τ c j ζ) c := by
+    intro ζ hζ
+    have h3 : (1 - nuτ τ c * ζ) ^ 3 ≠ 0 := pow_ne_zero 3 hζ
+    have h6 : ((1 - nuτ τ c * ζ) ^ 3) ^ 2 ≠ 0 := pow_ne_zero 2 h3
+    unfold dPiJf
+    fun_prop (disch := assumption)
+  have hPJ : ∀ ζ : ℂ, 1 - nuτ τ c * ζ ≠ 0 → DifferentiableAt ℂ (fun c => PiJ τ c j ζ) c := by
+    intro ζ hζ
+    have h3 : (1 - nuτ τ c * ζ) ^ 3 ≠ 0 := pow_ne_zero 3 hζ
+    have h3' : ((1 - nuτ τ c * ζ) ^ 3)⁻¹ = ((1 - nuτ τ c * ζ) ^ 3)⁻¹ := rfl
+    simp only [PiJ_eq]
+    fun_prop (disch := assumption)
+  have hPh : ∀ ζ : ℂ, 1 - nuτ τ c * ζ ≠ 0 → DifferentiableAt ℂ (fun c => Pihat τ c ζ) c := by
+    intro ζ hζ
+    have h2' : (1 - nuτ τ c * ζ) ^ 2 ≠ 0 := pow_ne_zero 2 hζ
+    unfold Pihat
+    fun_prop (disch := assumption)
+  have hA := hdP _ hn1
+  have hB := hdP _ hn2
+  have hC := hPJ _ hn1
+  have hD := hPJ _ hn2
+  have hE := hPh _ hn1
+  have hF := hPh _ hn2
+  unfold TJf
+  fun_prop (disch := assumption)
+
+/-- sec_04_near.tex:239: "the `T_j` are holomorphic in `c` there", i.e. near the closed disc `|c| ≤ 1`: on a disc of
+radius `R > 1`. (The set where the four denominators of `TJf` do not vanish is open and contains the closed disc; a
+compact set inside an open set has a thickening inside it.) -/
+theorem sec4_TJ_holo_proved (τ : ℝ) (h1 : 9 / 20 ≤ τ) (h2 : τ < 1 / 2) :
+    ∃ R : ℝ, 1 < R ∧ ∀ j : ℕ, DifferentiableOn ℂ (fun c => TJ τ c j) (ball (0 : ℂ) R) := by
+  have hxi := norm_xi_lt τ h1 h2
+  have hxi' : ‖-xiτ τ‖ < 1 / 2 := by rwa [norm_neg]
+  let U : Set ℂ := {c | 1 - nuτ τ c * xiτ τ ≠ 0 ∧ 1 - nuτ τ c * -xiτ τ ≠ 0 ∧ Qc τ c ≠ 0 ∧
+    Pihat τ c (xiτ τ) - Pihat τ c (-xiτ τ) ≠ 0}
+  have hc1 : Continuous (fun c => 1 - nuτ τ c * xiτ τ) := by unfold nuτ; fun_prop
+  have hc2 : Continuous (fun c => 1 - nuτ τ c * -xiτ τ) := by unfold nuτ; fun_prop
+  have hcQ : Continuous (Qc τ) := by unfold Qc; fun_prop
+  have hν : Differentiable ℂ (fun c => nuτ τ c) := by unfold nuτ; fun_prop
+  have hcP : ∀ ζ : ℂ, ∀ c : ℂ, 1 - nuτ τ c * ζ ≠ 0 → ContinuousAt (fun c => Pihat τ c ζ) c := by
+    intro ζ c hζ
+    have h2' : (1 - nuτ τ c * ζ) ^ 2 ≠ 0 := pow_ne_zero 2 hζ
+    have hd : DifferentiableAt ℂ (fun c => Pihat τ c ζ) c := by
+      unfold Pihat
+      fun_prop (disch := assumption)
+    exact hd.continuousAt
+  have hU : IsOpen U := by
+    rw [isOpen_iff_mem_nhds]
+    intro c hc
+    obtain ⟨hn1, hn2, hQ, hD⟩ := hc
+    have e1 := hc1.continuousAt.eventually_ne hn1
+    have e2 := hc2.continuousAt.eventually_ne hn2
+    have e3 := hcQ.continuousAt.eventually_ne hQ
+    have e4 := ((hcP _ c hn1).sub (hcP _ c hn2)).eventually_ne hD
+    filter_upwards [e1, e2, e3, e4] with c' a b d e using ⟨a, b, d, e⟩
+  have hsub : closedBall (0 : ℂ) 1 ⊆ U := by
+    intro c hc
+    have hc' : ‖c‖ ≤ 1 := mem_closedBall_zero_iff.mp hc
+    exact ⟨one_sub_nu_ne τ h1 h2 c hc' _ hxi, one_sub_nu_ne τ h1 h2 c hc' _ hxi', Qc_ne τ h1 h2.le c hc',
+      pihat_sub_ne τ h1 h2 c hc'⟩
+  obtain ⟨δ, hδ, hδU⟩ := (isCompact_closedBall (0 : ℂ) 1).exists_thickening_subset_open hU hsub
+  have hball : ball (0 : ℂ) (δ + 1) ⊆ U := by
+    rw [← thickening_closedBall hδ zero_le_one]
+    exact hδU
+  refine ⟨δ + 1, by linarith, fun j c hc => ?_⟩
+  have hcU : c ∈ U := hball hc
+  have hev : (fun c => TJ τ c j) =ᶠ[𝓝 c] (fun c => TJf τ c j) := by
+    filter_upwards [hU.mem_nhds hcU] with c' hc'
+    exact TJ_eq_of_ne τ h1 h2 j c' hc'.1 hc'.2.1
+  exact ((TJf_diffAt_of_ne τ j c hcU.1 hcU.2.1 hcU.2.2.1 hcU.2.2.2).congr_of_eventuallyEq hev).differentiableWithinAt
 
 /-- Lemma 4.5(i) on the disc, given it on the circle `|c| = 1` (for the same `τ`). -/
 theorem lem_4_5_i_of_circle (τ : ℝ) (h1 : 9 / 20 ≤ τ) (h2 : τ < 1 / 2)
