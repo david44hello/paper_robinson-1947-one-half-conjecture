@@ -1,6 +1,6 @@
 /-
 Robinson/Proofs/Lem44ii.lean — proofs of lem_4_4_ii.
-Paper author: Dave Goel. Copyright (C) Dave Goel 2026--now. All rights reserved.
+Paper author: Dave Goel. Copyright (C) Dave Goel 2026--now. Licensed under the Apache License 2.0; see LICENSE.
 -/
 import Robinson.Proofs.NearP_A
 

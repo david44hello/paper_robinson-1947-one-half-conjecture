@@ -1,7 +1,7 @@
 /-
 Robinson/Proofs/Rows292.lean — proofs of three rows added for the late-edit rule (1): the closed form and value
 of sin(π/8), the weight bounds of the majorants, and the two forms of the denominator 𝒬(c) with 4 - 7τ².
-Paper author: Dave Goel. Copyright (C) Dave Goel 2026--now. All rights reserved.
+Paper author: Dave Goel. Copyright (C) Dave Goel 2026--now. Licensed under the Apache License 2.0; see LICENSE.
 -/
 import Robinson.Defs.Near
 

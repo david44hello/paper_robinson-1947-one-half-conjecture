@@ -1,7 +1,7 @@
 /-
 Robinson/Proofs/Sec4Hat.lean — proofs of sec4_hat_bounds, eq_Qk, sec4_no_constant, lem_4_4_iv,
 sec4_That_num, sec4_That_den, sec4_hat_elem_bounds, sec4_PihatO_num, sec4_PihatO_den, sec4_hat_quotients.
-Paper author: Dave Goel. Copyright (C) Dave Goel 2026--now. All rights reserved.
+Paper author: Dave Goel. Copyright (C) Dave Goel 2026--now. Licensed under the Apache License 2.0; see LICENSE.
 -/
 import Robinson.Defs.Near
 import Robinson.Proofs.Koebe

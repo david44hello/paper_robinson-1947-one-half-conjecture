@@ -1,7 +1,7 @@
 /-
 Robinson/Proofs/Sec4Elem.lean — proofs of sec4_midpoint, sec4_goal_equiv, sec4_tau_bounds,
 sec4_eta_le, sec4_rho_facts, sec4_model_mem_S, lem_4_7, sec4_caps_valid.
-Paper author: Dave Goel. Copyright (C) Dave Goel 2026--now. All rights reserved.
+Paper author: Dave Goel. Copyright (C) Dave Goel 2026--now. Licensed under the Apache License 2.0; see LICENSE.
 -/
 import Robinson.Defs.Near
 import Robinson.Proofs.Sec2Basic

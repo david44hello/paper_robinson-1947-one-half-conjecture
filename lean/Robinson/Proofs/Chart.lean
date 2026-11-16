@@ -1,6 +1,6 @@
 /-
 Robinson/Proofs/Chart.lean — proofs of lem_5_3 and lem_5_4.
-Paper author: Dave Goel. Copyright (C) Dave Goel 2026--now. All rights reserved.
+Paper author: Dave Goel. Copyright (C) Dave Goel 2026--now. Licensed under the Apache License 2.0; see LICENSE.
 -/
 import Robinson.Defs.Matrix2
 

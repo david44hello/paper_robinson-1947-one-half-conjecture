@@ -1,6 +1,6 @@
 /-
 Robinson/Proofs/Sec7Lin.lean — proofs of sec7_CP_linear, sec7_CP_explicit, sec7_trace_bound.
-Paper author: Dave Goel. Copyright (C) Dave Goel 2026--now. All rights reserved.
+Paper author: Dave Goel. Copyright (C) Dave Goel 2026--now. Licensed under the Apache License 2.0; see LICENSE.
 -/
 import Robinson.Defs.Matrix2
 import Robinson.Proofs.Arith

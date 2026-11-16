@@ -1,6 +1,6 @@
 /-
 Robinson/Proofs/SigmaPos.lean — proofs of sec6_sigma_pos.
-Paper author: Dave Goel. Copyright (C) Dave Goel 2026--now. All rights reserved.
+Paper author: Dave Goel. Copyright (C) Dave Goel 2026--now. Licensed under the Apache License 2.0; see LICENSE.
 -/
 import Robinson.Defs.Basic
 import Robinson.Defs.Matrix2

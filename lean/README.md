@@ -25,4 +25,4 @@ de Branges' theorem, the area theorem, the strong Grunsky inequality, and the po
 holomorphic function on the bidisc. [AUDIT.md](AUDIT.md) names them, claim by claim, and
 [AUDIT_NOTES.md](AUDIT_NOTES.md) states each with its source.
 
-Copyright (C) Dave Goel 2026--now. All rights reserved.
+Copyright (C) Dave Goel 2026--now. Licensed under the Apache License 2.0; see LICENSE.

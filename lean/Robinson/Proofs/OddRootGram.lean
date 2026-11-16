@@ -1,7 +1,7 @@
 /-
 Robinson/Proofs/OddRootGram.lean — proofs of sec3_oddroot_exists, sec3_oddroot_mem_S, eq_gram,
 sec5_a_conj, sec5_uv_gram, sec6_UV_values, sec7_be_deriv, sec7_gram, sec3_oddroot_parity, sec7_identity_O2.
-Paper author: Dave Goel. Copyright (C) Dave Goel 2026--now. All rights reserved.
+Paper author: Dave Goel. Copyright (C) Dave Goel 2026--now. Licensed under the Apache License 2.0; see LICENSE.
 -/
 import Robinson.Defs.Basic
 import Robinson.Defs.Matrix2

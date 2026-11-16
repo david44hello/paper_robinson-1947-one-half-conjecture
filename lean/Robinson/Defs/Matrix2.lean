@@ -1,7 +1,7 @@
 /-
 Robinson/Defs/Matrix2.lean — the finite-dimensional objects of Sections 5 and 7 (functions of a complex
 symmetric 2x2 matrix M at the angle θ).
-Paper author: Dave Goel. Copyright (C) Dave Goel 2026--now. All rights reserved.
+Paper author: Dave Goel. Copyright (C) Dave Goel 2026--now. Licensed under the Apache License 2.0; see LICENSE.
 TRUST SURFACE: every definition is read against sec_05_grunsky_q.tex and sec_07_middle.tex (their lines; AUDIT_NOTES.md
 names the version).
 -/

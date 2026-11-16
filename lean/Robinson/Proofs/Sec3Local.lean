@@ -1,7 +1,7 @@
 /-
 Robinson/Proofs/Sec3Local.lean — proofs of sec3_deriv_ne_zero, sec3_koebe_transform_mem_S,
 sec3_kernel_nonvanishing, sec3_p_ne_zero, sec4_c_bounds.
-Paper author: Dave Goel. Copyright (C) Dave Goel 2026--now. All rights reserved.
+Paper author: Dave Goel. Copyright (C) Dave Goel 2026--now. Licensed under the Apache License 2.0; see LICENSE.
 -/
 import Robinson.Defs.Basic
 import Robinson.Defs.Grunsky

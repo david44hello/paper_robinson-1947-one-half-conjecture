@@ -1,6 +1,6 @@
 /-
 Robinson/Proofs/NearP_D.lean — the second-order remainder of Section 4 (Lemma 4.6).
-Paper author: Dave Goel. Copyright (C) Dave Goel 2026--now. All rights reserved.
+Paper author: Dave Goel. Copyright (C) Dave Goel 2026--now. Licensed under the Apache License 2.0; see LICENSE.
 -/
 import Robinson.Proofs.NearP_C
 import Robinson.Proofs.NearP_B

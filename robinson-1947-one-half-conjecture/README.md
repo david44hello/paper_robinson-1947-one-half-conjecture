@@ -32,4 +32,4 @@ RESULT: PASS - all 11 checks passed
 
 `./reproduce.sh --full` also replays all eleven interval-arithmetic bands with the Arb verifier (about 4 hours on one core); `./reproduce.sh --band 90-95` replays a single band.
 
-All rights reserved.
+Copyright (C) Dave Goel 2026--now. Licensed under the Apache License 2.0; see LICENSE.

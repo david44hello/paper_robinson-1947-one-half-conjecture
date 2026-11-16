@@ -1,7 +1,7 @@
 /-
 Robinson/Proofs/Sec6G.lean — proofs of lem_6_3, sec6_barnard_series, sec6_Rf_bound, sec6_logp_logq,
 eq_psum.
-Paper author: Dave Goel. Copyright (C) Dave Goel 2026--now. All rights reserved.
+Paper author: Dave Goel. Copyright (C) Dave Goel 2026--now. Licensed under the Apache License 2.0; see LICENSE.
 -/
 import Robinson.Defs.Basic
 import Robinson.Defs.Matrix2

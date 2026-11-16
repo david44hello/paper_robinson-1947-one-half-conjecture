@@ -1,7 +1,7 @@
 /-
 Robinson/Proofs/Sec6Values.lean — proofs of sec6_ZO_re_im, sec6_b_values, sec6_A0B0_closed,
 sec6_value_180, sec6_A0_printed.
-Paper author: Dave Goel. Copyright (C) Dave Goel 2026--now. All rights reserved.
+Paper author: Dave Goel. Copyright (C) Dave Goel 2026--now. Licensed under the Apache License 2.0; see LICENSE.
 -/
 import Robinson.Defs.Matrix2
 import Robinson.Defs.Far

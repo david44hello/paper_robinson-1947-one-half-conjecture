@@ -1,7 +1,7 @@
 /-
 Robinson/Proofs/Sec6PhiD.lean — the reasons for `b₁ ≤ L` in Section 6 (sec6_phi_d_range): `z_θ` in the closed
 first quadrant, `0 ≤ φ ≤ π/2`, `d ≤ 2(σ₊ + σ₋) = L` and `L² - d² ≥ 0`.
-Paper author: Dave Goel. Copyright (C) Dave Goel 2026--now. All rights reserved.
+Paper author: Dave Goel. Copyright (C) Dave Goel 2026--now. Licensed under the Apache License 2.0; see LICENSE.
 -/
 import Robinson.Proofs.Sec6Values
 

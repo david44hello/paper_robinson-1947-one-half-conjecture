@@ -1,7 +1,7 @@
 /-
 Robinson/Proofs/Sec5Finite.lean — proofs of sec5_s_sq, sec5_coords, sec5_tan_identity,
 sec5_qrel_algebra, sec5_chi_qrel_entire, lem_5_4_qrel, rem_5_6.
-Paper author: Dave Goel. Copyright (C) Dave Goel 2026--now. All rights reserved.
+Paper author: Dave Goel. Copyright (C) Dave Goel 2026--now. Licensed under the Apache License 2.0; see LICENSE.
 -/
 import Robinson.Defs.Matrix2
 

@@ -1,7 +1,7 @@
 /-
 Robinson/Proofs/Sec6Bounds.lean — proofs of sec6_xi_ball, sec6_psum_cos, sec6_b_change,
 sec6_Wbound_finite, sec6_expW_bound, sec6_logcos.
-Paper author: Dave Goel. Copyright (C) Dave Goel 2026--now. All rights reserved.
+Paper author: Dave Goel. Copyright (C) Dave Goel 2026--now. Licensed under the Apache License 2.0; see LICENSE.
 -/
 import Robinson.Defs.Matrix2
 import Robinson.Defs.Far

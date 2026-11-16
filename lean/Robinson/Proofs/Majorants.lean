@@ -1,7 +1,7 @@
 /-
 Robinson/Proofs/Majorants.lean — proofs of sec4_majorant_rules, sec4_hw_coeff, lem_4_4_i,
 sec4_majorant_conv.
-Paper author: Dave Goel. Copyright (C) Dave Goel 2026--now. All rights reserved.
+Paper author: Dave Goel. Copyright (C) Dave Goel 2026--now. Licensed under the Apache License 2.0; see LICENSE.
 -/
 import Robinson.Defs.NearP
 

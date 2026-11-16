@@ -1,7 +1,7 @@
 /-
 Robinson/Proofs/GrunskyIneq.lean — proofs of sec3_cauchy, sec3_blocks_compressions,
 sec3_OE_contractions.
-Paper author: Dave Goel. Copyright (C) Dave Goel 2026--now. All rights reserved.
+Paper author: Dave Goel. Copyright (C) Dave Goel 2026--now. Licensed under the Apache License 2.0; see LICENSE.
 -/
 import Robinson.Defs.Basic
 import Robinson.Defs.Grunsky

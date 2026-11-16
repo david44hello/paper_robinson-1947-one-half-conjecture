@@ -1,6 +1,6 @@
 /-
 Robinson/Proofs/NearP_B.lean — the first variation of Section 4 (sec4_first_variation).
-Paper author: Dave Goel. Copyright (C) Dave Goel 2026--now. All rights reserved.
+Paper author: Dave Goel. Copyright (C) Dave Goel 2026--now. Licensed under the Apache License 2.0; see LICENSE.
 -/
 import Robinson.Proofs.NearP_A
 

@@ -1,7 +1,7 @@
 /-
 Robinson/Defs/Near.lean — the explicit objects of Section 4 (nearby pairs): functions of `τ` and of the
 second-coefficient parameter `c`, and the cell data of Lemma 4.8.
-Paper author: Dave Goel. Copyright (C) Dave Goel 2026--now. All rights reserved.
+Paper author: Dave Goel. Copyright (C) Dave Goel 2026--now. Licensed under the Apache License 2.0; see LICENSE.
 TRUST SURFACE: every definition is read against sec_04_near.tex (its lines; AUDIT_NOTES.md names the version). `y` is
 `√(¼ - τ²)` (the pair is `-τ ± iy`, sec_04_near.tex:38).
 -/

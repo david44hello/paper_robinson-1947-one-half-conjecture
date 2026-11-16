@@ -1,6 +1,6 @@
 /-
 Robinson/Paper/Statements.lean — one Lean theorem per claim of the short paper.
-Paper author: Dave Goel. Copyright (C) Dave Goel 2026--now. All rights reserved.
+Paper author: Dave Goel. Copyright (C) Dave Goel 2026--now. Licensed under the Apache License 2.0; see LICENSE.
 
 
 

@@ -1,6 +1,6 @@
 /-
 Robinson/Proofs/Lem31.lean — proofs of sec3_block_sums, lem_3_1_i, lem_3_1_ii, lem_3_1_iii, eq_Kf.
-Paper author: Dave Goel. Copyright (C) Dave Goel 2026--now. All rights reserved.
+Paper author: Dave Goel. Copyright (C) Dave Goel 2026--now. Licensed under the Apache License 2.0; see LICENSE.
 -/
 import Robinson.Defs.Basic
 import Robinson.Defs.Grunsky

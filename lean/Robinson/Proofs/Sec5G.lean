@@ -1,7 +1,7 @@
 /-
 Robinson/Proofs/Sec5G.lean — proofs of sec5_O2_entries, prop_5_1, sec5_O2_contraction, sec5_relaxation,
 sec5_not_all_from_S.
-Paper author: Dave Goel. Copyright (C) Dave Goel 2026--now. All rights reserved.
+Paper author: Dave Goel. Copyright (C) Dave Goel 2026--now. Licensed under the Apache License 2.0; see LICENSE.
 -/
 import Robinson.Defs.Basic
 import Robinson.Defs.Matrix2

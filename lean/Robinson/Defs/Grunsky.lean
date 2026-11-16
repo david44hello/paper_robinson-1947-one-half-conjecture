@@ -2,7 +2,7 @@
 Robinson/Defs/Grunsky.lean — the Grunsky layer (sec_03_tools.tex:23-79, Sections 5-7): the Grunsky
 coefficients, the odd square root, `p = z f'/f`, the vectors `a(s)`, `a_e(s)`, `b_e(s)`, `α(z)`, `β(z)`, the blocks
 `O`, `E`, the matrix `C(g)`, the compression `O₂`.
-Paper author: Dave Goel. Copyright (C) Dave Goel 2026--now. All rights reserved.
+Paper author: Dave Goel. Copyright (C) Dave Goel 2026--now. Licensed under the Apache License 2.0; see LICENSE.
 TRUST SURFACE. No choice: the Grunsky coefficients and the odd root are PREDICATES (`IsGrunskyCoeff g γ`,
 `IsOddRoot f h`), and every statement quantifies over them. Sequences are indexed by `n : ℕ` with the value `0`
 at the indices the paper does not use (`n = 0`, or the other parity), so `ℓ²` sums run over all of `ℕ`.

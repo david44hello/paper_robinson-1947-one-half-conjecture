@@ -1,6 +1,6 @@
 /-
 Robinson/NotFormalized.lean — published facts from areas that Lean's library (Mathlib) lacks entirely.
-Paper author: Dave Goel. Copyright (C) Dave Goel 2026--now. All rights reserved.
+Paper author: Dave Goel. Copyright (C) Dave Goel 2026--now. Licensed under the Apache License 2.0; see LICENSE.
 Each fact is an ordinary proposition `def Fact… : Prop`, never a Lean postulate. A claim whose proof uses one takes it as an
 explicit hypothesis and is PROVED GIVEN that fact; the fact itself is "not formalized". Each is stated exactly as
 the paper uses it, and is true in full generality as typed.

@@ -1,7 +1,7 @@
 /-
 Robinson/Proofs/Prop41.lean — proofs of prop_4_1 from its layer rows (prop_4_1_hzero_from,
 prop_4_1_hcell_from, prop_4_1_proved_from).
-Paper author: Dave Goel. Copyright (C) Dave Goel 2026--now. All rights reserved.
+Paper author: Dave Goel. Copyright (C) Dave Goel 2026--now. Licensed under the Apache License 2.0; see LICENSE.
 -/
 import Robinson.Defs.Basic
 import Robinson.Defs.Near

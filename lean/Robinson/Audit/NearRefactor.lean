@@ -2,7 +2,7 @@
 Robinson/Audit/NearRefactor.lean — the numbers of Lemma 4.8 (Robinson/Defs/Near.lean) equal their
 printed formulas term for term (definitional equalities, proved by `rfl`). They were first written directly and are
 now the general-cap functions evaluated at the cell's caps; these lemmas show that the values did not change.
-Paper author: Dave Goel. Copyright (C) Dave Goel 2026--now. All rights reserved.
+Paper author: Dave Goel. Copyright (C) Dave Goel 2026--now. Licensed under the Apache License 2.0; see LICENSE.
 -/
 import Robinson.Defs.Near
 

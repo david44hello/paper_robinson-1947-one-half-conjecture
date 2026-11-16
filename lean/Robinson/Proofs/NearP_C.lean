@@ -1,6 +1,6 @@
 /-
 Robinson/Proofs/NearP_C.lean — the tail bound of the first variation (Lemma 4.5(ii)).
-Paper author: Dave Goel. Copyright (C) Dave Goel 2026--now. All rights reserved.
+Paper author: Dave Goel. Copyright (C) Dave Goel 2026--now. Licensed under the Apache License 2.0; see LICENSE.
 -/
 import Robinson.Proofs.NearP_A
 import Robinson.Proofs.Majorants

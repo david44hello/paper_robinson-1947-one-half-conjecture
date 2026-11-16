@@ -1,6 +1,6 @@
 /-
 Robinson/Proofs/Sec7Hol.lean — proofs of lem_7_2, sec7_UR_zero, prop_7_5_i, lem_7_6_i, lem_7_6_ii.
-Paper author: Dave Goel. Copyright (C) Dave Goel 2026--now. All rights reserved.
+Paper author: Dave Goel. Copyright (C) Dave Goel 2026--now. Licensed under the Apache License 2.0; see LICENSE.
 -/
 import Robinson.Defs.Matrix2
 import Robinson.ComputerChecked

@@ -1,6 +1,6 @@
 /-
 Robinson/Proofs/Normalize.lean — proofs of lem_2_3_rot and lem_2_3_dil.
-Paper author: Dave Goel. Copyright (C) Dave Goel 2026--now. All rights reserved.
+Paper author: Dave Goel. Copyright (C) Dave Goel 2026--now. Licensed under the Apache License 2.0; see LICENSE.
 -/
 import Robinson.Defs.Basic
 

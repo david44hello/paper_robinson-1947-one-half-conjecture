@@ -1,6 +1,6 @@
 /-
 Robinson/ComputerChecked.lean — the statements that the paper checks by computer.
-Paper author: Dave Goel. Copyright (C) Dave Goel 2026--now. All rights reserved.
+Paper author: Dave Goel. Copyright (C) Dave Goel 2026--now. Licensed under the Apache License 2.0; see LICENSE.
 Each check is an ordinary proposition `def Check… : Prop`, never a Lean postulate, stated exactly as printed (variables,
 range, function, strict inequality). A claim whose proof uses one takes it as an explicit hypothesis and is PROVED
 GIVEN that check; the check itself is "checked by computer, NOT proved in Lean". Angles of Lemma 7.6 are in degrees.

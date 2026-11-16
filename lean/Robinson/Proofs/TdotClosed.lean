@@ -1,7 +1,7 @@
 /-
 Robinson/Proofs/TdotClosed.lean — proofs of Tdot_closed (a sub-lemma of Lemma 4.6: the closed form
 Ṫ·Π̂_o = Υ[Π̇] - T̂·Π̇_o at ξ₀ = iy, with Π̇ = -2NB/(1 - νξ)³ the first variation).
-Paper author: Dave Goel. Copyright (C) Dave Goel 2026--now. All rights reserved.
+Paper author: Dave Goel. Copyright (C) Dave Goel 2026--now. Licensed under the Apache License 2.0; see LICENSE.
 -/
 import Robinson.Proofs.NearP_B
 

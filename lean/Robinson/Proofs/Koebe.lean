@@ -1,6 +1,6 @@
 /-
 Robinson/Proofs/Koebe.lean — proofs of koebe_mem_S, prop_2_5, intro_koebe_critical_on_circle.
-Paper author: Dave Goel. Copyright (C) Dave Goel 2026--now. All rights reserved.
+Paper author: Dave Goel. Copyright (C) Dave Goel 2026--now. Licensed under the Apache License 2.0; see LICENSE.
 -/
 import Robinson.Defs.Basic
 

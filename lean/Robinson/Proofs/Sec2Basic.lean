@@ -1,7 +1,7 @@
 /-
 Robinson/Proofs/Sec2Basic.lean — proofs of sec2_f_ne, sec2_Q_symm, lem_2_1, intro_gamma_deriv,
 intro_factor_two, intro_gamma_coeff.
-Paper author: Dave Goel. Copyright (C) Dave Goel 2026--now. All rights reserved.
+Paper author: Dave Goel. Copyright (C) Dave Goel 2026--now. Licensed under the Apache License 2.0; see LICENSE.
 -/
 import Robinson.Defs.Basic
 

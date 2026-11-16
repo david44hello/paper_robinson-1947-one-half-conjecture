@@ -1,7 +1,7 @@
 /-
 Robinson/Proofs/Sec2Rest.lean — proofs of sec2_pair_normal_form, sec2_values_eq, sec2_koebe_limit,
 lem_2_2, prop_2_4, sec8_assembly.
-Paper author: Dave Goel. Copyright (C) Dave Goel 2026--now. All rights reserved.
+Paper author: Dave Goel. Copyright (C) Dave Goel 2026--now. Licensed under the Apache License 2.0; see LICENSE.
 -/
 import Robinson.Defs.Basic
 import Robinson.NotFormalized

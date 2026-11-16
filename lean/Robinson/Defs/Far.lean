@@ -1,6 +1,6 @@
 /-
 Robinson/Defs/Far.lean — the explicit functions of `c = cos(θ/2)` in Lemmas 6.2 and 6.4.
-Paper author: Dave Goel. Copyright (C) Dave Goel 2026--now. All rights reserved.
+Paper author: Dave Goel. Copyright (C) Dave Goel 2026--now. Licensed under the Apache License 2.0; see LICENSE.
 TRUST SURFACE: every definition is read against sec_06_far.tex (its lines; AUDIT_NOTES.md names the version).
 -/
 import Robinson.Defs.Basic
