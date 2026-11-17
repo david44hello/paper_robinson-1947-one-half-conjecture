@@ -3,11 +3,11 @@
 The paper's link is on the [front page of this repository](https://github.com/david44hello/paper_robinson-1947-one-half-conjecture).
 
 Pointers of the form `sec_0N_*.tex:<line>` (and `abstract.tex:<line>`, `back_matter.tex:<line>`) are lines of the
-TeX sources of version 3.03 of the paper. No line has moved since version 1.70: later versions change the words of
+TeX sources of version 3.04 of the paper. No line has moved since version 1.70: later versions change the words of
 some lines in place, among them the abstract (abstract.tex:3), and add sentences that point to the figures at the
 ends of lines.
 
-Notation. Since version 2.80 of the paper (the previous release), the paper renamed some letters and wrote some
+Notation. Since version 2.80 of the paper (an earlier release), the paper renamed some letters and wrote some
 short names out. Where these notes,
 `CLAIM_MAP.tsv` or the comments of the Lean files restate the paper in an older letter, read it by this table.
 Quotes are the paper's own words. Lean's own names (`edef`, `Mcap`, `Tfar`, `vτ`, `βτ`, `cA`, `kappa`, `faOf`,
@@ -179,7 +179,7 @@ These printed sentences are not claims that the Lean work counts. Each line give
 6. sec_01_intro.tex:32-40: Table 1, its column "Best result before this paper" (with "the radius 1/2 cannot be enlarged (Robinson 1947)") and its caption "What was known before, and what this paper proves.": history and table layout (the column "New result" states Theorems 1.1 and 1.2).
 7. sec_01_intro.tex:11: the pointers to Table 1 and Figure 1 after the history (earlier versions had a sentence of its own, on a line of that file that is now a comment): history.
 8. sec_01_intro.tex:45: "Our proof does not use starlikeness": route words; its reason, that `(Γk)'(−½) = 0` on the circle `|z| = ½`, is a counted claim (the row `intro_koebe_critical_on_circle`).
-9. sec_01_intro.tex:52: Figure 1, panel (a), and "The vertical axis starts at r = 0.40": history and figure layout.
+9. sec_01_intro.tex:52: Figure 1, panel (a), and the caption's first sentence, which says how to read the colours: history and a reading rule. The caption's green and red sentences and the angle scale of panel (b) are counted claims (the rows `thm_1_1`, `prop_2_5` and `thm_1_2`).
 10. sec_01_intro.tex:75: Wikström's work "also combines a compression of the Grunsky matrix with interval arithmetic", and sec_01_intro.tex:77: Barnard's split of `Q_f` and how this proof uses it ("We use this split as the main estimate only for large angles"): attribution and route words.
 11. Robinson's observation that the radius 1/2 is sharp, credited at sec_01_intro.tex:14 ("as Robinson observed" [Rob47, p. 18]), sec_01_intro.tex:61 (Table 2, "(Robinson's observation)") and sec_02_reduction.tex:61 ("this is Robinson's observation"): attribution (the sharpness claim itself is counted).
 12. back_matter.tex:3 and :6-7: the data-availability heading and the acknowledgments (the data sentence, l.4, is item 35).
@@ -214,7 +214,7 @@ These printed sentences are not claims that the Lean work counts. Each line give
 ### Other
 36. sec_08_proof.tex:5: "All their endpoints, measured in degrees, are rational, except θ₀ = 2 arcsin(17/40)": it motivates Lemma 8.1; θ₀ is only excluded, and its irrationality is not claimed.
 37. P24_short.tex:11 and P24_long.tex:11, footnote 2 (its mark is in the abstract): "Additionally, Theorems 1.1 and 1.2 are proved in Lean 4 with six published theorems (the argument principle, the Jordan curve theorem, de Branges' theorem, the area theorem, the strong Grunsky inequality, and the double power series of a function holomorphic on the bidisc) and the explicit inequalities of Lemmas 4.8, 6.2, 6.4 and 7.6 taken as hypotheses, and checked with `lake comparator`": a remark about this Lean proof; its content is the status of Theorems 1.1 and 1.2 (AUDIT.md: PROVED GIVEN; Theorem 1.1 takes the six facts and the 14 checks, Theorem 1.2 four of the facts and the 14 checks; the six published theorems are the 6 published facts, Lemmas 4.8, 6.2, 6.4 and 7.6 the 14 checks; its last words (checked with lake comparator) are a run description, not counted: the comparator's run on this tag, outside these files).
-38. P24_short.tex:11 and P24_long.tex:11, the end of footnote 2: the link "https://github.com/david44hello/paper_robinson-1947-one-half-conjecture/tree/v3.03/lean" to this Lean proof.
+38. P24_short.tex:11 and P24_long.tex:11, the end of footnote 2: the link "https://github.com/david44hello/paper_robinson-1947-one-half-conjecture/tree/v3.04/lean" to this Lean proof.
 39. P24_short.tex:9 and :15 (short paper only): footnote 1 (its mark is in the abstract), which points to the expanded version of the paper (:9), and the manuscript's version line (:15): pointers, no mathematical claim.
 
 The new figures depict already-counted objects and bounds: figures/fig_pairs.tex:10 uses the normalized pair (`sec2_pair_normal_form`, `sec2_values_eq`) and the three angular ranges (`sec8_cover`); figures/fig_koebe.tex:6 uses Proposition 2.5 (`prop_2_5`); figures/fig_near.tex:6 uses the pair and Koebe-transform coordinates (`sec4_midpoint`, `sec4_Pi_formula`); figures/fig_bounds.tex:6 uses Remark 8.2 (`rem_8_2`) and the Koebe quotient (`sec2_koebe_limit`, `eq_Qk`). Dots, insets, line styles and axis choices are figure layout, not additional claims.

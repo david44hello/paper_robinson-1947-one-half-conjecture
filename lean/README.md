@@ -7,7 +7,7 @@ The paper's link is on the [front page of this repository](https://github.com/da
 Install Git, Lean (https://lean-lang.org/install/) and Python 3, then run:
 
 ```bash
-git clone --branch v3.03 --single-branch https://github.com/david44hello/paper_robinson-1947-one-half-conjecture.git
+git clone --branch v3.04 --single-branch https://github.com/david44hello/paper_robinson-1947-one-half-conjecture.git
 cd paper_robinson-1947-one-half-conjecture/lean
 ./check.sh
 ```
